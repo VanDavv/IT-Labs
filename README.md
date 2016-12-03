@@ -39,5 +39,7 @@ That's it! You've downloaded these sources!
     I bet that noone is having any problems with git on those systems, but if Your this one bad luck brian and have any issues - please follot [Mac](https://www.atlassian.com/git/tutorials/install-git/mac-os-x) or [Linux](https://www.atlassian.com/git/tutorials/install-git/linux) official tutorial
 
 
+
+
 If there are any other troubles that You had during and installation, please contact me personally or post an issue on github [here](https://github.com/VanDavv/IT-Labs-Borawski/issues/new)
     
