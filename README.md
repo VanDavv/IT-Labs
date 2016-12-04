@@ -15,6 +15,28 @@ Since many people reading this readme might not be familiar with git, I`ve prepa
 
 That's it! You've downloaded these sources!
 
+## Updating existing sources
+
+If You have recently downloaded this repository and want to update to latest version:
+
+- Go to directory where Your downloaded sources are (You have to be in the same directory where `README.md` file is
+- Type in the console `git pull`
+
+If it fails, this means either You're not in the root directory or have made some changes. In second case, try to do the following:
+
+- Type in the console `git stash`
+- Then `git pull`
+- Then `git stash pop`
+
+If this solution fails, only option is to do a [git merge](https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/). This might be problematic if You have never worked with git before.
+
+Of course there is yet another option - but be careful! **THIS METHOD WILL RESET CHANGES YOU'VE DONE**
+
+- First, type in the console `git fetch origin`
+- Next, type `git reset --hard origin/master`
+
+After typing these commands, Your changes will be discarded, and Your code will be replaced by updated files.
+
 ## Troubleshooting
 
 - `'git' is not recognized as an internal or external command, operable program or batch file.`
