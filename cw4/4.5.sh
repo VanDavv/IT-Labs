@@ -21,7 +21,8 @@ if ! [[ $b =~ $re ]] ; then
    echo "$b nie jest liczbą" >&2; exit 1
 fi
 
-((a+=3 - (a%3) ))
+let a+="(3 - (a%3))%3"
+
 while (( $a <= b ));
 do
     echo "$[$a * $a]"
