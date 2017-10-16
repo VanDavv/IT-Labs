@@ -1,4 +1,4 @@
-# IT-Labs-Borawski
+# IT-Labs
 
 ## Environment preparation
 
