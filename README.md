@@ -11,7 +11,7 @@ Since many people reading this readme might not be familiar with git, I`ve prepa
    Good practice is to keep Your code separated from other files in the system. Personally I have a `dev` directory under my home folder. But You might keep is just anywhere.
 
 3) Clone this repository
-   Enter Your working directory and type `git clone https://github.com/VanDavv/IT-Labs-Borawski.git`.
+   Enter Your working directory and type `git clone https://github.com/VanDavv/IT-Labs.git`.
 
 That's it! You've downloaded these sources!
 
@@ -63,5 +63,5 @@ After typing these commands, Your changes will be discarded, and Your code will 
 
 
 
-If there are any other troubles that You had during and installation, please contact me personally or post an issue on github [here](https://github.com/VanDavv/IT-Labs-Borawski/issues/new)
+If there are any other troubles that You had during and installation, please contact me personally or post an issue on github [here](https://github.com/VanDavv/IT-Labs/issues/new)
     
