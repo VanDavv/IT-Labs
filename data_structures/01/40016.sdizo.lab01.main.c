@@ -19,7 +19,15 @@ struct RandomEntity** random_func(int N) {
   struct RandomEntity** arr=(struct RandomEntity**) malloc(N*sizeof(struct RandomEntity*));
   for(int i = 0; i < N; i++) {
     arr[i] = (struct RandomEntity*) malloc(sizeof(struct RandomEntity));
-    arr[i]->a = (rand() % 10001) - 1000;
+    int id = (rand() % 10001) - 1000;
+    mark:
+    for (int j = 0; j < i; ++j) {
+        if (arr[j]->a == id) {
+            id = (rand() % 10001) - 1000;
+            goto mark;
+        }
+    }
+    arr[i]->a = id;
     arr[i]->b = (char)((int) 'B' + rand() % 23);
     arr[i]->c = (float) (1000 + i + 1);
   }
