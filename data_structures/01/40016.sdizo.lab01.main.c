@@ -1,6 +1,7 @@
 // SDIZO N1 20A LAB01
 // Łukasz Piłatowski
 // pilatowski-lukasz@zut.edu.pl
+// TODO change to typedef struct
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -19,11 +20,11 @@ struct RandomEntity** random_func(int N) {
   struct RandomEntity** arr=(struct RandomEntity**) malloc(N*sizeof(struct RandomEntity*));
   for(int i = 0; i < N; i++) {
     arr[i] = (struct RandomEntity*) malloc(sizeof(struct RandomEntity));
-    int id = (rand() % 10001) - 1000;
+    int id;
     mark:
+    id = (rand() % 10001) - 1000;
     for (int j = 0; j < i; ++j) {
         if (arr[j]->a == id) {
-            id = (rand() % 10001) - 1000;
             goto mark;
         }
     }
@@ -80,16 +81,11 @@ struct FileData load(char* filename) {
   char c;
   bool spaceRead = false;
   if (file) {
-      while ((c = getc(file)) != EOF)
-          if (c != ' ') {
-            if (spaceRead) {
-              result.search = c;
-            } else {
-              result.num = result.num * 10 + (c - '0');
-            }
-          } else {
-            spaceRead = true;
-          }
+      int num;
+      char search;
+      fscanf(file, "%d %c", &num, &search);
+      result.num = num;
+      result.search = search;
       fclose(file);
   }
   return result;
@@ -113,6 +109,6 @@ int main() {
     printf("Search count: %d\n", count);
     diff = clock() - start;
     int msec = diff * 1000 / CLOCKS_PER_SEC;
-    printf("Time taken %d seconds %d milliseconds", msec/1000, msec%1000);
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
     return 0;
 }
