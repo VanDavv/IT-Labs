@@ -1,8 +1,6 @@
 // SDIZO N1 20A LAB02
 // Łukasz Piłatowski
 // pilatowski-lukasz@zut.edu.pl
-// TODO change to cyclic list
-// TODO Resolve issue with last id being random number when presenting last 11 id's
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -19,10 +17,9 @@ typedef struct ListElement {
 
 ListElement* first = NULL;
 ListElement* last = NULL;
-int count = 0;
 
 void _remove_next_recursive(ListElement* elem) {
-    if(elem != NULL) {
+    if(elem != NULL && elem->next != first) {
         _remove_next_recursive(elem->next);
         elem->next = NULL;
         elem->previous = NULL;
@@ -33,26 +30,33 @@ void _remove_next_recursive(ListElement* elem) {
 
 void _insert_recur(ListElement* current, ListElement* element) {
     if(current->id < element->id) {
-        if(current->next != NULL) {
+        if(current->next != first) {
             _insert_recur(current->next, element);
         }
         else {
+            // element added at the end of the list
             element->previous = current;
+            element->next = first;
+            first->previous = element;
             current->next = element;
             last = element;
-            count += 1;
         }
     } else if (current->id == element->id) {
         printf("Could not insert element with id:%d to list. Element with specified id already exists\n", element->id);
     } else {
-        if(current->previous != NULL) {
-            current->previous->next = element;
-        }
-        element->previous = current->previous;
-        element->next = current;
-        current->previous = element;
-        if(current->id == first->id) {
+        if(element->id < first->id) {
+            // element added at the beggining of the list
+            first->previous = element;
+            last->next = element;
+            element->next = first;
+            element->previous = last;
             first = element;
+        } else {
+            // element added in the middle of the list
+            element->previous = current->previous;
+            element->next = current;
+            current->previous->next = element;
+            current->previous = element;
         }
     }
 
@@ -69,7 +73,7 @@ ListElement* _create_new_element(int id) {
 ListElement* _find_recur(ListElement* element, int id) {
     if(element->id == id) {
         return element;
-    } else if(element->next == NULL || element->id > id) {
+    } else if(element->next == first || element->id > id) {
         return NULL;
     } else {
         return _find_recur(element->next, id);
@@ -80,6 +84,7 @@ void remove_all() {
     if(first != NULL) {
         _remove_next_recursive(first);
         first = NULL;
+        free(last);
         last = NULL;
     }
 }
@@ -99,6 +104,12 @@ void _remove_recursive(ListElement* element, int id) {
         if(next != NULL) {
             next->previous = previous;
         }
+        if(element == first) {
+            first = next;
+        }
+        if(element == last) {
+            last = previous;
+        }
         free(element);
         element = NULL;
         return;
@@ -114,6 +125,8 @@ void remove_element(int id) {
 void insert_new_element(int id) {
     if(first == NULL) {
         ListElement* element = _create_new_element(id);
+        element->next = element;
+        element->previous = element;
         first = element;
         last = element;
     } else {
@@ -126,8 +139,11 @@ int calculate_id() {
     ListElement* current_element;
     mark:
     id = (rand() % 99901) + 99;
+    if(first == NULL) {
+        return id;
+    }
     current_element = first;
-    while(current_element != NULL) {
+    do {
         if(current_element->id == id) {
             goto mark;
         }
@@ -136,7 +152,7 @@ int calculate_id() {
         } else {
             current_element = current_element->next;
         }
-    }
+    } while(current_element != first);
     return id;
 }
 
@@ -154,6 +170,7 @@ ListElement* find_element(int id) {
     struct ListElement* element = _find_recur(first, id);
     if(element == NULL) {
         printf("Element with id %d was not found in list\n", id);
+        return NULL;
     }
     return element;
 }
@@ -162,7 +179,7 @@ void present_n_first_values(int Y) {
     int node_count = 0;
     ListElement* current_element = first;
     do {
-        if(current_element == NULL) {
+        if(current_element == NULL || (node_count > 0 && current_element == first)) {
             break;
         } else {
             printf("[%d] Element %d\n", node_count + 1, current_element->id);
@@ -179,7 +196,7 @@ void present_n_last_values(int Z) {
     int node_count = 0;
     ListElement* current_element = last;
     do {
-        if(current_element == NULL) {
+        if(current_element == NULL || (node_count > 0 && current_element == last)) {
             break;
         } else {
             printf("[%d] Element %d\n", node_count + 1, current_element->id);
@@ -195,10 +212,13 @@ void present_n_last_values(int Z) {
 int count_values() {
     int node_count = 0;
     ListElement* current_element = first;
-    while(current_element != NULL) {
+    do {
+        if(current_element == NULL) {
+            break;
+        }
         node_count += 1;
         current_element = current_element->next;
-    }
+    } while(current_element != first);
     return node_count;
 }
 
@@ -225,7 +245,6 @@ int main() {
     srand(time(NULL));
     clock_t start = clock(), diff;
     FileData data = load("inlab02.txt");
-    printf("%d\n", data.k1);
     ListElement* elem_k1 = find_element(data.k1);
     insert_n_new_elements(data.X);
     printf("Count: %d\n", count_values());
