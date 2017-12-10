@@ -1,25 +1,22 @@
 // SDIZO N1 20A LAB01
 // Łukasz Piłatowski
 // pilatowski-lukasz@zut.edu.pl
-// TODO change to typedef struct
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 typedef enum { false, true } bool;
 
-// Corresponds to "Struktura" struct from help01.pdf
-struct RandomEntity {
+typedef struct RandomEntity {
   int a;
   char b;
   float c;
-};
+} RandomEntity;
 
-// First func described in task
-struct RandomEntity** random_func(int N) {
-  struct RandomEntity** arr=(struct RandomEntity**) malloc(N*sizeof(struct RandomEntity*));
+RandomEntity** random_func(int N) {
+  RandomEntity** arr=(RandomEntity**) malloc(N*sizeof(RandomEntity*));
   for(int i = 0; i < N; i++) {
-    arr[i] = (struct RandomEntity*) malloc(sizeof(struct RandomEntity));
+    arr[i] = (RandomEntity*) malloc(sizeof(RandomEntity));
     int id;
     mark:
     id = (rand() % 10001) - 1000;
@@ -35,20 +32,19 @@ struct RandomEntity** random_func(int N) {
   return arr;
 }
 
-// Second func described in func
-void remove_func(struct RandomEntity** arr, int N) {
+void remove_func(RandomEntity** arr, int N) {
   for(int i = 0; i < N; i++) {
     free(arr[i]);
   }
   free(arr);
 }
 
-void sort_func(struct RandomEntity** arr, int N) {
+void sort_func(RandomEntity** arr, int N) {
     for(int i = N; i > 1; i--) {
         bool hasChanged = false;
         for(int j = 1; j < i; j++) {
             if(arr[j - 1]->a > arr[j]->a) {
-                struct RandomEntity* buff = arr[j];
+                RandomEntity* buff = arr[j];
                 arr[j] = arr[j - 1];
                 arr[j - 1] = buff;
                 hasChanged = true;
@@ -60,7 +56,7 @@ void sort_func(struct RandomEntity** arr, int N) {
     }
 }
 
-int search_count_func(struct RandomEntity** arr, int N, char query) {
+int search_count_func(RandomEntity** arr, int N, char query) {
   int count = 0;
   for(int i = 0; i < N; i++) {
     if(arr[i]->b == query) {
@@ -70,22 +66,16 @@ int search_count_func(struct RandomEntity** arr, int N, char query) {
   return count;
 }
 
-struct FileData {
+typedef struct FileData {
     int num;
     char search;
-};
+} FileData;
 
-struct FileData load(char* filename) {
+FileData load(char* filename) {
   FILE* file = fopen(filename, "r");
-  struct FileData result = {0, '0'};
-  char c;
-  bool spaceRead = false;
+  FileData result;
   if (file) {
-      int num;
-      char search;
-      fscanf(file, "%d %c", &num, &search);
-      result.num = num;
-      result.search = search;
+      fscanf(file, "%d %c", &result.num, &result.search);
       fclose(file);
   }
   return result;
@@ -94,8 +84,8 @@ struct FileData load(char* filename) {
 int main() {
     srand(time(NULL));
     clock_t start = clock(), diff;
-    struct FileData data = load("inlab01.txt");
-    struct RandomEntity** arr = random_func(data.num);
+    FileData data = load("inlab01.txt");
+    RandomEntity** arr = random_func(data.num);
     sort_func(arr, data.num);
     int count = search_count_func(arr, data.num, data.search);
     for(int i = 0; i < data.num && i < 20; i++) {

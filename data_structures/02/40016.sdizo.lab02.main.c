@@ -3,26 +3,25 @@
 // pilatowski-lukasz@zut.edu.pl
 // TODO change to cyclic list
 // TODO Resolve issue with last id being random number when presenting last 11 id's
-// TODO change to typedef struct
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 typedef enum { false, true } bool;
 
-struct ListElement {
+typedef struct ListElement {
     int id;
     double d;
     char c;
     struct ListElement* previous;
     struct ListElement* next;
-};
+} ListElement;
 
-struct ListElement* first = NULL;
-struct ListElement* last = NULL;
+ListElement* first = NULL;
+ListElement* last = NULL;
 int count = 0;
 
-void _remove_next_recursive(struct ListElement* elem) {
+void _remove_next_recursive(ListElement* elem) {
     if(elem != NULL) {
         _remove_next_recursive(elem->next);
         elem->next = NULL;
@@ -32,7 +31,7 @@ void _remove_next_recursive(struct ListElement* elem) {
     }
 }
 
-void _insert_recur(struct ListElement* current, struct ListElement* element) {
+void _insert_recur(ListElement* current, ListElement* element) {
     if(current->id < element->id) {
         if(current->next != NULL) {
             _insert_recur(current->next, element);
@@ -59,15 +58,15 @@ void _insert_recur(struct ListElement* current, struct ListElement* element) {
 
 }
 
-struct ListElement* _create_new_element(int id) {
-    struct ListElement* element = (struct ListElement*) malloc(sizeof(struct ListElement));
+ListElement* _create_new_element(int id) {
+    ListElement* element = (ListElement*) malloc(sizeof(ListElement));
     element->id = id;
     element->d = (double)rand() / RAND_MAX;
     element->c = 'T';
     return element;
 }
 
-struct ListElement* _find_recur(struct ListElement* element, int id) {
+ListElement* _find_recur(ListElement* element, int id) {
     if(element->id == id) {
         return element;
     } else if(element->next == NULL || element->id > id) {
@@ -85,15 +84,15 @@ void remove_all() {
     }
 }
 
-void _remove_recursive(struct ListElement* element, int id) {
+void _remove_recursive(ListElement* element, int id) {
     if(element == NULL) {
         return;
     }
     if(element->id != id) {
         _remove_recursive(element->next, id);
     } else {
-        struct ListElement* previous = element->previous;
-        struct ListElement* next = element->next;
+        ListElement* previous = element->previous;
+        ListElement* next = element->next;
         if(previous != NULL) {
             previous->next = next;
         }
@@ -114,7 +113,7 @@ void remove_element(int id) {
 
 void insert_new_element(int id) {
     if(first == NULL) {
-        struct ListElement* element = _create_new_element(id);
+        ListElement* element = _create_new_element(id);
         first = element;
         last = element;
     } else {
@@ -124,7 +123,7 @@ void insert_new_element(int id) {
 
 int calculate_id() {
     int id;
-    struct ListElement* current_element;
+    ListElement* current_element;
     mark:
     id = (rand() % 99901) + 99;
     current_element = first;
@@ -147,7 +146,7 @@ void insert_n_new_elements(int X) {
     }
 }
 
-struct ListElement* find_element(int id) {
+ListElement* find_element(int id) {
     if(first == NULL) {
         printf("List is empty, cound not find element with id %d\n", id);
         return NULL;
@@ -161,7 +160,7 @@ struct ListElement* find_element(int id) {
 
 void present_n_first_values(int Y) {
     int node_count = 0;
-    struct ListElement* current_element = first;
+    ListElement* current_element = first;
     do {
         if(current_element == NULL) {
             break;
@@ -178,7 +177,7 @@ void present_n_first_values(int Y) {
 
 void present_n_last_values(int Z) {
     int node_count = 0;
-    struct ListElement* current_element = last;
+    ListElement* current_element = last;
     do {
         if(current_element == NULL) {
             break;
@@ -195,7 +194,7 @@ void present_n_last_values(int Z) {
 
 int count_values() {
     int node_count = 0;
-    struct ListElement* current_element = first;
+    ListElement* current_element = first;
     while(current_element != NULL) {
         node_count += 1;
         current_element = current_element->next;
@@ -203,34 +202,20 @@ int count_values() {
     return node_count;
 }
 
-struct FileData {
+typedef struct FileData {
     int X;
     int k1;
     int k2;
     int k3;
     int k4;
     int k5;
-};
+} FileData;
 
-struct FileData load(char* filename) {
+FileData load(char* filename) {
   FILE* file = fopen(filename, "r");
-  struct FileData result = {0, 0, 0, 0, 0, 0};
-  char c;
-  int spaceCount = 0;
+  FileData result;
   if (file) {
-      int X;
-      int k1;
-      int k2;
-      int k3;
-      int k4;
-      int k5;
-      fscanf(file, "%d %d %d %d %d %d", &X, &k1, &k2, &k3, &k4, &k5);
-      result.X = X;
-      result.k1 = k1;
-      result.k2 = k2;
-      result.k3 = k3;
-      result.k4 = k4;
-      result.k5 = k5;
+      fscanf(file, "%d %d %d %d %d %d", &result.X, &result.k1, &result.k2, &result.k3, &result.k4, &result.k5);
       fclose(file);
   }
   return result;
@@ -239,9 +224,9 @@ struct FileData load(char* filename) {
 int main() {
     srand(time(NULL));
     clock_t start = clock(), diff;
-    struct FileData data = load("inlab02.txt");
+    FileData data = load("inlab02.txt");
     printf("%d\n", data.k1);
-    struct ListElement* elem_k1 = find_element(data.k1);
+    ListElement* elem_k1 = find_element(data.k1);
     insert_n_new_elements(data.X);
     printf("Count: %d\n", count_values());
     present_n_first_values(20);
@@ -259,7 +244,7 @@ int main() {
     present_n_first_values(20);
     remove_element(data.k5);
     printf("Count: %d\n", count_values());
-    struct ListElement* elem_k5 = find_element(data.k5);
+    ListElement* elem_k5 = find_element(data.k5);
     present_n_last_values(11);
     remove_all();
     present_n_last_values(11);
