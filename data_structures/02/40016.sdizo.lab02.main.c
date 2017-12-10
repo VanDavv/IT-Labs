@@ -15,6 +15,8 @@ typedef struct ListElement {
     struct ListElement* next;
 } ListElement;
 
+// TODO remove last value
+// TODO change first value to be in main and to be passed as param
 ListElement* first = NULL;
 ListElement* last = NULL;
 
