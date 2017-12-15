@@ -15,10 +15,8 @@ typedef struct ListElement {
     struct ListElement* next;
 } ListElement;
 
-// TODO remove last value
 // TODO change first value to be in main and to be passed as param
 ListElement* first = NULL;
-ListElement* last = NULL;
 
 void _remove_next_recursive(ListElement* elem) {
     if(elem != NULL && elem->next != first) {
@@ -41,17 +39,16 @@ void _insert_recur(ListElement* current, ListElement* element) {
             element->next = first;
             first->previous = element;
             current->next = element;
-            last = element;
         }
     } else if (current->id == element->id) {
         printf("Could not insert element with id:%d to list. Element with specified id already exists\n", element->id);
     } else {
         if(element->id < first->id) {
             // element added at the beggining of the list
-            first->previous = element;
-            last->next = element;
             element->next = first;
-            element->previous = last;
+            first->previous->next = element;
+            element->previous = first->previous;
+            first->previous = element;
             first = element;
         } else {
             // element added in the middle of the list
@@ -86,8 +83,6 @@ void remove_all() {
     if(first != NULL) {
         _remove_next_recursive(first);
         first = NULL;
-        free(last);
-        last = NULL;
     }
 }
 
@@ -109,8 +104,8 @@ void _remove_recursive(ListElement* element, int id) {
         if(element == first) {
             first = next;
         }
-        if(element == last) {
-            last = previous;
+        if(element == first->previous) {
+            first->previous = previous;
         }
         free(element);
         element = NULL;
@@ -130,7 +125,6 @@ void insert_new_element(int id) {
         element->next = element;
         element->previous = element;
         first = element;
-        last = element;
     } else {
         _insert_recur(first, _create_new_element(id));
     }
@@ -196,9 +190,13 @@ void present_n_first_values(int Y) {
 
 void present_n_last_values(int Z) {
     int node_count = 0;
-    ListElement* current_element = last;
+    if(first == NULL) {
+        printf("List is empty, nothing to show...\n");
+        return;
+    }
+    ListElement* current_element = first->previous;
     do {
-        if(current_element == NULL || (node_count > 0 && current_element == last)) {
+        if(current_element == NULL || (node_count > 0 && current_element == first->previous)) {
             break;
         } else {
             printf("[%d] Element %d\n", node_count + 1, current_element->id);
@@ -206,9 +204,6 @@ void present_n_last_values(int Z) {
             node_count += 1;
         }
     } while(node_count < Z);
-    if(node_count == 0) {
-        printf("List is empty, nothing to show...\n");
-    }
 }
 
 int count_values() {
