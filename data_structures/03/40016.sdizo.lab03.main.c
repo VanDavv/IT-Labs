@@ -245,9 +245,6 @@ int main() {
     clock_t start = clock(), diff;
     FileData data = load("inlab03.txt");
     TreeNode* root = init_tree();
-    insert_new_node(data.k2, &root);
-    insert_new_node(data.k1, &root);
-    TreeNode* test = _find_parent_node(data.k1, root);
     remove_node(data.k1, &root);
     insert_new_node(data.k1, &root);
     insert_n_new_nodes(data.X, &root);
