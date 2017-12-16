@@ -12,6 +12,10 @@ typedef struct TreeNode {
     char c[10];
 } TreeNode;
 
+void rebalance_tree(TreeNode** root) {
+    // TODO
+}
+
 int calculate_id(TreeNode* root) {
     int id;
     mark:
@@ -90,12 +94,14 @@ void insert_new_node(int id, TreeNode** root) {
         } else if (id < current_element->id) {
             if(current_element->left == NULL) {
                 current_element->left = _create_node(id);
+                rebalance_tree(root);
                 return;
             }
             current_element = current_element->left;
         } else {
             if(current_element->right == NULL) {
                 current_element->right = _create_node(id);
+                rebalance_tree(root);
                 return;
             }
             current_element = current_element->right;
@@ -131,6 +137,7 @@ void remove_node(int id, TreeNode** root) {
             }
         }
         free(found_node);
+        rebalance_tree(root);
     // found node has both children
     } else if (found_node->left != NULL && found_node->right != NULL) {
         TreeNode* succ_node = _find_succ_node(found_node);
@@ -154,6 +161,7 @@ void remove_node(int id, TreeNode** root) {
         succ_node->right = found_node->right;
         // free found node
         free(found_node);
+        rebalance_tree(root);
     // found node has only left children
     } else if(found_node->left != NULL) {
         if(id < parent_node->id) {
@@ -161,6 +169,8 @@ void remove_node(int id, TreeNode** root) {
         } else {
             parent_node->right = found_node->left;
         }
+        free(found_node);
+        rebalance_tree(root);
     // found node has only right children
     }  else if(found_node->right != NULL) {
         if(id < parent_node->id) {
@@ -168,6 +178,8 @@ void remove_node(int id, TreeNode** root) {
         } else {
             parent_node->right = found_node->right;
         }
+        free(found_node);
+        rebalance_tree(root);
     }
 }
 
