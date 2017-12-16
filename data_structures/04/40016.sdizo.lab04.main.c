@@ -7,13 +7,93 @@
 
 typedef struct TreeNode {
     int id;
+    int bf;
     struct TreeNode* left;
     struct TreeNode* right;
     char c[10];
 } TreeNode;
 
+TreeNode* _find_parent_node(int id, TreeNode* root) {
+    if(root == NULL || root->id == id) {
+        return NULL;
+    }
+    TreeNode* parent_node = root;
+    TreeNode* child_node;
+    do {
+        if(id > parent_node->id) {
+            child_node = parent_node->right;
+        } else if(id < parent_node->id) {
+            child_node = parent_node->left;
+        }
+        if(child_node != NULL && child_node->id == id) {
+            return parent_node;
+        } else {
+            parent_node = child_node;
+        }
+    } while(child_node != NULL);
+
+    return NULL;
+}
+
+int _calculate_height(TreeNode* node) {
+    if(node == NULL) {
+        return 0;
+    }
+    int left_height = _calculate_height(node->left);
+    int right_height = _calculate_height(node->right);
+    if(left_height > right_height) {
+        return left_height + 1;
+    } else {
+        return right_height + 1;
+    }
+}
+
+int _calculate_bf(TreeNode* node) {
+    return _calculate_height(node->left) - _calculate_height(node->right);
+}
+
+void _rebalance_tree_recur(TreeNode** node, TreeNode** root) {
+    if(*node == NULL) {
+        return;
+    }
+    _rebalance_tree_recur(&((*node)->left), root);
+    _rebalance_tree_recur(&((*node)->right), root);
+    int bf = (*node)->bf = _calculate_bf(*node);
+    if (bf > 1) {
+        if (_calculate_bf((*node)->left) < 0) {
+            // rotate left
+            TreeNode** left = &((*node)->left);
+            TreeNode** right = &((*left)->right);
+            TreeNode* rightLeftBuff = (*right)->left;
+            (*node)->left = *right;
+//            (*right)->left = *left;
+//            (*left)->right = rightLeftBuff;
+        }
+        // rotate right
+//        TreeNode** left = &((*node)->left);
+//        TreeNode* leftRightBuff = (*left)->right;
+//        (*node)->left = leftRightBuff;
+//        (*left)->right = *node;
+//        TreeNode* parent_node = _find_parent_node((*left)->id, *root);
+//        if(parent_node == NULL) {
+//            *root = *left;
+//        } else if((*left)->id < parent_node->id) {
+//            parent_node->left = *left;
+//        } else {
+//            parent_node->right = *left;
+//        }
+    } else if (bf < -1) {
+        if (_calculate_bf((*node)->right) > 0) {
+            // rotate right
+//            _rotate_right(R);
+        }
+        // rotate left
+//        _rotate_left(P);
+    }
+}
+
 void rebalance_tree(TreeNode** root) {
-    // TODO
+    _rebalance_tree_recur(root, root);
 }
 
 int calculate_id(TreeNode* root) {
@@ -50,31 +130,10 @@ TreeNode* find_node(int id, TreeNode* root) {
     return NULL;
 }
 
-TreeNode* _find_parent_node(int id, TreeNode* root) {
-    if(root == NULL || root->id == id) {
-        return NULL;
-    }
-    TreeNode* parent_node = root;
-    TreeNode* child_node;
-    do {
-        if(id > parent_node->id) {
-            child_node = parent_node->right;
-        } else if(id < parent_node->id) {
-            child_node = parent_node->left;
-        }
-        if(child_node != NULL && child_node->id == id) {
-            return parent_node;
-        } else {
-            parent_node = child_node;
-        }
-    } while(child_node != NULL);
-
-    return NULL;
-}
-
 TreeNode* _create_node(int id) {
     TreeNode* element = (TreeNode*) malloc(sizeof(TreeNode));
     element->id = id;
+    element->bf = 0;
     element->left = NULL;
     element->right = NULL;
     sprintf(element->c,"%d", id);
