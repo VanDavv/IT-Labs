@@ -161,6 +161,7 @@ void remove_node(int id, TreeNode** root) {
         } else {
             parent_node->right = found_node->left;
         }
+        free(found_node);
     // found node has only right children
     }  else if(found_node->right != NULL) {
         if(id < parent_node->id) {
@@ -168,6 +169,7 @@ void remove_node(int id, TreeNode** root) {
         } else {
             parent_node->right = found_node->right;
         }
+        free(found_node);
     }
 }
 
