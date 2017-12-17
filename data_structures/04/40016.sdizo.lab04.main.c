@@ -62,6 +62,7 @@ void _rebalance_tree_recur(TreeNode** node, TreeNode** root) {
     if (bf > 1) {
         if (_calculate_bf((*node)->left) < 0) {
             // LR rotation
+            printf("LR\n");
             TreeNode* left = (*node)->left;
             TreeNode* right = left->right;
             left->right = right->left;
@@ -69,18 +70,22 @@ void _rebalance_tree_recur(TreeNode** node, TreeNode** root) {
             (*node)->left = right;
         }
         // LL rotation
+        printf("LL\n");
         TreeNode* parent_node = _find_parent_node((*node)->id, *root);
         TreeNode* left = (*node)->left;
         (*node)->left = left->right;
         left->right = *node;
         if(parent_node == NULL) {
             *root = left;
+        } else if(left->id > parent_node->id) {
+            parent_node->right = left;
         } else {
             parent_node->left = left;
         }
     } else if (bf < -1) {
         if (_calculate_bf((*node)->right) > 0) {
             // RL rotation
+            printf("RL\n");
             TreeNode* right = (*node)->right;
             TreeNode* left = right->left;
             right->left = left->right;
@@ -88,14 +93,17 @@ void _rebalance_tree_recur(TreeNode** node, TreeNode** root) {
             (*node)->right = left;
         }
         // RR rotation
+        printf("RR\n");
         TreeNode* parent_node = _find_parent_node((*node)->id, *root);
         TreeNode* right = (*node)->right;
         (*node)->right = right->left;
         right->left = *node;
         if(parent_node == NULL) {
             *root = right;
-        } else {
+        } else if(right->id > parent_node->id) {
             parent_node->right = right;
+        } else {
+            parent_node->left = right;
         }
     }
 }
@@ -149,6 +157,7 @@ TreeNode* _create_node(int id) {
 }
 
 void insert_new_node(int id, TreeNode** root) {
+    printf("[indert]: %d\n", id);
     if(*root == NULL) {
         *root = _create_node(id);
         return;
@@ -287,6 +296,13 @@ void _post_order_recur(TreeNode* node) {
     printf("%d ", node->id);
 }
 
+int _count_recur(TreeNode* node) {
+    if(node == NULL) {
+        return 0;
+    }
+    return _count_recur(node->left) +_count_recur(node->right) + 1;
+}
+
 void view_pre_order(TreeNode* root) {
     _pre_order_recur(root);
     printf("\n");
@@ -324,22 +340,24 @@ int main() {
     clock_t start = clock(), diff;
     FileData data = load("inlab04.txt");
     TreeNode* root = init_tree();
-    remove_node(data.k1, &root);
-    insert_new_node(data.k1, &root);
-    insert_n_new_nodes(data.X, &root);
-    view_in_order(root);
-    view_pre_order(root);
-    insert_new_node(data.k2, &root);
-    view_in_order(root);
-    insert_new_node(data.k3, &root);
-    insert_new_node(data.k4, &root);
-    remove_node(data.k1, &root);
-    view_pre_order(root);
-    find_node(data.k1, root);
-    remove_node(data.k2, &root);
-    view_in_order(root);
-    remove_node(data.k3, &root);
-    remove_node(data.k4, &root);
+    insert_n_new_nodes(1000, &root);
+    printf("Count: %d\n", _count_recur(root));
+//    remove_node(data.k1, &root);
+//    insert_new_node(data.k1, &root);
+//    insert_n_new_nodes(data.X, &root);
+//    view_in_order(root);
+//    view_pre_order(root);
+//    insert_new_node(data.k2, &root);
+//    view_in_order(root);
+//    insert_new_node(data.k3, &root);
+//    insert_new_node(data.k4, &root);
+//    remove_node(data.k1, &root);
+//    view_pre_order(root);
+//    find_node(data.k1, root);
+//    remove_node(data.k2, &root);
+//    view_in_order(root);
+//    remove_node(data.k3, &root);
+//    remove_node(data.k4, &root);
     diff = clock() - start;
     int msec = diff * 1000 / CLOCKS_PER_SEC;
     printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
