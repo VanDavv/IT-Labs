@@ -7,7 +7,6 @@
 
 typedef struct TreeNode {
     int id;
-    int bf;
     struct TreeNode* left;
     struct TreeNode* right;
     char c[10];
@@ -58,7 +57,7 @@ void _rebalance_tree_recur(TreeNode** node, TreeNode** root) {
     }
     _rebalance_tree_recur(&((*node)->left), root);
     _rebalance_tree_recur(&((*node)->right), root);
-    int bf = (*node)->bf = _calculate_bf(*node);
+    int bf = _calculate_bf(*node);
     if (bf > 1) {
         if (_calculate_bf((*node)->left) < 0) {
             // LR rotation
@@ -145,7 +144,6 @@ TreeNode* find_node(int id, TreeNode* root) {
 TreeNode* _create_node(int id) {
     TreeNode* element = (TreeNode*) malloc(sizeof(TreeNode));
     element->id = id;
-    element->bf = 0;
     element->left = NULL;
     element->right = NULL;
     sprintf(element->c,"%d", id);
