@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+typedef enum { false, true } bool;
+
 typedef struct TreeNode {
     int id;
     struct TreeNode* left;
@@ -85,7 +87,6 @@ void insert_new_node(int id, TreeNode** root) {
     TreeNode* current_element = *root;
     while(current_element != NULL) {
         if(id == current_element->id) {
-            printf("Could not insert node with id %d, node already exists\n", id);
             return;
         } else if (id < current_element->id) {
             if(current_element->left == NULL) {
@@ -112,14 +113,19 @@ TreeNode* _find_succ_node(TreeNode* start_node) {
     return succ_node;
 }
 
-void remove_node(int id, TreeNode** root) {
+bool remove_node(int id, TreeNode** root) {
     if (*root == NULL) {
-        return;
+        return false;
+    }
+    if((*root)->id == id) {
+        free(*root);
+        *root = NULL;
+        return true;
     }
     TreeNode* found_node = find_node(id, *root);
     TreeNode* parent_node = _find_parent_node(id, *root);
     if(found_node == NULL) {
-        return;
+        return false;
     }
     // found node has no children
     if(found_node->left == NULL && found_node->right == NULL) {
@@ -131,6 +137,7 @@ void remove_node(int id, TreeNode** root) {
             }
         }
         free(found_node);
+        return true;
     // found node has both children
     } else if (found_node->left != NULL && found_node->right != NULL) {
         TreeNode* succ_node = _find_succ_node(found_node);
@@ -154,6 +161,7 @@ void remove_node(int id, TreeNode** root) {
         succ_node->right = found_node->right;
         // free found node
         free(found_node);
+        return true;
     // found node has only left children
     } else if(found_node->left != NULL) {
         if(id < parent_node->id) {
@@ -162,6 +170,7 @@ void remove_node(int id, TreeNode** root) {
             parent_node->right = found_node->left;
         }
         free(found_node);
+        return true;
     // found node has only right children
     }  else if(found_node->right != NULL) {
         if(id < parent_node->id) {
@@ -170,6 +179,7 @@ void remove_node(int id, TreeNode** root) {
             parent_node->right = found_node->right;
         }
         free(found_node);
+        return true;
     }
 }
 
@@ -224,47 +234,72 @@ void view_post_order(TreeNode* root) {
     _post_order_recur(root);
     printf("\n");
 }
-typedef struct FileData {
-    int X;
-    int k1;
-    int k2;
-    int k3;
-    int k4;
-} FileData;
 
-FileData load(char* filename) {
-  FILE* file = fopen(filename, "r");
-  FileData result;
-  if (file) {
-      fscanf(file, "%d %d %d %d %d", &result.X, &result.k1, &result.k2, &result.k3, &result.k4);
-      fclose(file);
-  }
-  return result;
+int _count_recur(TreeNode* node) {
+    if(node == NULL) {
+        return 0;
+    }
+    return _count_recur(node->left) +_count_recur(node->right) + 1;
 }
 
-int main() {
-    srand(time(NULL));
+int main(int argc, char *argv[]) {
+    if(argc != 3) {
+        printf("Incorrect numbers of arguments (%d), expected 2\n", argc - 1);
+        return 1;
+    }
+    int N = atoi(argv[1]);
+    bool randomize = (atoi(argv[2]) == 1);
+    srand(1);
+
+    printf("Inserting\n");
     clock_t start = clock(), diff;
-    FileData data = load("inlab03.txt");
     TreeNode* root = init_tree();
-    remove_node(data.k1, &root);
-    insert_new_node(data.k1, &root);
-    insert_n_new_nodes(data.X, &root);
-    view_in_order(root);
-    view_pre_order(root);
-    insert_new_node(data.k2, &root);
-    view_in_order(root);
-    insert_new_node(data.k3, &root);
-    insert_new_node(data.k4, &root);
-    remove_node(data.k1, &root);
-    view_pre_order(root);
-    find_node(data.k1, root);
-    remove_node(data.k2, &root);
-    view_in_order(root);
-    remove_node(data.k3, &root);
-    remove_node(data.k4, &root);
+    if(randomize) {
+        insert_n_new_nodes(N, &root);
+    } else {
+        for(int i = 0; i < N; i++) {
+            if(i % 2 == 0) {
+                insert_new_node(calculate_id(root), &root);
+            } else {
+                insert_new_node((i+1)/2, &root);
+            }
+        }
+    }
+    printf("Inserted: %d\n", _count_recur(root));
     diff = clock() - start;
     int msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+
+    printf("Search\n");
+    start = clock();
+    root = init_tree();
+    int count = 0;
+    for(int i = 0; i < N; i++) {
+        int id = calculate_id(root);
+        insert_new_node(id, &root);
+        if(find_node(id, root) != NULL) {
+            count++;
+        }
+    }
+    printf("Found: %d\n", count);
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+
+    printf("Remove\n");
+    start = clock();
+    root = init_tree();
+    count = 0;
+    for(int i = 0; i < N; i++) {
+        int id = calculate_id(root);
+        insert_new_node(id, &root);
+        if(remove_node(id, &root)) {
+            count++;
+        }
+    }
+    printf("Removed: %d\n", count);
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
     printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
     return 0;
 }
