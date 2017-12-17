@@ -38,7 +38,7 @@ void _insert_recur(ListElement* current, ListElement* element, ListElement** fir
             current->next = element;
         }
     } else if (current->id == element->id) {
-        printf("Could not insert element with id:%d to list. Element with specified id already exists\n", element->id);
+        return;
     } else {
         if(element->id < (*first)->id) {
             // element added at the beggining of the list
@@ -83,9 +83,9 @@ void remove_all(ListElement** first) {
     }
 }
 
-void _remove_recursive(ListElement* element, int id, ListElement** first) {
+bool _remove_recursive(ListElement* element, int id, ListElement** first) {
     if(element == NULL) {
-        return;
+        return false;
     }
     if(element->id != id) {
         _remove_recursive(element->next, id, first);
@@ -106,14 +106,15 @@ void _remove_recursive(ListElement* element, int id, ListElement** first) {
         }
         free(element);
         element = NULL;
-        return;
+        return true;
     }
 }
 
-void remove_element(int id, ListElement** first) {
+bool remove_element(int id, ListElement** first) {
     if(*first != NULL) {
-        _remove_recursive(*first, id, first);
+        return _remove_recursive(*first, id, first);
     }
+    return false;
 }
 
 void insert_new_element(int id, ListElement** first) {
@@ -157,12 +158,10 @@ void insert_n_new_elements(int X, ListElement** first) {
 
 ListElement* find_element(int id, ListElement** first) {
     if(*first == NULL) {
-        printf("List is empty, cound not find element with id %d\n", id);
         return NULL;
     }
     struct ListElement* element = _find_recur(*first, id, first);
     if(element == NULL) {
-        printf("Element with id %d was not found in list\n", id);
         return NULL;
     }
     return element;
@@ -235,36 +234,64 @@ FileData load(char* filename) {
   return result;
 }
 
-int main() {
-    srand(time(NULL));
+int main(int argc, char *argv[]) {
+    if(argc != 3) {
+        printf("Incorrect numbers of arguments (%d), expected 2\n", argc - 1);
+        return 1;
+    }
+    int N = atoi(argv[1]);
+    bool randomize = (atoi(argv[2]) == 1);
+    srand(1);
+
+    printf("Inserting\n");
     clock_t start = clock(), diff;
-    FileData data = load("inlab02.txt");
     ListElement* first = NULL;
-    ListElement* elem_k1 = find_element(data.k1, &first);
-    insert_n_new_elements(data.X, &first);
-    printf("Count: %d\n", count_values(&first));
-    present_n_first_values(20, &first);
-    insert_new_element(data.k2, &first);
-    present_n_first_values(20, &first);
-    insert_new_element(data.k3, &first);
-    present_n_first_values(20, &first);
-    insert_new_element(data.k4, &first);
-    present_n_first_values(20, &first);
-    insert_new_element(data.k5, &first);
-    present_n_first_values(20, &first);
-    remove_element(data.k3, &first);
-    present_n_first_values(20, &first);
-    remove_element(data.k2, &first);
-    present_n_first_values(20, &first);
-    remove_element(data.k5, &first);
-    printf("Count: %d\n", count_values(&first));
-    ListElement* elem_k5 = find_element(data.k5, &first);
-    present_n_last_values(11, &first);
-    remove_all(&first);
-    present_n_last_values(11, &first);
-    printf("Count: %d\n", count_values(&first));
+    if(randomize) {
+        insert_n_new_elements(N, &first);
+    } else {
+        for(int i = 0; i < N; i++) {
+            if(i % 2 == 0) {
+                insert_new_element(calculate_id(&first), &first);
+            } else {
+                insert_new_element((i+1)/2, &first);
+            }
+        }
+    }
+    printf("Inserted: %d\n", count_values(&first));
     diff = clock() - start;
     int msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+
+    printf("Search\n");
+    start = clock();
+    first = NULL;
+    int count = 0;
+    for(int i = 0; i < N; i++) {
+        int id = calculate_id(&first);
+        insert_new_element(id, &first);
+        if(find_element(id, &first) != NULL) {
+            count++;
+        }
+    }
+    printf("Found: %d\n", count);
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+
+    printf("Remove\n");
+    start = clock();
+    first = NULL;
+    count = 0;
+    for(int i = 0; i < N; i++) {
+        int id = calculate_id(&first);
+        insert_new_element(id, &first);
+        if(remove_element(id, &first)) {
+            count++;
+        }
+    }
+    printf("Removed: %d\n", count);
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
     printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
     return 0;
 }

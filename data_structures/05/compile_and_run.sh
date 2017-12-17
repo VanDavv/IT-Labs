@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gcc 40016.sdizo.lab05.BST.c && ./a.out 10000 0
+gcc 40016.sdizo.lab05.list.c && ./a.out 10000 0
