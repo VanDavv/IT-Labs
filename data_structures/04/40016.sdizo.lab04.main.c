@@ -191,6 +191,9 @@ void remove_node(int id, TreeNode** root) {
     if (*root == NULL) {
         return;
     }
+    if((*root)->id == id) {
+        *root = NULL;
+    }
     TreeNode* found_node = find_node(id, *root);
     TreeNode* parent_node = _find_parent_node(id, *root);
     if(found_node == NULL) {
