@@ -13,6 +13,10 @@ typedef struct TreeNode {
     struct TreeNode* right;
 } TreeNode;
 
+int new_id() {
+    return rand() % 100001;
+}
+
 TreeNode* _find_parent_node(int id, TreeNode* root) {
     if(root == NULL || root->id == id) {
         return NULL;
@@ -111,7 +115,7 @@ void rebalance_tree(TreeNode** root) {
 int calculate_id(TreeNode* root) {
     int id;
     mark:
-    id = rand() % 100001;
+    id = new_id();
     TreeNode* current_element = root;
     while(current_element != NULL) {
         if(id == current_element->id) {
@@ -326,7 +330,7 @@ int main(int argc, char *argv[]) {
     int N = atoi(argv[1]);
     bool randomize = (atoi(argv[2]) == 1);
     srand(1);
-
+    printf("\n[AVL] %d\n", N);
     printf("Inserting\n");
     clock_t start = clock(), diff;
     TreeNode* root = init_tree();
@@ -348,12 +352,9 @@ int main(int argc, char *argv[]) {
 
     printf("Search\n");
     start = clock();
-    root = init_tree();
     int count = 0;
     for(int i = 0; i < N; i++) {
-        int id = calculate_id(root);
-        insert_new_node(id, &root);
-        if(find_node(id, root) != NULL) {
+        if(find_node(new_id(), root) != NULL) {
             count++;
         }
     }
@@ -364,12 +365,9 @@ int main(int argc, char *argv[]) {
 
     printf("Remove\n");
     start = clock();
-    root = init_tree();
     count = 0;
     for(int i = 0; i < N; i++) {
-        int id = calculate_id(root);
-        insert_new_node(id, &root);
-        if(remove_node(id, &root)) {
+        if(remove_node(new_id(), &root)) {
             count++;
         }
     }

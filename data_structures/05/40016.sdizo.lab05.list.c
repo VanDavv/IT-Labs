@@ -15,6 +15,10 @@ typedef struct ListElement {
     struct ListElement* next;
 } ListElement;
 
+int new_id() {
+    return rand() % 100001;
+}
+
 void _remove_next_recursive(ListElement* elem, ListElement** first) {
     if(elem != NULL && elem->next != *first) {
         _remove_next_recursive(elem->next, first);
@@ -84,11 +88,12 @@ void remove_all(ListElement** first) {
 }
 
 bool _remove_recursive(ListElement* element, int id, ListElement** first) {
-    if(element == NULL) {
+    if(element == NULL || element->next->id == (*first)->id) {
         return false;
     }
+
     if(element->id != id) {
-        _remove_recursive(element->next, id, first);
+        return _remove_recursive(element->next, id, first);
     } else {
         ListElement* previous = element->previous;
         ListElement* next = element->next;
@@ -132,7 +137,7 @@ int calculate_id(ListElement** first) {
     int id;
     ListElement* current_element;
     mark:
-    id = (rand() % 99901) + 99;
+    id = new_id();
     if(*first == NULL) {
         return id;
     }
@@ -242,7 +247,7 @@ int main(int argc, char *argv[]) {
     int N = atoi(argv[1]);
     bool randomize = (atoi(argv[2]) == 1);
     srand(1);
-
+    printf("\n[LIST] %d\n", N);
     printf("Inserting\n");
     clock_t start = clock(), diff;
     ListElement* first = NULL;
@@ -264,12 +269,9 @@ int main(int argc, char *argv[]) {
 
     printf("Search\n");
     start = clock();
-    first = NULL;
     int count = 0;
     for(int i = 0; i < N; i++) {
-        int id = calculate_id(&first);
-        insert_new_element(id, &first);
-        if(find_element(id, &first) != NULL) {
+        if(find_element(new_id(), &first) != NULL) {
             count++;
         }
     }
@@ -280,12 +282,9 @@ int main(int argc, char *argv[]) {
 
     printf("Remove\n");
     start = clock();
-    first = NULL;
     count = 0;
     for(int i = 0; i < N; i++) {
-        int id = calculate_id(&first);
-        insert_new_element(id, &first);
-        if(remove_element(id, &first)) {
+        if(remove_element(new_id(), &first)) {
             count++;
         }
     }

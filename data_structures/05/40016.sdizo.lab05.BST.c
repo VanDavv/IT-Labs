@@ -11,13 +11,16 @@ typedef struct TreeNode {
     int id;
     struct TreeNode* left;
     struct TreeNode* right;
-    char c[10];
 } TreeNode;
+
+int new_id() {
+    return rand() % 100001;
+}
 
 int calculate_id(TreeNode* root) {
     int id;
     mark:
-    id = (rand() % 20001) - 10000;
+    id = new_id();
     TreeNode* current_element = root;
     while(current_element != NULL) {
         if(id == current_element->id) {
@@ -44,7 +47,6 @@ TreeNode* find_node(int id, TreeNode* root) {
         }
         continue;
     }
-    printf("Node with id %d was not found\n", id);
     return NULL;
 }
 
@@ -75,7 +77,6 @@ TreeNode* _create_node(int id) {
     element->id = id;
     element->left = NULL;
     element->right = NULL;
-    sprintf(element->c,"%d", id);
     return element;
 }
 
@@ -250,7 +251,7 @@ int main(int argc, char *argv[]) {
     int N = atoi(argv[1]);
     bool randomize = (atoi(argv[2]) == 1);
     srand(1);
-
+    printf("\n[BST] %d\n", N);
     printf("Inserting\n");
     clock_t start = clock(), diff;
     TreeNode* root = init_tree();
@@ -272,12 +273,9 @@ int main(int argc, char *argv[]) {
 
     printf("Search\n");
     start = clock();
-    root = init_tree();
     int count = 0;
     for(int i = 0; i < N; i++) {
-        int id = calculate_id(root);
-        insert_new_node(id, &root);
-        if(find_node(id, root) != NULL) {
+        if(find_node(new_id(), root) != NULL) {
             count++;
         }
     }
@@ -288,12 +286,9 @@ int main(int argc, char *argv[]) {
 
     printf("Remove\n");
     start = clock();
-    root = init_tree();
     count = 0;
     for(int i = 0; i < N; i++) {
-        int id = calculate_id(root);
-        insert_new_node(id, &root);
-        if(remove_node(id, &root)) {
+        if(remove_node(new_id(), &root)) {
             count++;
         }
     }
