@@ -327,6 +327,7 @@ FileData load(char* filename) {
 }
 
 int main() {
+    // TODO change rebalance tree func not to use recur (local transform makes tree balanced)
     srand(time(NULL));
     clock_t start = clock(), diff;
     FileData data = load("inlab04.txt");
