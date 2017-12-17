@@ -61,34 +61,42 @@ void _rebalance_tree_recur(TreeNode** node, TreeNode** root) {
     int bf = (*node)->bf = _calculate_bf(*node);
     if (bf > 1) {
         if (_calculate_bf((*node)->left) < 0) {
-            // rotate left
-            TreeNode** left = &((*node)->left);
-            TreeNode** right = &((*left)->right);
-            TreeNode* rightLeftBuff = (*right)->left;
-            (*node)->left = *right;
-//            (*right)->left = *left;
-//            (*left)->right = rightLeftBuff;
+            // LR rotation
+            TreeNode* left = (*node)->left;
+            TreeNode* right = left->right;
+            left->right = right->left;
+            right->left = left;
+            (*node)->left = right;
         }
-        // rotate right
-//        TreeNode** left = &((*node)->left);
-//        TreeNode* leftRightBuff = (*left)->right;
-//        (*node)->left = leftRightBuff;
-//        (*left)->right = *node;
-//        TreeNode* parent_node = _find_parent_node((*left)->id, *root);
-//        if(parent_node == NULL) {
-//            *root = *left;
-//        } else if((*left)->id < parent_node->id) {
-//            parent_node->left = *left;
-//        } else {
-//            parent_node->right = *left;
-//        }
+        // LL rotation
+        TreeNode* parent_node = _find_parent_node((*node)->id, *root);
+        TreeNode* left = (*node)->left;
+        (*node)->left = left->right;
+        left->right = *node;
+        if(parent_node == NULL) {
+            *root = left;
+        } else {
+            parent_node->left = left;
+        }
     } else if (bf < -1) {
         if (_calculate_bf((*node)->right) > 0) {
-            // rotate right
-//            _rotate_right(R);
+            // RL rotation
+            TreeNode* right = (*node)->right;
+            TreeNode* left = right->left;
+            right->left = left->right;
+            left->right = right;
+            (*node)->right = left;
         }
-        // rotate left
-//        _rotate_left(P);
+        // RR rotation
+        TreeNode* parent_node = _find_parent_node((*node)->id, *root);
+        TreeNode* right = (*node)->right;
+        (*node)->right = right->left;
+        right->left = *node;
+        if(parent_node == NULL) {
+            *root = right;
+        } else {
+            parent_node->right = right;
+        }
     }
 }
 
