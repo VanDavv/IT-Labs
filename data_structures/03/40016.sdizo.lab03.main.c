@@ -114,7 +114,7 @@ TreeNode* _find_succ_node(TreeNode* start_node) {
 
 void remove_node(int id, TreeNode** root) {
     if (*root == NULL) {
-        printf("Unable to remove element with id %d, tree is not initialized\n", id);
+        printf("Unable to remove element with id %d, tree is empty\n", id);
         return;
     }
     // found node is root
