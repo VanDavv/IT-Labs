@@ -114,16 +114,25 @@ TreeNode* _find_succ_node(TreeNode* start_node) {
 
 void remove_node(int id, TreeNode** root) {
     if (*root == NULL) {
+        printf("Unable to remove element with id %d, tree is not initialized\n", id);
         return;
     }
+    // found node is root
     if((*root)->id == id) {
+        TreeNode* new_root = (*root)->right;
+        if(new_root != NULL) {
+            new_root->left = (*root)->left;
+        } else {
+            new_root = (*root)->left;
+        }
         free(*root);
-        *root = NULL;
+        *root = new_root;
         return;
     }
     TreeNode* found_node = find_node(id, *root);
     TreeNode* parent_node = _find_parent_node(id, *root);
     if(found_node == NULL) {
+        printf("Unable to remove element with id %d, element not found\n", id);
         return;
     }
     // found node has no children
@@ -217,17 +226,17 @@ void _post_order_recur(TreeNode* node) {
 
 void view_pre_order(TreeNode* root) {
     _pre_order_recur(root);
-    printf("\n");
+    printf("\n\n");
 }
 
 void view_in_order(TreeNode* root) {
     _in_order_recur(root);
-    printf("\n");
+    printf("\n\n");
 }
 
 void view_post_order(TreeNode* root) {
     _post_order_recur(root);
-    printf("\n");
+    printf("\n\n");
 }
 typedef struct FileData {
     int X;
