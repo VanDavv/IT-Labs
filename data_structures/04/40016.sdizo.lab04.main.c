@@ -213,12 +213,11 @@ void remove_node(int id, TreeNode** root) {
     }
     // found node is root
     if((*root)->id == id) {
-        TreeNode* new_root = (*root)->right;
-        if(new_root != NULL) {
-            new_root->left = (*root)->left;
-        } else {
-            new_root = (*root)->left;
-        }
+        TreeNode* new_root = _find_succ_node(*root);
+        TreeNode* new_root_parent = _find_parent_node(new_root->id, *root);
+        new_root_parent->left = new_root->right;
+        new_root->left = (*root)->left;
+        new_root->right = (*root)->right;
         free(*root);
         *root = new_root;
         return;
@@ -355,7 +354,7 @@ FileData load(char* filename) {
 }
 
 int main() {
-    srand(time(NULL))
+    srand(time(NULL));
     clock_t start = clock(), diff;
     FileData data = load("inlab04.txt");
     TreeNode* root = init_tree();
