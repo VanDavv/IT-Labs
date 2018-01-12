@@ -1,0 +1,37 @@
+import pandas as pd
+
+results = pd.read_csv('../results.csv')
+
+with open('report.txt', 'w') as report:
+    report.write('[Avg inserted]\n')
+    report.write(results.groupby(['randomized', 'type'])['inserted'].mean().to_string())
+    report.write('\n\n')
+    report.write('[Avg insert time]\n')
+    report.write(results.groupby(['randomized', 'type'])['insert_time'].mean().to_string())
+    report.write('\n\n')
+    report.write('[Avg found]\n')
+    report.write(results.groupby(['randomized', 'type'])['search'].mean().to_string())
+    report.write('\n\n')
+    report.write('[Avg search time]\n')
+    report.write(results.groupby(['randomized', 'type'])['search_time'].mean().to_string())
+    report.write('\n\n')
+    report.write('[Avg removed]\n')
+    report.write(results.groupby(['randomized', 'type'])['removed'].mean().to_string())
+    report.write('\n\n')
+    report.write('[Avg remove time]\n')
+    report.write(results.groupby(['randomized', 'type'])['remove_time'].mean().to_string())
+    report.write('\n\n')
+    report.write('Results summary:\n')
+    report.write('\t- For inserting, The most effective is BST tree (400x faster than second LIST)\n')
+    report.write('\t- For inserting, The least effective is AVL tree (probably due to tree rotations\n')
+    report.write('\t- For searching, The most effective is AVL tree\n')
+    report.write('\t- For searching, The least effective is LIST (1000x slower than second BST)\n')
+    report.write('\t- For removing, The most effective is BST tree (500x faster than second AVL)\n')
+    report.write('\t- For removing, The leat effective is LIST\n')
+    report.write('\n\n')
+    report.write('Conclusions:\n')
+    report.write('\t- If we want to keep overall performance on high level, we should use BST tree\n')
+    report.write('\t- If we want to focus mainly on searching in tree (without mutating it), we should use AVL tree\n')
+    report.write('\t- If we don\'t care about performance but we focus on algorighm simplicity, we should use LIST\n')
+
+
