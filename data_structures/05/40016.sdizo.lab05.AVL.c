@@ -5,13 +5,18 @@
 #include <stdlib.h>
 #include <time.h>
 
+typedef enum { false, true } bool;
+
 typedef struct TreeNode {
     int id;
     struct TreeNode* left;
     struct TreeNode* right;
     int bf;
-    char c[10];
 } TreeNode;
+
+int new_id() {
+    return rand() % 100001;
+}
 
 TreeNode* _find_parent_node(int id, TreeNode* root) {
     if(root == NULL || root->id == id) {
@@ -128,7 +133,7 @@ void rebalance_tree(TreeNode** parent, int id, TreeNode** root) {
 int calculate_id(TreeNode* root) {
     int id;
     mark:
-    id = (rand() % 20001) - 10000;
+    id = new_id();
     TreeNode* current_element = root;
     while(current_element != NULL) {
         if(id == current_element->id) {
@@ -155,7 +160,6 @@ TreeNode* find_node(int id, TreeNode* root) {
         }
         continue;
     }
-    printf("Node with id %d was not found\n", id);
     return NULL;
 }
 
@@ -165,7 +169,6 @@ TreeNode* _create_node(int id) {
     element->left = NULL;
     element->right = NULL;
     element->bf = 0;
-    sprintf(element->c,"%d", id);
     return element;
 }
 
@@ -177,7 +180,6 @@ void insert_new_node(int id, TreeNode** root) {
     TreeNode* current_element = *root;
     while(current_element != NULL) {
         if(id == current_element->id) {
-            printf("Could not insert node with id %d, node already exists\n", id);
             return;
         } else if (id < current_element->id) {
             if(current_element->left == NULL) {
@@ -206,10 +208,9 @@ TreeNode* _find_succ_node(TreeNode* start_node) {
     return succ_node;
 }
 
-void remove_node(int id, TreeNode** root) {
-    if (*root == NULL) {
-        printf("Unable to remove element with id %d, tree is empty\n", id);
-        return;
+bool remove_node(int id, TreeNode** root) {
+    if(*root == NULL) {
+        return false;
     }
     // found node is root
     if((*root)->id == id) {
@@ -220,13 +221,12 @@ void remove_node(int id, TreeNode** root) {
         new_root->right = (*root)->right;
         free(*root);
         *root = new_root;
-        return;
+        return true;
     }
     TreeNode* found_node = find_node(id, *root);
     TreeNode* parent_node = _find_parent_node(id, *root);
     if(found_node == NULL) {
-        printf("Unable to remove element with id %d, element not found\n", id);
-        return;
+        return false;
     }
     // found node has no children
     if(found_node->left == NULL && found_node->right == NULL) {
@@ -239,6 +239,7 @@ void remove_node(int id, TreeNode** root) {
         }
         free(found_node);
         rebalance_tree(&parent_node, id, root);
+        return true;
     // found node has both children
     } else if (found_node->left != NULL && found_node->right != NULL) {
         TreeNode* succ_node = _find_succ_node(found_node);
@@ -263,6 +264,7 @@ void remove_node(int id, TreeNode** root) {
         // free found node
         free(found_node);
         rebalance_tree(&parent_node, id, root);
+        return  true;
     // found node has only left children
     } else if(found_node->left != NULL) {
         if(id < parent_node->id) {
@@ -272,6 +274,7 @@ void remove_node(int id, TreeNode** root) {
         }
         free(found_node);
         rebalance_tree(&parent_node, id, root);
+        return true;
     // found node has only right children
     }  else if(found_node->right != NULL) {
         if(id < parent_node->id) {
@@ -281,6 +284,7 @@ void remove_node(int id, TreeNode** root) {
         }
         free(found_node);
         rebalance_tree(&parent_node, id, root);
+        return true;
     }
 }
 

@@ -1,0 +1,330 @@
+
+[AVL] 10000
+Inserting
+Inserted: 9872
+Time taken 0 seconds 642 milliseconds
+Search
+Found: 1041
+Time taken 0 seconds 1 milliseconds
+Remove
+Removed: 914
+Time taken 0 seconds 403 milliseconds
+
+[AVL] 15000
+Inserting
+Inserted: 14723
+Time taken 1 seconds 464 milliseconds
+Search
+Found: 2203
+Time taken 0 seconds 2 milliseconds
+Remove
+Removed: 2006
+Time taken 1 seconds 309 milliseconds
+
+[AVL] 20000
+Inserting
+Inserted: 19486
+Time taken 2 seconds 812 milliseconds
+Search
+Found: 3885
+Time taken 0 seconds 3 milliseconds
+Remove
+Removed: 3520
+Time taken 3 seconds 45 milliseconds
+
+[AVL] 25000
+Inserting
+Inserted: 24207
+Time taken 4 seconds 489 milliseconds
+Search
+Found: 6030
+Time taken 0 seconds 4 milliseconds
+Remove
+Removed: 5340
+Time taken 5 seconds 900 milliseconds
+
+[AVL] 30000
+Inserting
+Inserted: 28836
+Time taken 7 seconds 363 milliseconds
+Search
+Found: 8616
+Time taken 0 seconds 7 milliseconds
+Remove
+Removed: 7478
+Time taken 9 seconds 935 milliseconds
+
+[BST] 10000
+Inserting
+Inserted: 9872
+Time taken 0 seconds 4 milliseconds
+Search
+Found: 1041
+Time taken 0 seconds 2 milliseconds
+Remove
+Removed: 914
+Time taken 0 seconds 4 milliseconds
+
+[BST] 15000
+Inserting
+Inserted: 14723
+Time taken 0 seconds 6 milliseconds
+Search
+Found: 2203
+Time taken 0 seconds 3 milliseconds
+Remove
+Removed: 1999
+Time taken 0 seconds 6 milliseconds
+
+[BST] 20000
+Inserting
+Inserted: 19486
+Time taken 0 seconds 8 milliseconds
+Search
+Found: 3885
+Time taken 0 seconds 4 milliseconds
+Remove
+Removed: 3425
+Time taken 0 seconds 8 milliseconds
+
+[BST] 25000
+Inserting
+Inserted: 24207
+Time taken 0 seconds 9 milliseconds
+Search
+Found: 6030
+Time taken 0 seconds 5 milliseconds
+Remove
+Removed: 5228
+Time taken 0 seconds 10 milliseconds
+
+[BST] 30000
+Inserting
+Inserted: 28836
+Time taken 0 seconds 11 milliseconds
+Search
+Found: 8616
+Time taken 0 seconds 7 milliseconds
+Remove
+Removed: 7288
+Time taken 0 seconds 13 milliseconds
+
+[LIST] 10000
+Inserting
+Inserted: 9871
+Time taken 0 seconds 495 milliseconds
+Search
+Found: 957
+Time taken 0 seconds 910 milliseconds
+Remove
+Removed: 879
+Time taken 1 seconds 314 milliseconds
+
+[LIST] 15000
+Inserting
+Inserted: 14710
+Time taken 1 seconds 219 milliseconds
+Search
+Found: 2131
+Time taken 2 seconds 33 milliseconds
+Remove
+Removed: 2022
+Time taken 2 seconds 913 milliseconds
+
+[LIST] 20000
+Inserting
+Inserted: 19484
+Time taken 2 seconds 251 milliseconds
+Search
+Found: 3844
+Time taken 3 seconds 395 milliseconds
+Remove
+Removed: 3474
+Time taken 4 seconds 747 milliseconds
+
+[LIST] 25000
+Inserting
+Inserted: 24194
+Time taken 3 seconds 769 milliseconds
+Search
+Found: 6029
+Time taken 5 seconds 234 milliseconds
+Remove
+Removed: 5392
+Time taken 7 seconds 295 milliseconds
+
+[LIST] 30000
+Inserting
+Inserted: 28809
+Time taken 5 seconds 608 milliseconds
+Search
+Found: 8603
+Time taken 7 seconds 739 milliseconds
+Remove
+Removed: 7538
+Time taken 10 seconds 471 milliseconds
+
+[AVL] 10000
+Inserting
+Inserted: 10000
+Time taken 1 seconds 474 milliseconds
+Search
+Found: 998
+Time taken 0 seconds 1 milliseconds
+Remove
+Removed: 965
+Time taken 0 seconds 432 milliseconds
+
+[AVL] 15000
+Inserting
+Inserted: 15000
+Time taken 3 seconds 263 milliseconds
+Search
+Found: 2252
+Time taken 0 seconds 2 milliseconds
+Remove
+Removed: 2065
+Time taken 1 seconds 477 milliseconds
+
+[AVL] 20000
+Inserting
+Inserted: 20000
+Time taken 6 seconds 262 milliseconds
+Search
+Found: 3913
+Time taken 0 seconds 5 milliseconds
+Remove
+Removed: 3636
+Time taken 4 seconds 143 milliseconds
+
+[AVL] 25000
+Inserting
+Inserted: 25000
+Time taken 10 seconds 226 milliseconds
+Search
+Found: 6209
+Time taken 0 seconds 5 milliseconds
+Remove
+Removed: 5469
+Time taken 6 seconds 789 milliseconds
+
+[AVL] 30000
+Inserting
+Inserted: 30000
+Time taken 15 seconds 149 milliseconds
+Search
+Found: 8930
+Time taken 0 seconds 6 milliseconds
+Remove
+Removed: 7819
+Time taken 11 seconds 361 milliseconds
+
+[BST] 10000
+Inserting
+Inserted: 10000
+Time taken 0 seconds 3 milliseconds
+Search
+Found: 998
+Time taken 0 seconds 2 milliseconds
+Remove
+Removed: 965
+Time taken 0 seconds 3 milliseconds
+
+[BST] 15000
+Inserting
+Inserted: 15000
+Time taken 0 seconds 7 milliseconds
+Search
+Found: 2252
+Time taken 0 seconds 3 milliseconds
+Remove
+Removed: 1974
+Time taken 0 seconds 6 milliseconds
+
+[BST] 20000
+Inserting
+Inserted: 20000
+Time taken 0 seconds 8 milliseconds
+Search
+Found: 3913
+Time taken 0 seconds 4 milliseconds
+Remove
+Removed: 3528
+Time taken 0 seconds 8 milliseconds
+
+[BST] 25000
+Inserting
+Inserted: 25000
+Time taken 0 seconds 11 milliseconds
+Search
+Found: 6209
+Time taken 0 seconds 6 milliseconds
+Remove
+Removed: 5469
+Time taken 0 seconds 11 milliseconds
+
+[BST] 30000
+Inserting
+Inserted: 30000
+Time taken 0 seconds 13 milliseconds
+Search
+Found: 8930
+Time taken 0 seconds 7 milliseconds
+Remove
+Removed: 7819
+Time taken 0 seconds 13 milliseconds
+
+[LIST] 10000
+Inserting
+Inserted: 10000
+Time taken 0 seconds 942 milliseconds
+Search
+Found: 1007
+Time taken 0 seconds 955 milliseconds
+Remove
+Removed: 936
+Time taken 1 seconds 581 milliseconds
+
+[LIST] 15000
+Inserting
+Inserted: 15000
+Time taken 2 seconds 251 milliseconds
+Search
+Found: 2236
+Time taken 1 seconds 997 milliseconds
+Remove
+Removed: 2111
+Time taken 4 seconds 2 milliseconds
+
+[LIST] 20000
+Inserting
+Inserted: 20000
+Time taken 4 seconds 480 milliseconds
+Search
+Found: 4050
+Time taken 4 seconds 96 milliseconds
+Remove
+Removed: 3629
+Time taken 6 seconds 513 milliseconds
+
+[LIST] 25000
+Inserting
+Inserted: 25000
+Time taken 8 seconds 165 milliseconds
+Search
+Found: 6265
+Time taken 6 seconds 314 milliseconds
+Remove
+Removed: 5588
+Time taken 9 seconds 673 milliseconds
+
+[LIST] 30000
+Inserting
+Inserted: 30000
+Time taken 12 seconds 23 milliseconds
+Search
+Found: 9081
+Time taken 9 seconds 446 milliseconds
+Remove
+Removed: 7725
+Time taken 15 seconds 146 milliseconds
