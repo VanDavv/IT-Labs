@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gcc 40016.sdizo.lab06.main.c && ./a.out
+gcc -lm 40016.sdizo.lab06.main.c && ./a.out

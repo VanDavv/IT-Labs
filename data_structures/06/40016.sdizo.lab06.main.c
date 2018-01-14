@@ -4,84 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include <time.h>
 
-typedef enum { false, true } bool;
-
-int* init_array() {
-    int *arr = malloc(sizeof(int)*997);
-    memset(arr, 0, sizeof *arr);
-    return arr;
-}
-
-int hash(int key) {
-    return ((key % 1000) + 2 ^ (key % 10) + 1) % 997;
-}
-
-int line_addressing(int hash) {
-    return hash + 1;
-}
-
-int double_mixing(int hash) {
-    return hash + 2;
-}
-
-typedef int (*resolv_conflict_func)(int);
-
-bool insert(int* arr, int key, resolv_conflict_func f) {
-    int hash_key = hash(key);
-    while(arr[hash_key] != 0) {
-        hash_key = f(hash_key) % 997;
-        if(arr[hash_key - 1] == key || arr[hash_key] == key) {
-            printf("Could not insert key %d, element already exists\n", key);
-            return false;
-        }
-    }
-    arr[hash_key] = key;
-    return true;
-}
-
-void insert_n(int* arr, int n, resolv_conflict_func f) {
-    for(int i = 0; i < n; i++) {
-        int id;
-        do {
-            id = (rand() % 20001) + 20000;
-        } while(insert(arr, id, f) == false);
-    }
-}
-
-int find(int* arr, int key, resolv_conflict_func f) {
-    int hash_key = hash(key);
-    while(arr[hash_key] != 0) {
-        if(arr[hash_key] == key) {
-            return hash_key;
-        }
-        hash_key = f(hash_key) % 997;
-    }
-    printf("Element with key %d was not found\n", key);
-    return 0;
-}
-
-void show(int* arr, int begin, int end) {
-    for(int i = begin; i < end; i++) {
-        if(arr[i] > 0) {
-            printf("[%d] %d\n", i, arr[i]);
-        }
-    }
-}
-
-void delete(int* arr, int key, resolv_conflict_func f) {
-    int hash_key = hash(key);
-    while(arr[hash_key] != 0) {
-        if(arr[hash_key] == key) {
-            arr[hash_key] = 0;
-            return;
-        }
-        hash_key = f(hash_key) % 997;
-    }
-    printf("Element with key %d was not found\n", key);
-    return;
-}
+#define FILENAME "inlab06.txt"
 
 typedef struct FileData {
     int X;
@@ -101,11 +27,97 @@ FileData load(char* filename) {
   return result;
 }
 
+typedef enum { false, true } bool;
+
+int* init_array() {
+    int *arr = malloc(sizeof(int)*997);
+    memset(arr, 0, 997 * sizeof *arr);
+    return arr;
+}
+
+int hash(int key) {
+    return ((key % 1000) + ((int) pow((double) 2 , (double) (key % 10))) + 1) % 997;
+}
+
+int line_addressing(int key, int conflicts) {
+    return hash(key) + conflicts;
+}
+
+int double_mixing(int key, int conflicts) {
+    return hash(key) + (3 * key % 19 + 1) * conflicts;
+}
+
+typedef int (*resolv_conflict_func)(int, int);
+
+bool insert(int* arr, int key, resolv_conflict_func f) {
+    int hash_key = hash(key);
+    int conflicts = 0;
+    while(arr[hash_key] != 0) {
+        conflicts++;
+        hash_key = f(key, conflicts) % 997;
+        if(arr[hash_key] == key) {
+            printf("Could not insert key %d, element already exists\n", key);
+            return false;
+        }
+    }
+    arr[hash_key] = key;
+    return true;
+}
+
+void insert_n(int* arr, int n, resolv_conflict_func f) {
+    FileData data = load(FILENAME);
+    for(int i = 0; i < n; i++) {
+        int id;
+        bool succ = false;
+        do {
+            id = (rand() % 20001) + 20000;
+            if (id != data.k1 && id != data.k2 && id != data.k3 && id != data.k4) {
+                succ = insert(arr, id, f);
+            }
+        } while(succ == false);
+    }
+}
+
+int find(int* arr, int key, resolv_conflict_func f) {
+    int hash_key = hash(key);
+    int conflicts = 0;
+    while(arr[hash_key] != 0) {
+        if(arr[hash_key] == key) {
+            return hash_key;
+        }
+        conflicts++;
+        hash_key = f(hash_key, conflicts) % 997;
+    }
+    printf("Element with key %d was not found\n", key);
+    return 0;
+}
+
+void show(int* arr, int begin, int end) {
+    for(int i = begin; i < end; i++) {
+        printf("[%d] %d\n", i, arr[i]);
+    }
+}
+
+void delete(int* arr, int key, resolv_conflict_func f) {
+    int hash_key = hash(key);
+    int conflicts = 0;
+    while(arr[hash_key] != 0) {
+        if(arr[hash_key] == key) {
+            arr[hash_key] = -1;
+            return;
+        }
+        conflicts++;
+        hash_key = f(hash_key, conflicts) % 997;
+    }
+    printf("Element with key %d was not found\n", key);
+    return;
+}
+
 
 int main() {
     srand(time(NULL));
     clock_t start = clock(), diff;
-    FileData data = load("inlab06.txt");
+    FileData data = load(FILENAME);
     resolv_conflict_func f = &line_addressing;
     int* a = init_array();
     delete(a, data.k1, f);
