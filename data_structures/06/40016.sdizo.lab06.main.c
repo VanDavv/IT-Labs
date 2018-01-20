@@ -86,7 +86,7 @@ int find(int* arr, int key, resolv_conflict_func f) {
             return hash_key;
         }
         conflicts++;
-        hash_key = f(hash_key, conflicts) % 997;
+        hash_key = f(key, conflicts) % 997;
     }
     printf("Element with key %d was not found\n", key);
     return 0;
@@ -107,7 +107,7 @@ void delete(int* arr, int key, resolv_conflict_func f) {
             return;
         }
         conflicts++;
-        hash_key = f(hash_key, conflicts) % 997;
+        hash_key = f(key, conflicts) % 997;
     }
     printf("Element with key %d was not found\n", key);
     return;
