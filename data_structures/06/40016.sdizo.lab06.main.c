@@ -139,7 +139,7 @@ int main() {
     printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
 
     start = clock();
-        f = &double_mixing;
+    f = &double_mixing;
     a = init_array();
     delete(a, data.k1, f);
     insert(a, data.k1, f);
