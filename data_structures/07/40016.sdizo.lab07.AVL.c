@@ -15,7 +15,7 @@ typedef struct TreeNode {
 } TreeNode;
 
 int new_id() {
-    return rand() % 10000001;
+    return rand() % 10000000;
 }
 
 TreeNode* _find_parent_node(int id, TreeNode* root) {
@@ -347,14 +347,84 @@ int _count_recur(TreeNode* node) {
     return _count_recur(node->left) +_count_recur(node->right) + 1;
 }
 
+typedef struct FileData {
+    int numbers[500000];
+} FileData;
+
+FileData load(char* filename, int N) {
+  FILE* file = fopen(filename, "r");
+  FileData result;
+  if (file) {
+      for (int i = 0; i < N && i < 500000; i++) {
+        fscanf(file, "%d", &result.numbers[i]);
+      }
+      fclose(file);
+  }
+  return result;
+}
+
 int main(int argc, char *argv[]) {
+    srand(time(NULL));
+    clock_t start = clock(), diff;
     if(argc != 2) {
-        printf("Incorrect numbers of arguments (%d), expected 2\n", argc - 1);
+        printf("Incorrect numbers of arguments (%d), expected 1\n", argc - 1);
         return 1;
     }
     int N = atoi(argv[1]);
-    srand(1);
-    clock_t start = clock(), diff;
+    TreeNode* root = init_tree();
+    FileData data = load("rand.txt", N);
+    for (int i = 0; i < N; i++) {
+        insert_new_node(data.numbers[i], &root);
+    }
+    printf("Inserted: %d\n", _count_recur(root));
+    diff = clock() - start;
+    int msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+    start = clock();
+    int found = 0;
+    for (int i = 0; i < N; i++) {
+        TreeNode* node = find_node(data.numbers[i], root);
+        if(node != NULL) {
+            found++;
+        }
+    }
+    printf("Found from file: %d\n", found);
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+    start = clock();
+    found = 0;
+    for (int i = 0; i < N; i++) {
+        TreeNode* node = find_node(new_id(), root);
+        if(node != NULL) {
+            found++;
+        }
+    }
+    printf("Found random: %d\n", found);
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+    start = clock();
+    int removed_count = 0;
+    for (int i = 0; i < N; i++) {
+        bool removed = remove_node(new_id(), &root);
+        if(removed == true) {
+            removed_count++;
+        }
+    }
+    printf("Removed random: %d\n", removed_count);
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+    start = clock();
+    removed_count = 0;
+    for (int i = 0; i < (N / 2); i++) {
+        bool removed = remove_node(data.numbers[i], &root);
+        if(removed == true) {
+            removed_count++;
+        }
+    }
+    printf("Removed from file: %d\n", removed_count);
     diff = clock() - start;
     msec = diff * 1000 / CLOCKS_PER_SEC;
     printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
