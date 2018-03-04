@@ -114,12 +114,19 @@ TreeNode* _find_succ_node(TreeNode* start_node) {
 
 void remove_node(int id, TreeNode** root) {
     if (*root == NULL) {
-        printf("Unable to remove element with id %d, element not found\n", id);
+        printf("Unable to remove element with id %d, tree is empty\n", id);
         return;
     }
+    // found node is root
     if((*root)->id == id) {
+        TreeNode* new_root = (*root)->right;
+        if(new_root != NULL) {
+            new_root->left = (*root)->left;
+        } else {
+            new_root = (*root)->left;
+        }
         free(*root);
-        *root = NULL;
+        *root = new_root;
         return;
     }
     TreeNode* found_node = find_node(id, *root);
@@ -250,7 +257,6 @@ FileData load(char* filename) {
 }
 
 int main() {
-    // TODO resolve remove issue (view_pre_order not showing up)
     srand(time(NULL));
     clock_t start = clock(), diff;
     FileData data = load("inlab03.txt");
@@ -264,7 +270,7 @@ int main() {
     view_in_order(root);
     insert_new_node(data.k3, &root);
     insert_new_node(data.k4, &root);
-//    remove_node(data.k1, &root);
+    remove_node(data.k1, &root);
     view_pre_order(root);
     find_node(data.k1, root);
     remove_node(data.k2, &root);

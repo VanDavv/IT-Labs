@@ -11,6 +11,7 @@ typedef struct TreeNode {
     int id;
     struct TreeNode* left;
     struct TreeNode* right;
+    int bf;
 } TreeNode;
 
 int new_id() {
@@ -56,60 +57,77 @@ int _calculate_bf(TreeNode* node) {
     return _calculate_height(node->left) - _calculate_height(node->right);
 }
 
-void _rebalance_tree_recur(TreeNode** node, TreeNode** root) {
+void _left_rotation(TreeNode** node, TreeNode** root) {
+    TreeNode* parent_node = _find_parent_node((*node)->id, *root);
+    TreeNode* right = (*node)->right;
+    (*node)->right = right->left;
+    right->left = *node;
+
+    if(parent_node == NULL) {
+        *root = right;
+    } else if((*node)->id > parent_node->id) {
+        parent_node->right = right;
+    } else {
+        parent_node->left = right;
+    }
+}
+
+void _right_rotation(TreeNode** node, TreeNode** root) {
+    TreeNode* parent_node = _find_parent_node((*node)->id, *root);
+    TreeNode* left = (*node)->left;
+    (*node)->left = left->right;
+    left->right = *node;
+
+    if(parent_node == NULL) {
+        *root = left;
+    } else if(left->id > parent_node->id) {
+        parent_node->right = left;
+    } else {
+        parent_node->left = left;
+    }
+}
+
+void _rebalance_tree_recur(TreeNode** node, int id, TreeNode** root) {
     if(*node == NULL) {
         return;
     }
-    _rebalance_tree_recur(&((*node)->left), root);
-    _rebalance_tree_recur(&((*node)->right), root);
     int bf = _calculate_bf(*node);
     if (bf > 1) {
         if (_calculate_bf((*node)->left) < 0) {
             // LR rotation
-            TreeNode* left = (*node)->left;
-            TreeNode* right = left->right;
-            left->right = right->left;
-            right->left = left;
-            (*node)->left = right;
+            _left_rotation(&((*node)->left), root);
         }
         // LL rotation
-        TreeNode* parent_node = _find_parent_node((*node)->id, *root);
-        TreeNode* left = (*node)->left;
-        (*node)->left = left->right;
-        left->right = *node;
-        if(parent_node == NULL) {
-            *root = left;
-        } else if(left->id > parent_node->id) {
-            parent_node->right = left;
-        } else {
-            parent_node->left = left;
-        }
+        _right_rotation(node, root);
     } else if (bf < -1) {
         if (_calculate_bf((*node)->right) > 0) {
             // RL rotation
-            TreeNode* right = (*node)->right;
-            TreeNode* left = right->left;
-            right->left = left->right;
-            left->right = right;
-            (*node)->right = left;
+            _right_rotation(&((*node)->right), root);
         }
         // RR rotation
-        TreeNode* parent_node = _find_parent_node((*node)->id, *root);
-        TreeNode* right = (*node)->right;
-        (*node)->right = right->left;
-        right->left = *node;
-        if(parent_node == NULL) {
-            *root = right;
-        } else if(right->id > parent_node->id) {
-            parent_node->right = right;
-        } else {
-            parent_node->left = right;
+        _left_rotation(node, root);
+    }
+
+    (*node)->bf = _calculate_bf(*node);
+
+    if (bf > 1 || bf < -1) {
+        TreeNode* left = (*node)->left;
+        if(left != NULL) {
+            left->bf = _calculate_bf(left);
         }
+        TreeNode* right = (*node)->right;
+        if(right != NULL) {
+            right->bf = _calculate_bf(right);
+        }
+    }
+     else {
+        TreeNode* parent_node = _find_parent_node((*node)->id, *root);
+        _rebalance_tree_recur(&parent_node, id, root);
     }
 }
 
-void rebalance_tree(TreeNode** root) {
-    _rebalance_tree_recur(root, root);
+void rebalance_tree(TreeNode** parent, int id, TreeNode** root) {
+    _rebalance_tree_recur(parent, id, root);
 }
 
 int calculate_id(TreeNode* root) {
@@ -150,6 +168,7 @@ TreeNode* _create_node(int id) {
     element->id = id;
     element->left = NULL;
     element->right = NULL;
+    element->bf = 0;
     return element;
 }
 
@@ -165,14 +184,14 @@ void insert_new_node(int id, TreeNode** root) {
         } else if (id < current_element->id) {
             if(current_element->left == NULL) {
                 current_element->left = _create_node(id);
-                rebalance_tree(root);
+                rebalance_tree(&current_element, id, root);
                 return;
             }
             current_element = current_element->left;
         } else {
             if(current_element->right == NULL) {
                 current_element->right = _create_node(id);
-                rebalance_tree(root);
+                rebalance_tree(&current_element, id, root);
                 return;
             }
             current_element = current_element->right;
@@ -193,9 +212,15 @@ bool remove_node(int id, TreeNode** root) {
     if(*root == NULL) {
         return false;
     }
+    // found node is root
     if((*root)->id == id) {
+        TreeNode* new_root = _find_succ_node(*root);
+        TreeNode* new_root_parent = _find_parent_node(new_root->id, *root);
+        new_root_parent->left = new_root->right;
+        new_root->left = (*root)->left;
+        new_root->right = (*root)->right;
         free(*root);
-        *root = NULL;
+        *root = new_root;
         return true;
     }
     TreeNode* found_node = find_node(id, *root);
@@ -213,7 +238,7 @@ bool remove_node(int id, TreeNode** root) {
             }
         }
         free(found_node);
-        rebalance_tree(root);
+        rebalance_tree(&parent_node, id, root);
         return true;
     // found node has both children
     } else if (found_node->left != NULL && found_node->right != NULL) {
@@ -238,8 +263,8 @@ bool remove_node(int id, TreeNode** root) {
         succ_node->right = found_node->right;
         // free found node
         free(found_node);
-        rebalance_tree(root);
-        return true;
+        rebalance_tree(&parent_node, id, root);
+        return  true;
     // found node has only left children
     } else if(found_node->left != NULL) {
         if(id < parent_node->id) {
@@ -248,7 +273,7 @@ bool remove_node(int id, TreeNode** root) {
             parent_node->right = found_node->left;
         }
         free(found_node);
-        rebalance_tree(root);
+        rebalance_tree(&parent_node, id, root);
         return true;
     // found node has only right children
     }  else if(found_node->right != NULL) {
@@ -258,7 +283,7 @@ bool remove_node(int id, TreeNode** root) {
             parent_node->right = found_node->right;
         }
         free(found_node);
-        rebalance_tree(root);
+        rebalance_tree(&parent_node, id, root);
         return true;
     }
 }

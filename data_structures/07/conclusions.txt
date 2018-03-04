@@ -1,0 +1,5 @@
+Inserting in AVL is much more slower than in set (for 50000 is took 40,07 seconds, where in set it took 0,37 seconds
+
+Searching in AVL is faster than in set (for 50000 it took 0,08 seconds, where in set it took 0,25 seconds)
+
+Removing in AVL is much slower that in set (for 50000 it took 54,63 seconds where in set it took 0,18 seconds)

@@ -1,4 +1,4 @@
-// SDIZO N1 20A LAB05
+// SDIZO N1 20A LAB07
 // Łukasz Piłatowski
 // pilatowski-lukasz@zut.edu.pl
 #include <stdio.h>
@@ -11,10 +11,123 @@ typedef struct TreeNode {
     int id;
     struct TreeNode* left;
     struct TreeNode* right;
+    int bf;
 } TreeNode;
 
 int new_id() {
-    return rand() % 100001;
+    return rand() % 10000000;
+}
+
+TreeNode* _find_parent_node(int id, TreeNode* root) {
+    if(root == NULL || root->id == id) {
+        return NULL;
+    }
+    TreeNode* parent_node = root;
+    TreeNode* child_node;
+    do {
+        if(id > parent_node->id) {
+            child_node = parent_node->right;
+        } else if(id < parent_node->id) {
+            child_node = parent_node->left;
+        }
+        if(child_node != NULL && child_node->id == id) {
+            return parent_node;
+        } else {
+            parent_node = child_node;
+        }
+    } while(child_node != NULL);
+
+    return NULL;
+}
+
+int _calculate_height(TreeNode* node) {
+    if(node == NULL) {
+        return 0;
+    }
+    int left_height = _calculate_height(node->left);
+    int right_height = _calculate_height(node->right);
+    if(left_height > right_height) {
+        return left_height + 1;
+    } else {
+        return right_height + 1;
+    }
+}
+
+int _calculate_bf(TreeNode* node) {
+    return _calculate_height(node->left) - _calculate_height(node->right);
+}
+
+void _left_rotation(TreeNode** node, TreeNode** root) {
+    TreeNode* parent_node = _find_parent_node((*node)->id, *root);
+    TreeNode* right = (*node)->right;
+    (*node)->right = right->left;
+    right->left = *node;
+
+    if(parent_node == NULL) {
+        *root = right;
+    } else if((*node)->id > parent_node->id) {
+        parent_node->right = right;
+    } else {
+        parent_node->left = right;
+    }
+}
+
+void _right_rotation(TreeNode** node, TreeNode** root) {
+    TreeNode* parent_node = _find_parent_node((*node)->id, *root);
+    TreeNode* left = (*node)->left;
+    (*node)->left = left->right;
+    left->right = *node;
+
+    if(parent_node == NULL) {
+        *root = left;
+    } else if(left->id > parent_node->id) {
+        parent_node->right = left;
+    } else {
+        parent_node->left = left;
+    }
+}
+
+void _rebalance_tree_recur(TreeNode** node, int id, TreeNode** root) {
+    if(*node == NULL) {
+        return;
+    }
+    int bf = _calculate_bf(*node);
+    if (bf > 1) {
+        if (_calculate_bf((*node)->left) < 0) {
+            // LR rotation
+            _left_rotation(&((*node)->left), root);
+        }
+        // LL rotation
+        _right_rotation(node, root);
+    } else if (bf < -1) {
+        if (_calculate_bf((*node)->right) > 0) {
+            // RL rotation
+            _right_rotation(&((*node)->right), root);
+        }
+        // RR rotation
+        _left_rotation(node, root);
+    }
+
+    (*node)->bf = _calculate_bf(*node);
+
+    if (bf > 1 || bf < -1) {
+        TreeNode* left = (*node)->left;
+        if(left != NULL) {
+            left->bf = _calculate_bf(left);
+        }
+        TreeNode* right = (*node)->right;
+        if(right != NULL) {
+            right->bf = _calculate_bf(right);
+        }
+    }
+     else {
+        TreeNode* parent_node = _find_parent_node((*node)->id, *root);
+        _rebalance_tree_recur(&parent_node, id, root);
+    }
+}
+
+void rebalance_tree(TreeNode** parent, int id, TreeNode** root) {
+    _rebalance_tree_recur(parent, id, root);
 }
 
 int calculate_id(TreeNode* root) {
@@ -50,33 +163,12 @@ TreeNode* find_node(int id, TreeNode* root) {
     return NULL;
 }
 
-TreeNode* _find_parent_node(int id, TreeNode* root) {
-    if(root == NULL || root->id == id) {
-        return NULL;
-    }
-    TreeNode* parent_node = root;
-    TreeNode* child_node;
-    do {
-        if(id > parent_node->id) {
-            child_node = parent_node->right;
-        } else if(id < parent_node->id) {
-            child_node = parent_node->left;
-        }
-        if(child_node != NULL && child_node->id == id) {
-            return parent_node;
-        } else {
-            parent_node = child_node;
-        }
-    } while(child_node != NULL);
-
-    return NULL;
-}
-
 TreeNode* _create_node(int id) {
     TreeNode* element = (TreeNode*) malloc(sizeof(TreeNode));
     element->id = id;
     element->left = NULL;
     element->right = NULL;
+    element->bf = 0;
     return element;
 }
 
@@ -92,12 +184,14 @@ void insert_new_node(int id, TreeNode** root) {
         } else if (id < current_element->id) {
             if(current_element->left == NULL) {
                 current_element->left = _create_node(id);
+                rebalance_tree(&current_element, id, root);
                 return;
             }
             current_element = current_element->left;
         } else {
             if(current_element->right == NULL) {
                 current_element->right = _create_node(id);
+                rebalance_tree(&current_element, id, root);
                 return;
             }
             current_element = current_element->right;
@@ -115,17 +209,16 @@ TreeNode* _find_succ_node(TreeNode* start_node) {
 }
 
 bool remove_node(int id, TreeNode** root) {
-    if (*root == NULL) {
+    if(*root == NULL) {
         return false;
     }
     // found node is root
     if((*root)->id == id) {
-        TreeNode* new_root = (*root)->right;
-        if(new_root != NULL) {
-            new_root->left = (*root)->left;
-        } else {
-            new_root = (*root)->left;
-        }
+        TreeNode* new_root = _find_succ_node(*root);
+        TreeNode* new_root_parent = _find_parent_node(new_root->id, *root);
+        new_root_parent->left = new_root->right;
+        new_root->left = (*root)->left;
+        new_root->right = (*root)->right;
         free(*root);
         *root = new_root;
         return true;
@@ -145,6 +238,7 @@ bool remove_node(int id, TreeNode** root) {
             }
         }
         free(found_node);
+        rebalance_tree(&parent_node, id, root);
         return true;
     // found node has both children
     } else if (found_node->left != NULL && found_node->right != NULL) {
@@ -169,7 +263,8 @@ bool remove_node(int id, TreeNode** root) {
         succ_node->right = found_node->right;
         // free found node
         free(found_node);
-        return true;
+        rebalance_tree(&parent_node, id, root);
+        return  true;
     // found node has only left children
     } else if(found_node->left != NULL) {
         if(id < parent_node->id) {
@@ -178,6 +273,7 @@ bool remove_node(int id, TreeNode** root) {
             parent_node->right = found_node->left;
         }
         free(found_node);
+        rebalance_tree(&parent_node, id, root);
         return true;
     // found node has only right children
     }  else if(found_node->right != NULL) {
@@ -187,6 +283,7 @@ bool remove_node(int id, TreeNode** root) {
             parent_node->right = found_node->right;
         }
         free(found_node);
+        rebalance_tree(&parent_node, id, root);
         return true;
     }
 }
@@ -250,56 +347,84 @@ int _count_recur(TreeNode* node) {
     return _count_recur(node->left) +_count_recur(node->right) + 1;
 }
 
+typedef struct FileData {
+    int numbers[500000];
+} FileData;
+
+FileData load(char* filename, int N) {
+  FILE* file = fopen(filename, "r");
+  FileData result;
+  if (file) {
+      for (int i = 0; i < N && i < 500000; i++) {
+        fscanf(file, "%d", &result.numbers[i]);
+      }
+      fclose(file);
+  }
+  return result;
+}
+
 int main(int argc, char *argv[]) {
-    if(argc != 3) {
-        printf("Incorrect numbers of arguments (%d), expected 2\n", argc - 1);
+    srand(time(NULL));
+    clock_t start = clock(), diff;
+    if(argc != 2) {
+        printf("Incorrect numbers of arguments (%d), expected 1\n", argc - 1);
         return 1;
     }
     int N = atoi(argv[1]);
-    bool randomize = (atoi(argv[2]) == 1);
-    srand(1);
-    printf("\n[BST] %d\n", N);
-    printf("Inserting\n");
-    clock_t start = clock(), diff;
     TreeNode* root = init_tree();
-    if(randomize) {
-        insert_n_new_nodes(N, &root);
-    } else {
-        for(int i = 0; i < N; i++) {
-            if(i % 2 == 0) {
-                insert_new_node(calculate_id(root), &root);
-            } else {
-                insert_new_node((i+1)/2, &root);
-            }
-        }
+    FileData data = load("rand.txt", N);
+    for (int i = 0; i < N; i++) {
+        insert_new_node(data.numbers[i], &root);
     }
     printf("Inserted: %d\n", _count_recur(root));
     diff = clock() - start;
     int msec = diff * 1000 / CLOCKS_PER_SEC;
     printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
-
-    printf("Search\n");
     start = clock();
-    int count = 0;
-    for(int i = 0; i < N; i++) {
-        if(find_node(new_id(), root) != NULL) {
-            count++;
+    int found = 0;
+    for (int i = 0; i < N; i++) {
+        TreeNode* node = find_node(data.numbers[i], root);
+        if(node != NULL) {
+            found++;
         }
     }
-    printf("Found: %d\n", count);
+    printf("Found from file: %d\n", found);
     diff = clock() - start;
     msec = diff * 1000 / CLOCKS_PER_SEC;
     printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
-
-    printf("Remove\n");
     start = clock();
-    count = 0;
-    for(int i = 0; i < N; i++) {
-        if(remove_node(new_id(), &root)) {
-            count++;
+    found = 0;
+    for (int i = 0; i < N; i++) {
+        TreeNode* node = find_node(new_id(), root);
+        if(node != NULL) {
+            found++;
         }
     }
-    printf("Removed: %d\n", count);
+    printf("Found random: %d\n", found);
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+    start = clock();
+    int removed_count = 0;
+    for (int i = 0; i < N; i++) {
+        bool removed = remove_node(new_id(), &root);
+        if(removed == true) {
+            removed_count++;
+        }
+    }
+    printf("Removed random: %d\n", removed_count);
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+    start = clock();
+    removed_count = 0;
+    for (int i = 0; i < (N / 2); i++) {
+        bool removed = remove_node(data.numbers[i], &root);
+        if(removed == true) {
+            removed_count++;
+        }
+    }
+    printf("Removed from file: %d\n", removed_count);
     diff = clock() - start;
     msec = diff * 1000 / CLOCKS_PER_SEC;
     printf("Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
