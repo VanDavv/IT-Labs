@@ -1,0 +1,91 @@
+* Sieci komputerowe
+** Laboratoria
+*** Laboratorium 1
+** Wykłady
+*** Zaliczenie wykładu
+**** zaliczenie kolokwium
+Topologia i dzielenie puli na podsieci + wypełnienie tablicy routingu
+**** zaliczenie egzaminu
+***** Ze wszystkich prezentacji 
+***** W formie elektronicznej 
+***** Wielokrotnego wyboru
+***** 40 pytań, na każde 4 odpowiedzi z czego conajmniej jedna dobra
+***** Wynik przedstawiony jest w formie punktów ujemnych
+***** Progi punktowe
+****** I podejście
+Co 8, tj. 0-7 (5), 8-15 (4.5), 16-23 (4) itd
+****** II podejście
+Co 7, tj. 0-6 (5), 7-13 (4.5), 14-20 (4) itd
+****** III podejście 
+Co 6, tj. 0-5 (5), 6-9 (4.5), 10-14 (4) itd
+**** testy na wykładzie
+***** Testy są po każdym wykładzie
+***** Zaliczenie 80% testów skutkuje zaliczeniem egzaminu. Ocena zaliczenia to średnia ocen z testów
+* Architektura systemów komputerowych
+** Wykłady
+*** Ostatnie zajęcia - zerówka
+pisemny, 4 pytania otwarte
+** Laboratoria
+*** 2 bloki - Assembler i programowanie urządzeń pod Windowsa (MFC - Microsoft Foundation Class)
+*** Info
+**** mszaber.strony.wi.ps.pl
+**** mkapruziak.strony.wi.ps.pl
+**** mszaber@wi.zut.edu.pl
+**** mszaber@zut.edu.pl
+**** p. 215 WI2
+* Języki i pradygmaty programowania
+** Wykłady
+*** Ostatnie zajęcia - test
+pytania, wielokrotnego wyboru, możliwe że też otwarte
+*** Zaliczenie na podstawie oceny z laborek
+* Angielski
+** Słówka
+*** Zajęcia
+**** I
+robust; silny, mocny
+shortcomings; wady, niedociągnięcia braki
+allocation; przydział, podział czegoś
+to compile; zebrać, zestawić coś
+revenue; dochód
+astounding; zdumiewające
+kit; zestaw
+hitherto; dotychczas, dotąd
+kernel; jądro
+to be besotted; być zauroczonym, ogłupiałym
+to look washed out; wyglądać marnie, mizernie
+to fly off the handle; wybuchać, reagować agresywnie
+to be at wits' end; odchodzić od zmysłów
+to resent; obrażać się na kogoś, oburzać, czuć się dotkniętym
+mind your own business; nie twój interes, nie wtrącaj się
+pull yourself together; weź się w garść
+to drop hints; dawać wskazówki
+to encourage; zachęcać
+to distract; odciągać uwagę
+aisle seat; miejsce przy przejściu
+clinche; frazes, banał, komunał
+concise; zwięzły
+counterous; grzeczny, uprzejny
+herewith; wraz z ninijeszym, w załączeniu,
+recipient; odbiorca
+to aim for; dążyć do czegoś
+oblivious; niepamiętający o czymś, nie pomny czegoś
+to convey; wyrażać coś, przenosić ze sobą coś
+retail; handel detaliczny
+to endeavour; zabiegać o coś
+to despatch/dispatch; wysyłać coś
+*** kartkówki
+[18-03-2018] nr. 76-150 zawodowe
+* Bazy danych
+** Zaliczenie wcześniej laboratorium - projekt z Mateuszem
+** Typ bazy: SQL Server
+** Tematy projektu - System ewidencji w prywatnej przychodni medycznej
+*** System ewidencji w prywatnej przychodni medycznej (MY)
+*** System obsługi sieci hoteli (TAKEN)
+*** System obsługi firmy turystycznej (TAKEN)
+*** System obsługi firmy kurierskiej (TAKEN)
+*** System ewidencji pracowników w dużej wielooddziałowej firmie (TAKEN)
+*** Elektroniczny dziennik klasowy dla technikum/liceum (TAKEN)
+*** System ewidencji studentów i ich rozliczeń na uczelni na jednym wydziale (TAKEN)
+*** System obsługi biblioteki miejskiej (TAKEN)
+*** System obsługi sieci komisów samochodowych (TAKEN)
+** Mail do prowadzącego: makrakowiak@wi.zut.edu.pl

@@ -1,0 +1,11 @@
+Mediana - waga 50% mężczyzn nie przekracza 78kg
+Moda (dominanta) - najczęściej występuje waga 75kg (7 razy)
+Dolny kwartyl - waga 25% mężczyzn nie przekracza 69kg
+Górny kwartyl - waga 75% mężczyzn nie przekracza 88kg
+Rozstęp empiryczny - waga mężczyzn zmienia się w zakresie 72kg
+Rozstęp kwartylowy - 50% środkowych wartości wagi zmienia się w zakresie 19kg
+Wariancja - Przeciętne kwadratowe odchylenie wagi mężczyzn od wagi średniej wynosi 206,1 kg^2
+Odchyleni standardowe - Przeciętne odchylenie wagi mężczyzn od wagi średniej wynosi 14,4 kg
+Współczynnik zmienności - Odchylenie standardowe wagi mężczyzn stanowi 18,1% wagi średniej
+Skośność (współczynnik asymetrii) - Rozkład wagi mężczyzn jest prawostronnie asymetryczny, gdyż skośność jest dodatnia
+Kurtoza (współczynnik skupienia) - Rozkład wagi mężczyzn jest silniej skupiony wokół średniej niż rozkład normalny, gdyż kurtoza jest dodatnia
