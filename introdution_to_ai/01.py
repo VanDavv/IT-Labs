@@ -1,5 +1,7 @@
 import sys
 
+DEPTH_MODE = True
+
 
 def is_equal(left, right):
     if len(left) != len(right):
@@ -34,6 +36,7 @@ def is_result(current, size):
 
     return True
 
+
 def contains(array, elem):
     return True in map(lambda x: is_equal(x, elem), array)
 
@@ -64,18 +67,20 @@ if __name__ == '__main__':
     closed = []
     results = []
     while len(opened) > 0:
-        open = opened.pop(0)
-        if len(open) == n:
-            if is_result(open, n):
-                if contains(results, open):
+        open_elem = opened.pop(0)
+        if len(open_elem) == n:
+            if is_result(open_elem, n):
+                if contains(results, open_elem):
                     continue
                 else:
                     print('Found at {} closed'.format(len(closed)))
-                    results.append(open)
+                    results.append(open_elem)
             else:
                 continue
 
-        for child in get_children(open, size, closed):
-            opened.append(child)
-        closed.append(open)
+        if DEPTH_MODE:
+            opened = get_children(open_elem, size, closed) + opened
+        else:
+            opened.extend(get_children(open_elem, size, closed))
+        closed.append(open_elem)
     print(results)
