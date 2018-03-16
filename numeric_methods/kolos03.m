@@ -1,6 +1,6 @@
 F = @(x) x^3 + 2*x^2 - 100;
 a = 3;
-b = 5.3;
+b = 100;
 
 X = a:0.1:b;
 for i=1:length(X)
@@ -25,4 +25,4 @@ while(abs(a_temp - b_temp) > ex)
   endif
 endwhile
 
-plot(X, Y);
+#plot(X, Y);

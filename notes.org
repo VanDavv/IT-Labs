@@ -24,7 +24,7 @@ Co 6, tj. 0-5 (5), 6-9 (4.5), 10-14 (4) itd
 * Architektura systemów komputerowych
 ** Wykłady
 *** Ostatnie zajęcia - zerówka
-pisemny, 4 pytania otwarte
+    pisemny, 4 pytania otwarte
 ** Laboratoria
 *** 2 bloki - Assembler i programowanie urządzeń pod Windowsa (MFC - Microsoft Foundation Class)
 *** Info
@@ -74,7 +74,7 @@ retail; handel detaliczny
 to endeavour; zabiegać o coś
 to despatch/dispatch; wysyłać coś
 *** kartkówki
-[18-03-2018] nr. 76-150 zawodowe
+    [18-03-2018] nr. 76-150 zawodowe
 * Bazy danych
 ** Zaliczenie wcześniej laboratorium - projekt z Mateuszem
 ** Typ bazy: SQL Server
@@ -89,3 +89,4 @@ to despatch/dispatch; wysyłać coś
 *** System obsługi biblioteki miejskiej (TAKEN)
 *** System obsługi sieci komisów samochodowych (TAKEN)
 ** Mail do prowadzącego: makrakowiak@wi.zut.edu.pl
+   

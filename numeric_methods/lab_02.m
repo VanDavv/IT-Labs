@@ -3,10 +3,10 @@ clear all;
 # A = polyfit(X, Y, n-1)
 # W(x) = polyval(A, x)
 
-# X = input('X (input vector): ')
-# Y = input('Y (input vector): ')
-X = [1, 2, 3, 4, 5, 6, 7];
-Y = [1, 6, 2, 10, 3, 5, 10];
+X = input('X (input vector): ')
+Y = input('Y (input vector): ')
+#X = [1, 2, 3, 4, 5, 6, 7];
+Y# = [1, 6, 2, 10, 3, 5, 10];
 
 # p = input('p (level):');
 p = 7;
