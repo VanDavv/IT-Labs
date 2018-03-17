@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <utmpx.h>
 #include <unistd.h>
-#include <pwd.h>
-#include <grp.h>
+#include <dlfcn.h>
+#define LIB_NAME "./libuser.so.1.0"
+
+char* ( *get_groups)(char*);
 
 int main(int argc, char **argv) {
     int aflag = 0, bflag = 0, flag;
@@ -17,11 +19,20 @@ int main(int argc, char **argv) {
 	    default: abort ();
 	}
     }
-    
+
+    void *handle = dlopen(LIB_NAME, RTLD_LAZY);
+    if(!handle) {
+        dlerror();
+    } else { 
+        get_groups = dlsym(handle, "get_groups");
+    }    
+
+    if(!handle || get_groups == NULL) {
+	bflag = 0;
+	printf("[WARNING] Could not load dynamic library %s\n", LIB_NAME);
+    }
+
     struct utmpx *entry;
-    struct passwd *group;
-    gid_t *groups; 
-    int ngroups = 0;
     
     while((entry = getutxent()) != NULL) {
 	if(entry->ut_type == 7) {
@@ -32,25 +43,15 @@ int main(int argc, char **argv) {
 	    }
 
 	    if(bflag == 1) {
-		ngroups = 0;
-		group = getpwnam(entry->ut_user);
-		
-		getgrouplist(entry->ut_user, group->pw_gid, NULL, &ngroups);
-		groups = malloc(ngroups * sizeof(gid_t));
-		getgrouplist(entry->ut_user, group->pw_gid, groups, &ngroups);
-		
-		printf("   \t[");
-		for(int i = 0; i < ngroups; i++) {
-		    printf("%s", getgrgid(groups[i])->gr_name);
-		    if(i + 1 < ngroups) {
-			printf(", ");
-		    }
-		}
-		printf("]");
+		char *groups = get_groups(entry->ut_user); 
+		printf("\t%s", groups);
 		free(groups);
 	    }
 	    
 	    printf("\n");
 	}
     }
+    if(handle) {
+	dlclose(handle);
+    }    
 }
