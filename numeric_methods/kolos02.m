@@ -7,7 +7,7 @@ clear all;
 # Y = input('Y (input vector): ')
 X = [-1, 0, 2, 5];
 Y = [0, 1, -2, 0];
-
+ 
 # p = input('p (level):');
 p = 3;
 psi = zeros(p+1);

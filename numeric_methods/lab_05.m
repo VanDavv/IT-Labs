@@ -60,6 +60,3 @@ monte = (positives / n_monte) * ( (max(y) - min(y)) * (b - a));
 monte
 
 plot(X_neg, Y_neg, "xr; neg;", X_pos, Y_pos, "og; pos;", x, y);
-
-
-
