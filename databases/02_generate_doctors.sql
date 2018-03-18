@@ -1,34 +1,4 @@
-USE master
-GO
-
-IF exists(
-    SELECT *
-    FROM sys.databases
-    WHERE name = 'clinic'
-)
-  DROP DATABASE clinic
-GO
-
-CREATE DATABASE clinic
-GO
-
 USE clinic
-GO
-
-IF NOT exists(
-    SELECT *
-    FROM sysobjects
-    WHERE name = 'doctor' AND xtype = 'U'
-)
-  CREATE TABLE doctor (
-    pesel                BIGINT,
-    name                 TEXT,
-    spec                 INT,
-    degree               TEXT,
-    fulltime             BIT,
-    started_working_date DATE,
-    phone                TEXT
-  )
 GO
 
 IF NOT EXISTS(
@@ -44,7 +14,8 @@ AS
   BEGIN
 
     DECLARE @i INT = 0
-    DECLARE @name INT
+    DECLARE @first_name INT
+    DECLARE @last_name INT
     DECLARE @specialization INT
     DECLARE @degree INT
     DECLARE @fulltime INT
@@ -55,7 +26,8 @@ AS
     WHILE @i < @n
       BEGIN
         SET @i = @i + 1
-        SET @name = ABS(CHECKSUM(NewId())) % 10 + 1
+        SET @first_name = ABS(CHECKSUM(NewId())) % 10 + 1
+        SET @last_name = ABS(CHECKSUM(NewId())) % 10 + 1
         SET @specialization = ABS(CHECKSUM(NewId())) % 10 + 1
         SET @degree = ABS(CHECKSUM(NewId())) % 5 + 1
         SET @fulltime = ABS(CHECKSUM(NewId())) % 2
@@ -67,10 +39,8 @@ AS
         SET @pesel4 = (ABS(CHECKSUM(NewId()))) % 90000 + 10000
 
         INSERT INTO doctor VALUES (
-          cast(@pesel1 AS VARCHAR) + '0' + cast(@pesel2 AS VARCHAR) + cast(@pesel3 AS VARCHAR) +
-          cast(@pesel4 AS VARCHAR),
-          choose(@name, 'Adam Adamski', 'Marek Marecki', 'Tomek Tomasiuk', 'Horacy Horacyński', 'Łukasz Piłatowski',
-                 'Mateusz Iwaniec', 'Olgierd Olgierdowicz', 'Michał Michałowicz', 'Dawid Davidovich', 'Gerard Kruci'),
+          cast(@pesel1 AS VARCHAR) + '0' + cast(@pesel2 AS VARCHAR) + cast(@pesel3 AS VARCHAR) + cast(@pesel4 AS VARCHAR),
+          choose(@first_name, 'Adam', 'Marek', 'Tomek', 'Horacy', 'Łukasz', 'Mateusz', 'Olgierd', 'Michał', 'Dawid', 'Gerard') + choose(@last_name, 'Adamski', 'Marecki', 'Tomasiuk', 'Horacyński', 'Piłatowski', 'Iwaniec', 'Olgierdowicz', 'Michałowicz', 'Davidovich', 'Kruci'),
           @specialization,
           choose(@degree, 'młodszy', 'dr. n. med.', 'stara lucka', 'dr.', 'prof.'),
           @fulltime,

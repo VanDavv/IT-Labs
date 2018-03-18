@@ -1,3 +1,29 @@
+USE master
+GO
+
+IF NOT exists(
+    SELECT *
+    FROM sys.databases
+    WHERE name = 'clinic'
+)
+  CREATE DATABASE clinic
+GO
+
+USE clinic
+GO
+
+IF NOT exists(
+    SELECT *
+    FROM sysobjects
+    WHERE name = 'specialization' AND xtype = 'U'
+)
+
+  CREATE TABLE specialization (
+    id   INT IDENTITY (1, 1) PRIMARY KEY,
+    name TEXT NOT NULL
+  )
+GO
+
 IF NOT exists(
     SELECT *
     FROM sysobjects
@@ -11,18 +37,6 @@ IF NOT exists(
     fulltime             BIT,
     started_working_date DATE,
     phone                TEXT
-  )
-GO
-
-IF NOT exists(
-    SELECT *
-    FROM sysobjects
-    WHERE name = 'specialization' AND xtype = 'U'
-)
-
-  CREATE TABLE specialization (
-    id   INT IDENTITY (1, 1) PRIMARY KEY,
-    name TEXT NOT NULL
   )
 GO
 
