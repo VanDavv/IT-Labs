@@ -6,7 +6,7 @@ IF NOT EXISTS(
     FROM sys.objects
     WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('generate_patients')
 )
-  EXEC ('CREATE PROCEDURE generate_patients(@n int output) AS BEGIN SET NOCOUNT ON; END')
+  EXEC ('CREATE PROCEDURE generate_patients(@n int) AS BEGIN SET NOCOUNT ON; END')
 GO
 
 ALTER PROCEDURE generate_patients(@n INT)
