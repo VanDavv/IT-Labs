@@ -6,18 +6,21 @@ IF NOT EXISTS(
     FROM sys.objects
     WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('generate_salary')
 )
-  EXEC ('CREATE PROCEDURE generate_salary() AS BEGIN SET NOCOUNT ON; END')
+  EXEC ('CREATE PROCEDURE generate_salary AS BEGIN SET NOCOUNT ON; END')
 GO
 
-ALTER PROCEDURE generate_salary()
+ALTER PROCEDURE generate_salary
 AS
   BEGIN
+    SET NOCOUNT ON;
     DECLARE @startdate DATE
     DECLARE @vat_payer INT
     DECLARE @netto FLOAT
     DECLARE @doctor BIGINT
     DECLARE cur CURSOR LOCAL FOR
       SELECT pesel from doctor order by newid()
+
+    OPEN cur
 
     FETCH NEXT FROM cur INTO @doctor
 

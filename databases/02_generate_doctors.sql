@@ -6,13 +6,13 @@ IF NOT EXISTS(
     FROM sys.objects
     WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('generate_doctors')
 )
-  EXEC ('CREATE PROCEDURE generate_doctors(@n int) AS BEGIN SET NOCOUNT ON; END')
+  EXEC ('CREATE PROCEDURE generate_doctors @n int AS BEGIN SET NOCOUNT ON; END')
 GO
 
-ALTER PROCEDURE generate_doctors(@n INT)
+ALTER PROCEDURE generate_doctors @n INT
 AS
   BEGIN
-
+    SET NOCOUNT ON;
     DECLARE @i INT = 0
     DECLARE @first_name INT
     DECLARE @last_name INT
@@ -38,11 +38,11 @@ AS
         SET @pesel3 = (ABS(CHECKSUM(NewId()))) % 20 + 10
         SET @pesel4 = (ABS(CHECKSUM(NewId()))) % 90000 + 10000
 
-        INSERT INTO doctor VALUES (
+        INSERT INTO doctor(pesel, name, spec, degree, fulltime, started_working_date, phone) VALUES (
           cast(@pesel1 AS VARCHAR) + '0' + cast(@pesel2 AS VARCHAR) + cast(@pesel3 AS VARCHAR) + cast(@pesel4 AS VARCHAR),
           choose(@first_name, 'Adam', 'Marek', 'Tomek', 'Horacy', 'Łukasz', 'Mateusz', 'Olgierd', 'Michał', 'Dawid', 'Gerard') + choose(@last_name, 'Adamski', 'Marecki', 'Tomasiuk', 'Horacyński', 'Piłatowski', 'Iwaniec', 'Olgierdowicz', 'Michałowicz', 'Davidovich', 'Kruci'),
           @specialization,
-          choose(@degree, 'młodszy', 'dr. n. med.', 'stara lucka', 'dr.', 'prof.'),
+          choose(@degree, 'młodszy', 'dr. n. med.', 'stażysta', 'dr.', 'prof.'),
           @fulltime,
           @startdate,
           '+48' + cast(@phone AS VARCHAR)

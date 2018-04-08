@@ -6,19 +6,21 @@ IF NOT EXISTS(
     FROM sys.objects
     WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('generate_office_hours')
 )
-  EXEC ('CREATE PROCEDURE generate_office_hours() AS BEGIN SET NOCOUNT ON; END')
+  EXEC ('CREATE PROCEDURE generate_office_hours AS BEGIN SET NOCOUNT ON; END')
 GO
 
-ALTER PROCEDURE generate_office_hours()
+ALTER PROCEDURE generate_office_hours
 AS
   BEGIN
-
+    SET NOCOUNT ON;
     DECLARE @i INT = 0
     DECLARE @starttime TIME
     DECLARE @endtime TIME
     DECLARE @doctor BIGINT
     DECLARE cur CURSOR LOCAL FOR
-      SELECT pesel from doctor order by newid()
+      SELECT pesel from doctor
+
+    OPEN cur
 
     FETCH NEXT FROM cur INTO @doctor
 
@@ -31,7 +33,7 @@ AS
             SET @starttime = dateadd(millisecond, (abs(CHECKSUM(newid())) % 7200000 + 1), convert(time, '08:00'))
             SET @endtime = dateadd(millisecond, (abs(CHECKSUM(newid())) % 7200000 + 1), convert(time, '14:00'))
 
-            INSERT INTO office_hours VALUES (
+            INSERT INTO office_hours(doctor, day_num, start_hour, end_hour) VALUES (
               @doctor,
               @i,
               @starttime,
