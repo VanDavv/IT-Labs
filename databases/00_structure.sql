@@ -40,6 +40,7 @@ IF NOT exists(
   )
 GO
 
+
 IF NOT exists(
     SELECT *
     FROM sysobjects
@@ -64,10 +65,11 @@ IF NOT exists(
 )
 
   CREATE TABLE office_hours (
-    doctor     BIGINT FOREIGN KEY REFERENCES doctor (pesel) PRIMARY KEY,
+    doctor     BIGINT NOT NULL FOREIGN KEY REFERENCES doctor (pesel) ,
     day_num    INT  NOT NULL,
     start_hour TIME NOT NULL,
-    end_hour   TIME NOT NULL
+    end_hour   TIME NOT NULL,
+    PRIMARY KEY (doctor, day_num)
   )
 GO
 

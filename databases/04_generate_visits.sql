@@ -4,14 +4,15 @@ GO
 IF NOT EXISTS(
     SELECT *
     FROM sys.objects
-    WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('generate_salary')
+    WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('generate_visits')
 )
-  EXEC ('CREATE PROCEDURE generate_salary(@n INT) AS BEGIN SET NOCOUNT ON; END')
+  EXEC ('CREATE PROCEDURE generate_visits @n INT AS BEGIN SET NOCOUNT ON; END')
 GO
 
-ALTER PROCEDURE generate_salary(@n INT)
+ALTER PROCEDURE generate_visits @n INT
 AS
   BEGIN
+    SET NOCOUNT ON;
     DECLARE @i INT = 0
     DECLARE @nr INT
     DECLARE @date DATE
@@ -22,6 +23,9 @@ AS
       SELECT pesel from doctor order by newid()
     DECLARE pat_cur CURSOR LOCAL FOR
       SELECT pesel from patient order by newid()
+
+    OPEN doc_cur
+    OPEN pat_cur
 
     FETCH NEXT FROM doc_cur INTO @doctor
     FETCH NEXT FROM pat_cur INTO @patient
