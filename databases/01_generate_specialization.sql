@@ -9,7 +9,7 @@ IF NOT EXISTS(
   EXEC ('CREATE PROCEDURE generate_specialization() AS BEGIN SET NOCOUNT ON; END')
 GO
 
-ALTER PROCEDURE generate_specialization()
+ALTER PROCEDURE generate_specialization
 AS
   BEGIN
     DECLARE @i INT = 0
