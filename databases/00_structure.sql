@@ -81,8 +81,8 @@ IF NOT exists(
 
   CREATE TABLE visit (
     id          INT IDENTITY (1, 1) PRIMARY KEY,
-    doctor      BIGINT FOREIGN KEY REFERENCES doctor (pesel),
-    patient     BIGINT FOREIGN KEY REFERENCES patient (pesel),
+    doctor      BIGINT NOT NULL FOREIGN KEY REFERENCES doctor (pesel),
+    patient     BIGINT NOT NULL FOREIGN KEY REFERENCES patient (pesel),
     date        DATE,
     time        TIME,
     nr          INT,
@@ -101,7 +101,7 @@ IF NOT exists(
 
   CREATE TABLE salary (
     id         INT IDENTITY (1, 1) PRIMARY KEY,
-    doctor     BIGINT FOREIGN KEY REFERENCES doctor (pesel),
+    doctor     BIGINT NOT NULL FOREIGN KEY REFERENCES doctor (pesel),
     start_date DATE,
     active     BIT,
     netto      FLOAT NOT NULL,
