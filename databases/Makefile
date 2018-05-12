@@ -10,10 +10,10 @@ clean:
 	-docker kill zut-databases
 	-docker rm -f zut-databases
 
-all: clean build run exec
+all: clean build run
 
 db:
-	docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=TNTRocks! -e MSSQL_PID=Express --name mssql -d microsoft/mssql-server-linux:2017-CU4
+	docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=TNTRocks! -e MSSQL_PID=Express --name mssql -p 1433:1433 -d microsoft/mssql-server-linux:2017-CU4
 
 db-clean:
 	-docker kill mssql
