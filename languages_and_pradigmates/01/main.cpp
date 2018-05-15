@@ -46,21 +46,23 @@ void add_driver(int &balance, int (&experience)[10], int (&talent)[10], int &cur
     balance -= driver_price;
     experience[current_index] = 0;
     talent[current_index] = rand_int(1, 3);
-    current_index += 1;
 
-    switch(talent[current_index]) {
-        case 1:
-            std::cout << "Purchased new driver with a little talent" << std::endl;
-            break;
-        case 2:
-            std::cout << "Purchased new driver with a moderate talent" << std::endl;
-            break;
-        case 3:
-            std::cout << "Purchased new driver with a great talent" << std::endl;
-            break;
-        default:
-            break;
+    if(current_index > 0) {
+        switch(talent[current_index]) {
+            case 1:
+                std::cout << "Purchased new driver with a little talent" << std::endl;
+                break;
+            case 2:
+                std::cout << "Purchased new driver with a moderate talent" << std::endl;
+                break;
+            case 3:
+                std::cout << "Purchased new driver with a great talent" << std::endl;
+                break;
+            default:
+                break;
+        }
     }
+    current_index += 1;
 }
 
 void buy_car(int &balance, int (&value)[10], int (&damage)[10], int &current_index) {
@@ -75,7 +77,7 @@ void buy_car(int &balance, int (&value)[10], int (&damage)[10], int &current_ind
         car_quality = 0;
     }
 
-    if(car_quality < 1 || car_quality > 3) {
+    if(current_index > 0 && (car_quality < 1 || car_quality > 3)) {
         std::cout << "Aborted!" << std::endl;
     }
 
@@ -89,7 +91,9 @@ void buy_car(int &balance, int (&value)[10], int (&damage)[10], int &current_ind
     value[current_index] = static_cast<int>(car_price * 0.66);
     damage[current_index] = 0;
     current_index += 1;
-    std::cout << "You have purchased a new car!" << std::endl;
+    if(current_index > 1) {
+        std::cout << "You have purchased a new car!" << std::endl;
+    }
 }
 
 void sell_car(int &balance, int (&value)[10], int (&damage)[10], int &current_index) {
@@ -152,7 +156,7 @@ int calculate_new_exp(int exp, int talent) {
 void race(int &bank_balance, int (&drivers_experience)[10], int (&drivers_talent)[10], int &drivers_count,
           int (&cars_value)[10], int (&cars_damage)[10], int &cars_count) {
 
-    int min_count = std::min(drivers_count, cars_count), assigned_car[10];
+    int min_count = std::min(drivers_count, cars_count), assigned_car[10] = {};
 
     int sum_exp = std::accumulate(std::begin(drivers_experience), std::end(drivers_experience), 0, std::plus<int>());
     double collision_proba = 0.1 - (0.001 * sum_exp);
@@ -162,7 +166,8 @@ void race(int &bank_balance, int (&drivers_experience)[10], int (&drivers_talent
     for (int i = 0; i < min_count; i++) {
         std::cout << "Pick car for driver #" << i + 1 << ":";
         std::cin >> choice;
-        if(std::any_of(std::begin(assigned_car), std::end(assigned_car), [&](int i) { return i == choice; }) || choice > cars_count) {
+        bool exists = std::find(std::begin(assigned_car), std::end(assigned_car), choice) != std::end(assigned_car);
+        if(exists || choice > cars_count || choice <= 0) {
             std::cout << "Invalid, try again!" << std::endl;
             i--;
             continue;
@@ -172,11 +177,11 @@ void race(int &bank_balance, int (&drivers_experience)[10], int (&drivers_talent
         bool is_colision = rand_double(0.0, 1.0) < collision_proba;
         if (is_colision) {
             drivers_experience[i] = static_cast<int>(calculate_new_exp(drivers_experience[i], drivers_talent[i]) * 0.7);
-            cars_damage[assigned_car[i]] = static_cast<int>(cars_value[assigned_car[i]] * rand_double(0.001, 0.1));
+            cars_damage[assigned_car[i] - 1] = static_cast<int>(cars_value[assigned_car[i] - 1] * rand_double(0.001, 0.1));
             bank_balance += rand_int(0, 1000);
         } else {
             drivers_experience[i] = calculate_new_exp(drivers_experience[i], drivers_talent[i]);
-            bank_balance += 2000 + cars_value[assigned_car[i]] * 0.1 + rand_int(0, 1000);
+            bank_balance += 2000 + cars_value[assigned_car[i] - 1] * 0.1 + rand_int(0, 1000);
         }
     }
 
@@ -292,12 +297,11 @@ void test() {
 
 int main() {
 //    test();
-    int bank_balance = 2000, drivers_count = 0, drivers_experience[10] = {}, drivers_talent[10] = {},
+    int bank_balance = 200000, drivers_count = 0, drivers_experience[10] = {}, drivers_talent[10] = {},
             cars_count = 0, cars_value[10] = {}, cars_damage[10] = {};
 
     buy_car(bank_balance, cars_value, cars_damage, cars_count);
     add_driver(bank_balance, drivers_experience, drivers_talent, drivers_count);
-
     std::cout << "==============================" << std::endl
               << "===== Raily Tycoon v.1.0 =====" << std::endl
               << "==============================" << std::endl;
