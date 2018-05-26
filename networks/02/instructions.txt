@@ -1,0 +1,23 @@
+$ apt-get update
+$ apt-get install apache2 php libapache2-mod-php mysql-server php-mysql phpmyadmin
+> Y
+> test1234 # db root password
+> space # apache2
+> enter # Yes
+> test1234 # db root password
+$ /etc/init.d/apache2 restart
+# Open localhost/phpmyadmin
+# User: root
+# Pass: test1234
+# User accounts -> Add user account
+# User: joomla
+# Host: localhost
+# Pass: test1234
+# Check "Create database with the same..."
+# Go
+$ cd /var/www/html
+$ mkdir joomla
+$ cd joomla
+$ wget https://downloads.joomla.org/cms/joomla3/3-8-6/Joomla_3-8-6-Stable-Full_Package.zip
+$ unzip Joomla_3-8-6-Stable-Full_Package.zip
+$ goto localhost/joomla

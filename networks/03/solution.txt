@@ -1,0 +1,15 @@
+$ apt-get update && apt-get -y upgrade
+$ wget https://prdownloads.sourceforge.net/webadmin/webmin_1.881_all.deb
+$ dpkg -i webmin_1.881_all.deb
+$ apt-get install -f
+# goto https://localhost:10000
+# login
+# goto networking -> linux firewall
+# Activate On Boot -> ON
+# In input section "Add rule"
+# Action to take: Drop
+# Network protocol: Equals -> TCP
+# Destination TCP or UDP port: Equals -> Port: 80
+# Hit Create
+# Hit Apply Configuration
+# Change action to take to "Do nothing"

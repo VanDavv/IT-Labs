@@ -1,0 +1,32 @@
+$ apt-get install slapd ldap-utils
+$ dpkg-reconfigure slapd
+# Screen 1 : NO
+# Screen 2 : Change domain from "nodomain" to "lab.pl"
+# Screen 3 : -//- (same as above)
+# Screen 4 : Type LDAP db admin password
+# Screen 5 : Retype password
+# Screen 6: HDB
+# Screen 7 : "Remove old ..." : NO
+# Screen 8 : "Move old data" : YES
+# Screen 9 : "v2 Allow" : YES
+# Change /etc/ldap/ldap.conf
+# + BASE db=lab,dc=pl
+# + URI ldap://localhost
+
+# ALTERNATIVE FOR REMOTE ONLY
+# Create user1.ldif as follows
+dn: cn=user1,dc=lab,dc=pl
+cn: user1
+gidNumber: 100
+objectClass: top
+objectClass: person
+objectClass: posixAccount
+objectClass: simpleSecurityObject
+sn: nazwisko dla user1
+uid: user1
+uidNumber: 10000
+homeDirectory: /home/user1
+userPassword: u1
+
+$ ldapadd -x -W -D "cn=admin,dc=lab,dc=pl" -f user1.ldif
+$ ldapsearch -x -LLL -b "dc=lab,dc=pl"
