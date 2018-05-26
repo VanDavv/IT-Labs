@@ -1,0 +1,12 @@
+$ apt-get install libnss-ldap
+# ldap://localhost
+# domain dc=lab,dc=pl
+# Version 3
+# Admin account cn=admin,dc=lab,dc=pl
+# Type admin password
+# Again admin account cn=admin,dc=lab,dc=pl
+# Type admin password
+# Uncomment in /etc/ldap.conf line 59 (SCOPE SUB)
+# Change in /etc/ldap.conf line 129 (pam_password clear)
+# Add along compat in /etc/nsswitch.conf for passwd, group and shadow also "ldap"
+$ id <ldap_user> # try creating one with ldap_auto.sh
