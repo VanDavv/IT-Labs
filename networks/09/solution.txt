@@ -1,0 +1,22 @@
+$ apt-get install samba
+# edit /etc/samba/smb.conf, add to bottom
+[share]
+comment = Lukasz Pilatowski file share
+path = /home/shared
+force user = nobody
+create mask = 0775
+force create mode = 0775
+directory mask = 2775
+force directory mode = 02775
+public = yes
+writable = yes
+browsable = yes
+guest ok = yes
+read only = no
+Veto files = /*.ini/*.inf
+$ mkdir /home/shared
+$ chmod 777 /home/shared
+$ apt-get install smbclient
+$ ifconfig # to find ip_addr like 10.2.0.xxx
+$ smbclient //<ip_addr>/share
+# Login as root
