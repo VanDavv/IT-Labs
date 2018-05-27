@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void read_recur(char* dir_str, int indent) {
+void read_recur(char* dir_str, int depth, int dirs_only, int print_full_path, int max_depth) {
     DIR *curr_dir = opendir(dir_str);
     if(curr_dir == NULL) {
         printf("[ERROR] Unable to read from directory, skipping... %s\n", dir_str);
@@ -20,17 +20,25 @@ void read_recur(char* dir_str, int indent) {
             continue;
         }
 
-        for(int i = 0; i < indent; i++) {
+        if(dirs_only && curr_dir_ent->d_type != 4) {
+            continue;
+        }
+
+        for(int i = 0; i < depth; i++) {
             printf("\t");
+        }
+
+        if(print_full_path) {
+            printf(dir_str);
         }
 
         printf("%s\n", curr_dir_ent->d_name);
 
         // check if dir
-        if(curr_dir_ent->d_type == 4) {
+        if(curr_dir_ent->d_type == 4 && (max_depth == -1 || depth < (max_depth - 1))) {
             char* new_path = "";
             asprintf(&new_path, "%s/%s", dir_str, curr_dir_ent->d_name);
-            read_recur(new_path, indent + 1);
+            read_recur(new_path, depth + 1, dirs_only, print_full_path, max_depth);
             free(new_path);
         }
     }
@@ -38,6 +46,18 @@ void read_recur(char* dir_str, int indent) {
 }
 
 int main(int argc, char **argv) {
-    read_recur("/home/vandavv/dev/", 0);
+    int dflag = 0, lflag = 0, fflag = 0, max_depth = -1, flag;
+    while ((flag = getopt (argc, argv, "dlfL:")) != -1) {
+        switch (flag) {
+            case 'd': dflag = 1; break;
+            case 'f': fflag = 1; break;
+            case 'L': max_depth = atoi(optarg); break;
+            case '?':
+            fprintf (stderr, "Unknown option `-%c'.\n", optopt);
+            return 1;
+            default: abort ();
+        }
+    }
+    read_recur("/home/vandavv/dev/", 0, dflag, fflag, max_depth);
     return 0;
 }
