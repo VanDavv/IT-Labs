@@ -24,7 +24,7 @@ sn: $lastname
 uid: $username
 uidNumber: $newuid
 homeDirectory: /home/$username
-userPassword: $password
+userpassword: $password
 EOF
 
 ldapadd -x -W -D "cn=admin,dc=lab,dc=pl" -f $file

@@ -1,7 +1,9 @@
 $ apt-get install libnss-ldap
-# ldap://localhost
+# 127.0.0.1
 # domain dc=lab,dc=pl
 # Version 3
+# Yes
+# Yes
 # Admin account cn=admin,dc=lab,dc=pl
 # Type admin password
 # Again admin account cn=admin,dc=lab,dc=pl
