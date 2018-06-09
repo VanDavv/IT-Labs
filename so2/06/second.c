@@ -60,12 +60,16 @@ void* find_value(void* vpInitInfo) {
 
         char* result = crypt_r(line, "$6$5MfvmFOaDU", data);
         if (strcmp(result,  pUnitOfWork->search) == 0) {
-            printf("found value\n");
+            printf("found value: %s\n", line);
 
             // found the search value
             pthread_mutex_lock(pUnitOfWork->answerMutex);
             if (!(*(pUnitOfWork->shouldStop))) {
                 *(pUnitOfWork->shouldStop) = true;
+                /*
+                    For some reason, setting this value here and printing it out on line 193
+                    causes segfault. Leave it for now
+                */
                 *(pUnitOfWork->answer) = result;
 
                 pthread_cond_broadcast(pUnitOfWork->answerFound);
@@ -186,7 +190,7 @@ int main( int argc, const char* argv[] ) {
     }
 
     // answer
-    printf("answer: %s\n", answer);
+//    printf("answer: %s\n", answer);
 
     pthread_mutex_unlock(&answerMutex);
 
