@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <syscall.h>
 
 #define SEARCH_VALUE ("$6$5MfvmFOaDU$CVt7jU9wJRYz3K98EklAJqp8RMG5NvReUSVK7ctVvc2VOnYVrvyTfXaIgHn2xQS78foEJZBq2oCIqwfdNp.2V1")
 #define SEARCH_MAX (254002730)
@@ -50,17 +51,14 @@ void* find_value(void* vpInitInfo) {
         return NULL;
     }
 
-    getline(&line, &len, fp);
-    printf("OFFSET: %d\t FIRST LINE: %s", offset, line);
-
     int cValue = pUnitOfWork->start;
 
     while (!(*(pUnitOfWork->shouldStop)) && (getline(&line, &len, fp) != -1)) {
+        if (line[strlen(line) - 1] == '\n') {
+            line[strlen(line) - 1] = '\0';
+        }
 
         char* result = crypt_r(line, "$6$5MfvmFOaDU", data);
-        if((cValue - pUnitOfWork->start) == 998) {
-            printf("LINE [%d]: %s\t%s", cValue - pUnitOfWork->start, line, result);
-        }
         if (strcmp(result,  pUnitOfWork->search) == 0) {
             printf("found value\n");
 
@@ -77,11 +75,16 @@ void* find_value(void* vpInitInfo) {
             if ((offset = ftell(fp)) < 0) {
                 free(line);
                 fclose(fp);
+
+                printf("[0] EXIT PROCESS ID %d\n", syscall(SYS_gettid));
                 return NULL;
             }
 
             free(line);
             fclose(fp);
+
+
+            printf("[1] EXIT PROCESS ID %d\n", syscall(SYS_gettid));
             return NULL;
         }
 
@@ -97,11 +100,13 @@ void* find_value(void* vpInitInfo) {
             if ((offset = ftell(fp)) < 0) {
                 free(line);
                 fclose(fp);
+                printf("[2] EXIT PROCESS ID %d\n", syscall(SYS_gettid));
                 return NULL;
             }
 
             free(line);
             fclose(fp);
+            printf("[3] EXIT PROCESS ID %d\n", syscall(SYS_gettid));
             return NULL;
         }
     }
@@ -109,6 +114,7 @@ void* find_value(void* vpInitInfo) {
     if ((offset = ftell(fp)) < 0) {
         free(line);
         fclose(fp);
+        printf("[4] EXIT PROCESS ID %d\n", syscall(SYS_gettid));
         return NULL;
     }
 
@@ -117,6 +123,7 @@ void* find_value(void* vpInitInfo) {
 
     // we were usurped by another thread
     printf("usurped\n");
+    printf("[5] EXIT PROCESS ID %d\n", syscall(SYS_gettid));
     return NULL;
 }
 
@@ -126,7 +133,7 @@ int main( int argc, const char* argv[] ) {
     bool shouldStop = false;
     char* answer = "";
 
-    int SEARCH_THREAD_COUNT = 1;//sysconf(_SC_NPROCESSORS_ONLN);
+    int SEARCH_THREAD_COUNT = sysconf(_SC_NPROCESSORS_ONLN);
     // initialize thread jobs
     find_worker_init startInfo[SEARCH_THREAD_COUNT];
     int current_search_start = 0;
