@@ -223,7 +223,7 @@ public:
         delete car_to_sell;
         std::cout << "You have sold your car for " << car_income << std::endl;
     }
-
+    // Kontenery x2 rozne
     void repairCars() {
         int repaired = 0;
         for (int i = 0; i < Car::getCarCount(); i++) {
