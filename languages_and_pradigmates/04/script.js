@@ -51,6 +51,19 @@ class Driver {
     }
 }
 
+const fun = (
+    function() {
+        let a = 5;
+        return function () {
+            return a;
+        }
+
+    }
+)();
+
+console.log(fun());
+console.log(fun.a);
+
 Driver.driver_count = 0;
 
 class Car {

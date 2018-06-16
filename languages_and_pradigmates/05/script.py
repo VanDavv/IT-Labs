@@ -4,7 +4,8 @@ from random import randint, uniform, random
 from time import sleep
 
 
-def print_progress(progress):
+def print_progress(**kwargs):
+    progress = kwargs['progress']
     bar_width = 70
     message = "["
     position = int(bar_width * progress)
@@ -150,7 +151,7 @@ def race(balance, drivers, cars):
     progress = 0.0
     wait_time = 10
     while progress < 1.0:
-        print_progress(progress)
+        print_progress(progress=progress)
         sleep(wait_time / 45)
         progress += 1.0 / 45.0
 
