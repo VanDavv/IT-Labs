@@ -92,6 +92,19 @@ IF NOT exists(
   )
 GO
 
+IF NOT exists (
+    SELECT *
+    FROM sysobjects
+    WHERE name = 'office_hours_m2m' AND xtype = 'U'
+)
+
+CREATE TABLE office_hours_m2m (
+    slot BIGINT NOT NULL FOREIGN KEY REFERENCES slot(id),
+    office_hours BIGINT NOT NULL FOREIGN KEY REFERENCES office_hours(id)
+)
+
+GO
+
 IF NOT exists(
     SELECT *
     FROM sysobjects
@@ -102,7 +115,6 @@ IF NOT exists(
     id    INT  NOT NULL PRIMARY KEY ,
     start_date DATE,
     end_date DATE,
-    slot     BIGINT NOT NULL FOREIGN KEY REFERENCES slot(id) ,
     doctor     BIGINT NOT NULL FOREIGN KEY REFERENCES doctor (pesel) ,
   )
 GO
