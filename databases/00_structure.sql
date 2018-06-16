@@ -22,7 +22,7 @@ IF NOT exists(
     id   INT IDENTITY (1, 1) PRIMARY KEY,
     profession TEXT NOT NULL,
     specialization TEXT NOT NULL,
-    desc TEXT NOT NULL,
+    descr TEXT NOT NULL,
   )
 GO
 
@@ -72,8 +72,8 @@ IF NOT exists(
     number TEXT,
     netto FLOAT,
     tax FLOAT,
-    gross: FLOAT,
-    contracor: TEXT,
+    gross FLOAT,
+    contractor TEXT,
     nip TEXT,
   )
 GO
@@ -85,10 +85,26 @@ IF NOT exists(
 )
 
   CREATE TABLE slot (
-    id    INT  NOT NULL PRIMARY KEY ,
+    id   INT IDENTITY (1, 1) PRIMARY KEY,
     day_num    INT  NOT NULL,
     start_hour TIME NOT NULL,
     end_hour   TIME NOT NULL
+  )
+GO
+
+
+IF NOT exists(
+    SELECT *
+    FROM sysobjects
+    WHERE name = 'office_hours' AND xtype = 'U'
+)
+
+  CREATE TABLE office_hours (
+    id   INT IDENTITY (1, 1) PRIMARY KEY,
+    day_num INT,
+    start_date TIME,
+    end_date TIME,
+    employee     BIGINT NOT NULL FOREIGN KEY REFERENCES employee (pesel) ,
   )
 GO
 
@@ -99,25 +115,13 @@ IF NOT exists (
 )
 
 CREATE TABLE office_hours_m2m (
-    slot BIGINT NOT NULL FOREIGN KEY REFERENCES slot(id),
-    office_hours BIGINT NOT NULL FOREIGN KEY REFERENCES office_hours(id)
+    id   INT IDENTITY (1, 1) PRIMARY KEY,
+    slot INT NOT NULL FOREIGN KEY REFERENCES slot(id),
+    office_hours INT NOT NULL FOREIGN KEY REFERENCES office_hours(id)
 )
 
 GO
 
-IF NOT exists(
-    SELECT *
-    FROM sysobjects
-    WHERE name = 'office_hours' AND xtype = 'U'
-)
-
-  CREATE TABLE office_hours (
-    id    INT  NOT NULL PRIMARY KEY ,
-    start_date DATE,
-    end_date DATE,
-    doctor     BIGINT NOT NULL FOREIGN KEY REFERENCES doctor (pesel) ,
-  )
-GO
 
 IF NOT exists(
     SELECT *
@@ -141,7 +145,7 @@ IF NOT exists(
     id   INT IDENTITY (1, 1) PRIMARY KEY,
     name TEXT NOT NULL,
     icd10 TEXT NOT NULL,
-    desc TEXT NOT NULL,
+    descr TEXT NOT NULL,
   )
 GO
 
@@ -183,8 +187,8 @@ CREATE TABLE visit (
     id          INT IDENTITY (1, 1) PRIMARY KEY,
     date        DATE,
     patient     BIGINT NOT NULL FOREIGN KEY REFERENCES patient (pesel),
-    invoice      BIGINT NOT NULL FOREIGN KEY REFERENCES invoice (id),
-    recorder      BIGINT NOT NULL FOREIGN KEY REFERENCES registerer (pesel),
+    invoice      INT NOT NULL FOREIGN KEY REFERENCES invoice (id),
+    recorder      INT NOT NULL FOREIGN KEY REFERENCES registerer (id),
   )
 GO
 
@@ -196,7 +200,7 @@ IF NOT exists(
 
   CREATE TABLE salary (
     id         INT IDENTITY (1, 1) PRIMARY KEY,
-    doctor     BIGINT NOT NULL FOREIGN KEY REFERENCES doctor (pesel),
+    employee     BIGINT NOT NULL FOREIGN KEY REFERENCES employee (pesel),
     start_date DATE,
     active     BIT,
     netto      FLOAT NOT NULL,
@@ -240,10 +244,11 @@ CREATE TABLE examination_on_visit (
     id              INT IDENTITY (1, 1) PRIMARY KEY,
     date            DATE,
     exam            INT NOT NULL FOREIGN KEY REFERENCES examination (id),
-    diagnosis       INT NOT NULL FOREIGN KEY REFERENCES diagnosis (id),
-    prescription       INT NOT NULL FOREIGN KEY REFERENCES perscription (id),
+    diagnosis       INT FOREIGN KEY REFERENCES diagnosis (id),
+    prescription    INT FOREIGN KEY REFERENCES prescription (id),
     staff           BIGINT NOT NULL FOREIGN KEY REFERENCES employee (pesel),
-    admission_hours INT NOT NULL FOREIGN KEY REFERENCES office_hours (pesel),
+    admission_hours INT NOT NULL FOREIGN KEY REFERENCES office_hours (id),
     visit           INT NOT NULL FOREIGN KEY REFERENCES visit (id),
+    office          INT NOT NULL FOREIGN KEY REFERENCES office (id)
   )
 GO
