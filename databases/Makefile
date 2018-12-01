@@ -1,19 +1,14 @@
-build:
-	docker build -t zut/databases .
-run:
-	docker run -d -e DB_HOST=mssql -e DB_PORT=1433 --name zut-databases zut/databases
-exec:
-	docker exec -it zut-databases /opt/mssql-tools/bin/sqlcmd -S 10.2.0.222,11433 -U sa -P TNTRocks!
-logs:
-	docker logs zut-databases
-clean:
-	-docker kill zut-databases
-	-docker rm -f zut-databases
+all:
+	docker cp 00_structure.sql mssql:/
+	docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -i /00_structure.sql -U sa -P Secret123@
+	docker cp fill_database.sql mssql:/
+	docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -i /fill_database.sql -U sa -P Secret123@
 
-all: clean build run
+exec:
+	docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Secret123@
 
 db:
-	docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=TNTRocks! -e MSSQL_PID=Express --name mssql -p 1433:1433 -d microsoft/mssql-server-linux:2017-CU4
+	docker run --name mssql -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Secret123@' -p 1433:1433 -d microsoft/mssql-server-linux:2017-CU7
 
 db-clean:
 	-docker kill mssql
