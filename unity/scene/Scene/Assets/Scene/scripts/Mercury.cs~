@@ -1,0 +1,17 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Mercury : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+	     int a = 1;
+	     Debug.Log(("a = ", a);
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
