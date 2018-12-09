@@ -1,9 +1,9 @@
-sim('lab1');
-R = str2num(get_param('lab1/Subsystem', 'R'));
+sim('lab2');
+R = str2num(get_param('lab2/Subsystem', 'R'));
 
 
 
-RS = str2num(get_param('lab1/Subsystem', 'RS'));
+RS = str2num(get_param('lab2/Subsystem', 'RS'));
 
 for i=1:length(xarray)
     x = xarray(i)
