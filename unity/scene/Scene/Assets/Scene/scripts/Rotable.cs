@@ -1,19 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class Rotable : MonoBehaviour {
-	public float rotationSpeed = 1;
+	public float rotationSpeed = 0;
+	public Vector3 rotationDistance = new Vector3(0, 0, 0);
+	public Vector3 rotationScale = new Vector3(1, 1, 1);
 	public bool rotateObject = false;
 	public Rotable centralObject;
+	private float alpha = 0;
+
+	public Matrix4x4 GetRotationMatrix()
+	{
+		var centralMat = Matrix4x4.identity;
+		var translateMat = Matrix4x4.Translate(rotationDistance);
+		if (centralObject)
+		{
+			centralMat = centralObject.GetRotationMatrix();
+		}
+
+		var scaleMat = Matrix4x4.Scale(rotationScale);
+		alpha += rotationSpeed * Time.deltaTime;
+		var rotMat = Matrix4x4.Rotate(Quaternion.Euler(0, alpha, 0));
+
+		var rotationMatrix = rotMat * translateMat;
+		rotationMatrix = centralMat * rotationMatrix;
+		//var rotationMatrix = translateMat;
+		return rotationMatrix;
+	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (rotateObject)
-		{
-			if (centralObject.rotateObject)
-				transform.RotateAround(centralObject.centralObject.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
-			transform.RotateAround(centralObject.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
-		}
+	private void Update ()
+	{
+		var rotationMat = GetRotationMatrix();
+		print('a' + rotationMat.ToString());
+		transform.position = rotationMat * new Vector4(0, 0, 0, 1);
+		print('a' + transform.position.ToString());
 	}
 }
