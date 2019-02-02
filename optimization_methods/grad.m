@@ -1,17 +1,46 @@
-syms z(X, Y)
-z(X, Y) = 2*X^2 + Y^2 + X*Y -6*X -5*Y + 8;
+%lab03 - Metoda gradientu prostego
+clc
+clear all
+close all
 
-grad_x = diff(z, X)
-grad_y = diff(z, Y)
+x0 = -5; % punkt startowy X
+y0 = -5; % punkt startowy Y
+bool = 0; % sluzy do zakonczenia petli
+h = 0.05; % krok
+e = 0.1; % epsilon
+iter = 0; %liczba iteracji
 
-grad_k = [19 10]
+f = inline('2*x.^2 + y.^2 + x.*y - 6*x - 5*y + 8'); %funkcja
 
-learning_rate = 0.2
-epsylon = 0.01
+[X,Y] = meshgrid(-5:0.1:5, -5:0.1:5);
+contour(X,Y,f(X,Y), 50) 
+hold on
+plot(x0, y0, 'b o')	% narysowanie punktu startowego
 
-while norm(grad_k) > epsylon
-    derr_grad_k = [grad_x(grad_k(1), grad_k(2)) grad_y(grad_k(1), grad_k(2))];
-    grad_k = eval(grad_k - (learning_rate / norm(grad_k)) * der_grad_k)
+Fx = (f(x0+h,y0) - f(x0,y0))/h;
+Fy = (f(x0,y0+h) - f(x0,y0))/h;
+
+gradient = [Fx, Fy]; % gradient
+dl_grad = norm(gradient); %dlugosc gradientu
+
+lambda = 0.15;
+
+while (norm(gradient) >= e )
+     
+    x0 = x0 - (gradient(1)./dl_grad)*lambda;
+    y0 = y0 - (gradient(2)./dl_grad)*lambda;
+    
+    iter = iter + 1;
+    plot(x0,y0, '. r')
+        
+    Fx = (f(x0+h,y0) - f(x0,y0))/h;
+    Fy = (f(x0,y0+h) - f(x0,y0))/h;
+    
+    gradient = [Fx, Fy]; % nasz gradient
+    dl_grad = norm(gradient); %oblicza dlugosc naszego gradientu
 end
 
-
+plot(x0, y0, 'g o');
+iter
+x0
+y0

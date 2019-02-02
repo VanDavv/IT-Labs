@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Rotable : MonoBehaviour {
 	public float rotationSpeed = 0;
+	public float angle = 0;
 	public Vector3 rotationDistance = new Vector3(0, 0, 0);
 	public Vector3 rotationScale = new Vector3(1, 1, 1);
 	public bool rotateObject = false;
@@ -20,7 +21,7 @@ public class Rotable : MonoBehaviour {
 
 		var scaleMat = Matrix4x4.Scale(rotationScale);
 		alpha += rotationSpeed * Time.deltaTime;
-		var rotMat = Matrix4x4.Rotate(Quaternion.Euler(0, alpha, 0));
+		var rotMat = Matrix4x4.Rotate(Quaternion.Euler(30, alpha, 0));
 
 		var rotationMatrix = rotMat * translateMat;
 		rotationMatrix = centralMat * rotationMatrix;
@@ -32,8 +33,6 @@ public class Rotable : MonoBehaviour {
 	private void Update ()
 	{
 		var rotationMat = GetRotationMatrix();
-		print('a' + rotationMat.ToString());
 		transform.position = rotationMat * new Vector4(0, 0, 0, 1);
-		print('a' + transform.position.ToString());
 	}
 }

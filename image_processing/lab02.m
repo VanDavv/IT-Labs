@@ -22,11 +22,14 @@ img_analyse(img - 50, img);
 disp('nonlinear x^2; histogram strech left');
 img_analyse(double(img) .^ 2, img);
 
-disp('nonlinear sqrt(x); histogram compress right');
+disp('nonlinear sqrt(x); histogram compress to right');
 img_analyse(double(img) .^ 0.5, img);
 
-disp('nonlinear sqrt(x); histogram compress right');
+disp('nonlinear sqrt(x); histogram compress to middle');
 img_analyse(log(double(img)), img);
+
+close all
+clear all
 
 % linear: (a>0; b=0) (a<0; b=0) (a=1; b>0) (a=1; b<0)
 % normalization with non linear y2 = 255 * (y - min(y)) / (max(y) - min(y))
@@ -58,7 +61,7 @@ function img_show(img, raw_img)
     
     hist_1 = img_hist(raw_img);
     hist_2 = img_hist(img);
-    max_x = max([size(img, 1), size(raw_img, 1)]);
+    max_x = max([size(hist_1), size(hist_2)]);
     max_y = max([max(hist_1(:)), max(hist_2(:))]);
     subplot(2, 2, 3);
     plot(hist_1);
@@ -71,13 +74,22 @@ function img_show(img, raw_img)
 end
 
 function result = img_hist(img)
+    intervals = 100;
+    img_max = max(max(max(img)));
+    img_min = max(min(min(img)));
+    img_delta = img_max - img_min;
+    step = double(img_delta) / double(intervals);
     img_ = uint8(img);
     [x, y] = size(img_);
-    result = zeros(1, max(img(:)));
+    result = zeros(1, intervals);
     for i=1:x
         for j=1:y
             value = img_(i,j);
-            result(value) = result(value) + 1;
+            index = floor((value - img_min) / step) + 1;
+            if index >= 100
+                index = 100;
+            end
+            result(index) = result(index) + 1;
         end
     end
 end
