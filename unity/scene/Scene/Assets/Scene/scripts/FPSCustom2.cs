@@ -9,7 +9,7 @@ namespace Scene.scripts
         private Camera m_Camera;
         public Camera transitionCamera;
         private float m_DistToGround;
-        private const float MovementForce = 1;
+        private const float MovementForce = 0.5f;
         private float m_HorizontalAngle = 0;
         private float m_VerticalAngle = 0;
         public bool manual;
@@ -52,21 +52,21 @@ namespace Scene.scripts
             if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") > 0)
             {
                 // Move to the right
-                print("right");
+                // print("right");
                 m_HorizontalAngle += 2;
             }
 
             if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") < 0)
             {
                 // Move to the left
-                print("left");
+                // print("left");
                 m_HorizontalAngle -= 2;
             }
 
             if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") > 0)
             {
                 // Move up
-                print("up");
+                // print("up");
                 var dir = transform.forward * MovementForce;
                 m_Rigidbody.AddForce(dir, ForceMode.VelocityChange);
             }
@@ -74,7 +74,7 @@ namespace Scene.scripts
             if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") < 0)
             {
                 // Move down
-                print("down");
+                // print("down");
                 var dir = -transform.forward * MovementForce;
                 m_Rigidbody.AddForce(dir, ForceMode.VelocityChange);
             }

@@ -4,13 +4,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/HelloWorldProject2.cpp 
+../src/HelloWorldProject3.cpp \
+../src/obraz.cpp 
 
 OBJS += \
-./src/HelloWorldProject2.o 
+./src/HelloWorldProject3.o \
+./src/obraz.o 
 
 CPP_DEPS += \
-./src/HelloWorldProject2.d 
+./src/HelloWorldProject3.d \
+./src/obraz.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

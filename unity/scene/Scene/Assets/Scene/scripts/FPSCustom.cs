@@ -37,28 +37,28 @@ namespace Scene.scripts
             if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") > 0)
             {
                 // Move to the right
-                print("right");
+                // print("right");
                 movement += new Vector3(speed, 0, 0);
             }
 
             if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") < 0)
             {
                 // Move to the left
-                print("left");
+                // print("left");
                 movement += new Vector3(-speed, 0, 0);
             }
 
             if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") > 0)
             {
                 // Move up
-                print("up");
+                // print("up");
                 movement += new Vector3(0, 0, speed);
             }
 
             if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") < 0)
             {
                 // Move down
-                print("down");
+                // print("down");
                 movement += new Vector3(0, 0, -speed);
             }
         }

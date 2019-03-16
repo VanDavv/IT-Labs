@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Scene.scripts
@@ -8,8 +9,10 @@ namespace Scene.scripts
         private Rigidbody m_Rigidbody;
         private float m_DistToGround;
         private float m_Angle = 0;
-        private GameObject[] m_Players;
-
+        private GameObject[] m_Players = new GameObject[] {};
+        private Vector3 m_Player;
+        private SphereCollider m_Collider;
+        
         private void Start()
         {
             m_Controller = GetComponent<CharacterController>();
@@ -17,7 +20,12 @@ namespace Scene.scripts
             m_DistToGround = GetComponent<Collider>().bounds.extents.y;
             m_Players = GameObject.FindGameObjectsWithTag("Player");
         }
-        
+
+        private void OnTriggerStay(Collider other)
+        {
+            m_Player = other.transform.position;
+        }
+
         bool IsGrounded()
         {
             return Physics.Raycast(transform.position, -Vector3.up, m_DistToGround + 0.4f);
@@ -38,31 +46,19 @@ namespace Scene.scripts
                 return;
             }
 
-            float? min_dist = null;
-            GameObject closestPlayer = gameObject;
-            foreach (var player in m_Players)
+            if (m_Player != new Vector3())
             {
-                if (player == gameObject)
-                    continue;
-                
-                var dist = Vector3.Distance(player.transform.position, transform.position);
-                if (min_dist == null || dist < min_dist)
+                float dist = Vector3.Distance(m_Player, transform.position);
+                if (IsGrounded() && dist > 5 && dist < 30)
                 {
-                    min_dist = dist;
-                    closestPlayer = player;
-                }
-            }
-            if (IsGrounded() && min_dist > 5 && min_dist < 30)
-            {
-                var targetDir = closestPlayer.transform.position - transform.position;
-                var angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
-                print(angle);
-                if(Mathf.Abs(angle) < 5)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, closestPlayer.transform.position,   5*Time.deltaTime);
-                }
-                m_Angle -= angle * Time.deltaTime;
-
+                    var targetDir = m_Player - transform.position;
+                    var angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
+                    if (Mathf.Abs(angle) < 5)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, m_Player,   5*Time.deltaTime);
+                    }
+                    m_Angle -= angle * Time.deltaTime;
+                }   
             }
         }
     }

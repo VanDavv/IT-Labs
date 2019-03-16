@@ -24,7 +24,7 @@ namespace Scene.scripts
         void Update()
         {
             UpdateMovement();
-            //UpdateGravity();
+            UpdateGravity();
             UpdateView();
             animSpeed = animSpeed * 0.99f;
             m_Animator.SetFloat("speed", animSpeed * Time.deltaTime);
@@ -37,7 +37,8 @@ namespace Scene.scripts
         
         private void UpdateView()
         {
-            //m_Rigidbody.MoveRotation(Quaternion.Euler(0, m_HorizontalAngle, 0));
+            print(m_HorizontalAngle);
+            m_Rigidbody.MoveRotation(Quaternion.Euler(0, m_HorizontalAngle, 0));
         }
 
         private void UpdateMovement()
@@ -64,14 +65,14 @@ namespace Scene.scripts
             if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") > 0)
             {
                 // Move up
-                print("up");
+                // print("up");
                 animSpeed += speed * 5;
             }
 
             if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") < 0)
             {
                 // Move down
-                print("down");
+                // print("down");
                 animSpeed -= speed * 5;
             }
         }
