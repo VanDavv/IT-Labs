@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  lab01:
+    build: .
+    image: vandavv/gpu_programming
+    command: python lab01.py
+
+  lab01-profiling:
+    build: .
+    image: vandavv/gpu_programming
+    command: bash lab01profiling.sh
+    environment:
+      NO_DEBUG: 1
+    volumes:
+      - ./src:/src
