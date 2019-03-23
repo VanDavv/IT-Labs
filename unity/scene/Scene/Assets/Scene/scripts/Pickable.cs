@@ -13,16 +13,15 @@ namespace Scene.scripts
 
         public void pick(GameObject parent)
         {
-            gameObject.SetActive(false);
             m_Collider.enabled = false;
-            gameObject.transform.position = parent.transform.position;
+            gameObject.transform.position = parent.transform.position + new Vector3(0, 1, 0);
             gameObject.transform.rotation = parent.transform.rotation;
             gameObject.transform.parent = parent.transform;
         }
 
         public void drop()
         {
-            gameObject.SetActive(true);
+            gameObject.transform.position += new Vector3(0, -1, 0);
             m_Collider.enabled = true;
             gameObject.transform.parent = null;
         }

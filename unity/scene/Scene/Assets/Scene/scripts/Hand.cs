@@ -6,10 +6,10 @@ namespace Scene.scripts
     public class Hand : MonoBehaviour
     {
         [CanBeNull] public Pickable picked;
-        private int cooldown = 0;
+        private int m_PickupCooldown = 0;
         private void OnTriggerStay(Collider other)
         {
-            if (picked != null || cooldown > 0)
+            if (picked != null || m_PickupCooldown > 0)
             {
                 return;
             }
@@ -23,13 +23,21 @@ namespace Scene.scripts
 
         void Update()
         {
-            if (cooldown > 0)
+            if (m_PickupCooldown > 0)
             {
-                cooldown--;
+                m_PickupCooldown--;
             }
             if (Input.GetKey(KeyCode.Minus))
             {
                 DropItem();
+            }   
+            if (Input.GetKey(KeyCode.F))
+            {
+                var weapon = picked as Weapon;
+                if (weapon != null)
+                {
+                    weapon.fire();
+                }
             }    
         }
 
@@ -37,7 +45,7 @@ namespace Scene.scripts
         {
             picked.drop();
             picked = null;
-            cooldown = 200;
+            m_PickupCooldown = 200;
         }
     }
 }
