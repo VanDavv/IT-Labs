@@ -1,6 +1,14 @@
+import os
+import sys
 from contextlib import contextmanager
 from numba import cuda
 import time
+
+
+def init():
+    # Suppress printing debug info
+    if os.getenv('NO_DEBUG') is not None:
+        sys.stdout = open(os.devnull, 'w')
 
 
 @contextmanager
@@ -46,6 +54,9 @@ def timed(suffix=None):
     start = time.time()
     yield
     end = time.time() - start
-    print("Time to calculate{}: {}ms".format(' ' + suffix if suffix is not None else '', int(end * 1000)))
+    print(
+        "Time to calculate{}: {}ms".format(' ' + suffix if suffix is not None else '', int(end * 1000)),
+        file=sys.__stdout__
+    )
 
 

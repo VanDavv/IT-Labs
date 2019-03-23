@@ -1,15 +1,29 @@
 version: '2'
 
 services:
-  lab01:
+  lab01-1:
     build: .
     image: vandavv/gpu_programming
-    command: python lab01.py
+    command: python lab01_1.py
 
-  lab01-profiling:
+  lab01-1-profiling:
     build: .
     image: vandavv/gpu_programming
-    command: bash lab01profiling.sh
+    command: bash lab01_1_profiling.sh
+    environment:
+      NO_DEBUG: 1
+
+  lab01-2:
+    build: .
+    image: vandavv/gpu_programming
+    command: python lab01_2.py
+    volumes:
+      - ./src:/src
+
+  lab01-2-profiling:
+    build: .
+    image: vandavv/gpu_programming
+    command: bash lab01_2_profiling.sh
     environment:
       NO_DEBUG: 1
     volumes:
