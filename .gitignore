@@ -5,10 +5,13 @@
 7.4.output
 
 # Unity
+*.x86_64
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
+[Bb]uild1/
+[Bb]uild1_Data/
 [Bb]uilds/
 Assets/AssetStoreTools*
 
