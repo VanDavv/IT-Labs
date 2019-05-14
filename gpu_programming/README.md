@@ -448,3 +448,45 @@ Time to calculate to multiply: 124ms
                    31.34%  44.996ms         1  44.996ms  44.996ms  44.996ms  [CUDA memcpy HtoD]
                    31.30%  44.938ms         1  44.938ms  44.938ms  44.938ms  [CUDA memcpy DtoH]
 ```
+
+## Lab 02
+
+Before
+
+![img](src/lab02img.bmp)
+
+After
+
+![img](src/lab02result.bmp)
+
+## Lab 03
+
+### 3.1
+
+```
+Input: [ 1.01  2.02  3.03  4.04  5.05  6.06  7.07  8.08  9.09 10.1 ]; Operation: pow(array, factor)
+gpu vs cpu
+[Factor: 1]  Mean: 0.0	                    Max: 0.0	                Min: 0.0
+[Factor: 2]  Mean: 0.0	                    Max: 0.0	                Min: 0.0
+[Factor: 3]  Mean: -1.2989609388114332e-14	Max: 0.0	                Min: -1.1368683772161603e-13
+[Factor: 4]  Mean: 9.094947017729283e-14	Max: 9.094947017729282e-13	Min: 0.0
+[Factor: 5]  Mean: -1.1726175586090904e-13	Max: 7.275957614183426e-12	Min: -7.275957614183426e-12
+[Factor: 6]  Mean: 1.1641532182693482e-11	Max: 1.1641532182693481e-10	Min: 0.0
+[Factor: 7]  Mean: 2.339191729205936e-10	Max: 1.862645149230957e-09	Min: -4.656612873077393e-10
+[Factor: 8]  Mean: 1.5598743630107491e-09	Max: 1.4901161193847656e-08	Min: -2.3283064365386963e-10
+[Factor: 9]  Mean: 9.691586932980555e-09	Max: 5.960464477539063e-08	Min: 0.0
+[Factor: 10] Mean: 1.2444727419680391e-07	Max: 9.5367431640625e-07	Min: -7.450580596923828e-09
+[Factor: 11] Mean: 1.5199155313894153e-06	Max: 1.52587890625e-05	    Min: -5.960464477539063e-08
+[Factor: 12] Mean: 1.2350070755928755e-05	Max: 0.0001220703125	    Min: -4.76837158203125e-07
+[Factor: 13] Mean: 9.899137075990439e-05	Max: 0.0009765625	        Min: -1.9073486328125e-06
+[Factor: 14] Mean: 0.00118408203125	        Max: 0.01171875	            Min: 0.0
+[Factor: 15] Mean: 0.008691382407414471	    Max: 0.09375	            Min: -0.0078125
+[Factor: 16] Mean: 0.12573242112994193	    Max: 1.25	                Min: -0.00048828125
+[Factor: 17] Mean: 1.2558597534924048	    Max: 12.0	                Min: -0.00390625
+[Factor: 18] Mean: -15.551658636325737	    Max: 96.0	                Min: -256.0
+[Factor: 19] Mean: 102.78749997615814	    Max: 1024.0	                Min: -0.125
+[Factor: 20] Mean: 1025.5499999523163	    Max: 10240.0	            Min: -0.5
+
+cpu vs cpu: no difference - result is not randomly varying
+gpu vs gpu: no difference - result is not randomly varying
+```
