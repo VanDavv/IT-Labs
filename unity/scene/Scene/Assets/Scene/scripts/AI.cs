@@ -23,7 +23,10 @@ namespace Scene.scripts
 
         private void OnTriggerStay(Collider other)
         {
-            m_Player = other.transform.position;
+            if (other.gameObject.CompareTag("player"))
+            {
+                m_Player = other.transform.position;                
+            }
         }
 
         bool IsGrounded()
