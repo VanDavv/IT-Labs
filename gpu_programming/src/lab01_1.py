@@ -11,7 +11,7 @@ print("N = {}".format(N))
 init()
 
 
-@cuda.jit
+@cuda.jit('float')
 def calculate_gpu(A):
     i = cuda.grid(1)
 

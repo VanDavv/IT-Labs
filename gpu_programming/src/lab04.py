@@ -12,7 +12,6 @@ init()
 def calculate_gpu(x, n, factors, out):
     pos = cuda.grid(1)
     if pos < factors.shape[0]:
-        print(pos)
         val = factors[pos] * math.pow(x, pos)
         cuda.atomic.add(out, 0, val)
 
@@ -24,6 +23,5 @@ with allocated_gpu() as gpu:
     blockspergrid = (wages.size + (threadsperblock - 1)) // threadsperblock
 
     gpu_result = np.array([0])
-    calculate_gpu[blockspergrid, threadsperblock](1, len(wages), wages, gpu_result)
+    calculate_gpu[blockspergrid, threadsperblock](12, len(wages), wages, gpu_result)
     print(gpu_result, gpu_result[0], type(gpu_result[0]))
-

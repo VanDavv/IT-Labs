@@ -1,0 +1,32 @@
+		.version        5.0
+        .target         sm_60
+        .address_size   64
+		.entry   KERN ( .param .u32 N,	.param .align 8 .u64 vect)
+		{
+		.reg    .u32    max,indx;
+		.reg	.u64	ptr,indx2;
+		.reg    .pred   out;
+		.reg    .f32    x, val, i;
+
+		ld.param.u32    max, [N];	    // max = N
+		ld.param.u64    ptr, [vect];	// ptr = vect;
+		mov.b32         indx, %tid.x;	// indx = threadIdx.x
+		setp.ge.u32     out,indx,max;	// if(indx > max)
+@out   		bra             END;		//		goto END:
+
+		shl.b32         indx,indx,2;	// indx *= 4;
+		cvt.u64.u32	    indx2,indx;	// indx2 = (long)int
+		add.u64         ptr,ptr,indx2;	// ptr += indx2;
+
+		mov.b32         indx, %tid.x;	// i = threadIdx.x
+		cvt.rn.f32.u32	i,indx;	        // i = (float)indx
+
+		ld.global.f32   val,[ptr];	    // x = *ptr
+		lg2.approx.ftz.f32 val, val;    // val = log(x, 2)
+		mul.f32         val, val, i;    // val = val * i
+		ex2.approx.ftz.f32 val, val;    // val = 2 ** val
+		st.global.f32   [ptr],val;	    // *ptr = val
+END:    	exit;				// return
+		}
+
+
