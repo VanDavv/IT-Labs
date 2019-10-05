@@ -3,7 +3,8 @@
 7_13_data
 6.1.txt
 7.4.output
-
+*.exe
+*.meta
 # Unity
 *.x86_64
 [Ll]ibrary/
