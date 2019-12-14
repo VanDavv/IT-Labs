@@ -1,7 +1,8 @@
+import re
 from collections import Counter
 
 with open('04.txt') as f:
-    text = f.read().replace(' ', '').replace('\n', '')
+    text = re.sub(r'[^a-zA-Z]', '', f.read())
 
 cnt = Counter(list(text))
 
