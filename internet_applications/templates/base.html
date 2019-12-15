@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+    #error-box {
+        margin-top: 30px;
+    }
+    </style>
+</head>
+<body>
+{% block content %}{% endblock %}
+<div id="error-box">
+    {% for error in errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</div>
+</body>
+</html>

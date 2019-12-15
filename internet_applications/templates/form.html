@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post">
+    <input name="a" value="{{ a }}"/>
+    <select name="op">
+        <option value="+"{% if op=='+' %} selected="selected"{% endif %}>+</option>
+        <option value="-"{% if op=='-' %} selected="selected"{% endif %}>-</option>
+        <option value="*"{% if op=='*' %} selected="selected"{% endif %}>*</option>
+        <option value="/"{% if op=='/' %} selected="selected"{% endif %}>/</option>
+    </select>
+    <input name="b" value="{{ b }}}"/>
+    <button type="submit">=</button>
+    <input name="result" value="{{ result }}}"/>
+</form>
+{% endblock %}
