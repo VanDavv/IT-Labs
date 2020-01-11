@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:simpleType name="string30">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="string11">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="string9">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="adres_typ">
+        <xs:sequence>
+            <xs:element name="ulica" type="string30"/>
+            <xs:element name="numer_domu" type="xs:int"/>
+            <xs:element name="numer_mieszkania" type="xs:int"/>
+            <xs:element name="kod_pocztowy">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]{2}-[0-9]{3}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element> 
+            <xs:element name="miejscowosc" type="string30"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="osoba_typ">  
+        <xs:sequence>
+            <xs:element name="imie" type="string30"/>
+            <xs:element name="nazwisko" type="string30"/>
+            <xs:element name="pesel" type="string11"/>
+            <xs:element name="data_urodzenia" type="xs:date"/>
+            <xs:element name="plec">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="m"/>
+                        <xs:enumeration value="k"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="numer_telefonu" type="string9"/>
+            <xs:element name="adres" type="adres_typ"/>
+            <xs:element name="wzrost" type="xs:decimal"/>
+            <xs:element name="kolor_oczu">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="czarny"/>
+                        <xs:enumeration value="zielony"/>
+                        <xs:enumeration value="niebieski"/>
+                        <xs:enumeration value="piwny"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="zawod" type="string30"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="lista_osob">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="osoba" maxOccurs="unbounded" type="osoba_typ"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    
+</xs:schema>

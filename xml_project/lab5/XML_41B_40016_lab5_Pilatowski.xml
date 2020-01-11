@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Osoba (osoba)
+1. Imię (imie)
+2. Nazwisko (nazwisko)
+3. Pesel (pesel)
+4. Data urodzenia (data_urodzenia)
+5. Płeć (plec)
+6. Numer telefonu (numer_telefonu)
+7. Adres (adres)
+7.1. Ulica (ulica)
+7.2. Numer domu (numer_domu)
+7.3. Numer mieszkania (numer_mieszkania)
+7.4. Kod pocztowy (kod_pocztowy)
+7.5. Miejscowość (miejscowosc)
+8. Wzrost (wzrost)
+9. Kolor oczu (kolor_oczu)
+10. Zawod (zawod)
+ -->
+<lista_osob>
+	<osoba>
+		<imie>Adam</imie>
+		<nazwisko>Walaszek</nazwisko>
+		<pesel>75128312937</pesel>
+		<data_urodzenia>11-11-1991</data_urodzenia>
+		<plec>m</plec>
+		<numer_telefonu>978645312</numer_telefonu>
+		<adres>
+			<ulica>Walaszkowa</ulica>
+			<numer_domu>21</numer_domu>
+			<numer_mieszkania>27</numer_mieszkania>
+			<kod_pocztowy>11-231</kod_pocztowy>
+			<miejscowosc>Warszawa</miejscowosc>
+		</adres>
+		<wzrost>193</wzrost>
+		<kolor_oczu>niebieski</kolor_oczu>
+		<zawod>programista</zawod>
+	</osoba>
+    <osoba>
+		<imie>Oliwia</imie>
+		<nazwisko>Barkczyk</nazwisko>
+		<pesel>44123841237</pesel>
+		<data_urodzenia>22-11-1999</data_urodzenia>
+		<plec>k</plec>
+		<numer_telefonu>123823991</numer_telefonu>
+		<adres>
+			<ulica>Walaszkowa</ulica>
+			<numer_domu>21</numer_domu>
+			<numer_mieszkania>27</numer_mieszkania>
+			<kod_pocztowy>11-231</kod_pocztowy>
+			<miejscowosc>Warszawa</miejscowosc>
+		</adres>
+		<wzrost>167</wzrost>
+		<kolor_oczu>piwny</kolor_oczu>
+		<zawod>karateka</zawod>
+	</osoba>
+    <osoba>
+		<imie>Artur</imie>
+		<nazwisko>Zawisza</nazwisko>
+		<pesel>97123312392</pesel>
+		<data_urodzenia>22-10-1987</data_urodzenia>
+		<plec>m</plec>
+		<numer_telefonu>556821239</numer_telefonu>
+		<adres>
+			<ulica>Sezamowa</ulica>
+			<numer_domu>1</numer_domu>
+			<numer_mieszkania>3</numer_mieszkania>
+			<kod_pocztowy>71-411</kod_pocztowy>
+			<miejscowosc>Szczecin</miejscowosc>
+		</adres>
+		<wzrost>178</wzrost>
+		<kolor_oczu>niebieski</kolor_oczu>
+		<zawod>hydraulik</zawod>
+	</osoba>
+    <osoba>
+		<imie>Nicole</imie>
+		<nazwisko>Moudaber</nazwisko>
+		<pesel>51231244129</pesel>
+		<data_urodzenia>31-12-1981</data_urodzenia>
+		<plec>k</plec>
+		<numer_telefonu>574312938</numer_telefonu>
+		<adres>
+			<ulica>Grafitowa</ulica>
+			<numer_domu>11</numer_domu>
+			<numer_mieszkania>10</numer_mieszkania>
+			<kod_pocztowy>86-123</kod_pocztowy>
+			<miejscowosc>Radom</miejscowosc>
+		</adres>
+		<wzrost>185</wzrost>
+		<kolor_oczu>zielony</kolor_oczu>
+		<zawod>nauczyciel</zawod>
+	</osoba>
+    <osoba>
+		<imie>Oliwia</imie>
+		<nazwisko>Domostawka</nazwisko>
+		<pesel>98121645689</pesel>
+		<data_urodzenia>16-12-1998</data_urodzenia>
+		<plec>k</plec>
+		<numer_telefonu>899912031</numer_telefonu>
+		<adres>
+			<ulica>Harcerska</ulica>
+			<numer_domu>21</numer_domu>
+			<numer_mieszkania>1</numer_mieszkania>
+			<kod_pocztowy>31-447</kod_pocztowy>
+			<miejscowosc>Tomaszewo</miejscowosc>
+		</adres>
+		<wzrost>167</wzrost>
+		<kolor_oczu>piwny</kolor_oczu>
+		<zawod>domokrążca</zawod>
+	</osoba>
+</lista_osob>

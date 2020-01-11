@@ -1,0 +1,18 @@
+Perl to wolne oprogramowanie, dostępne pod licencjami GPL i artystyczną. Perl jest dostępny dla wielu systemów operacyjnych, lecz jego naturalne środowisko to Unix i jego pochodne. Rośnie popularność Perla w środowisku Microsoft Windows. Jako przykład praktycznego zastosowania Perla można podać oprogramowanie Wikipedii, które aż do stycznia 2002 było skryptem CGI napisanym w Perlu.
+
+Filozofia Perla
+Język Perl został zaprojektowany jako praktyczne narzędzie do analizy plików tekstowych i tworzenia raportów. Jednym z naczelnych haseł jest Można to zrobić na różne sposoby (ang. There is more than one way to do it – TIMTOWTDI[4] – wymawiane jak Tim Toady). Jednym z podstawowych zamysłów projektu było uczynienie łatwych zadań łatwymi do wykonania, zaś trudnych – wykonalnymi. Wszechstronność Perla pozwala na programowanie w różnych modelach: proceduralnym, funkcyjnym czy obiektowym, chociaż purystom przeszkadza podejście polegające na przedkładaniu wygody programisty nad czystość projektu.
+
+Umożliwia powiązanie systemów i struktur danych, których współpraca nie była przewidywana w momencie projektowania.
+
+Perl 6
+Obecnie rozwijany jest Perl 6[5], który jest nowym językiem programowania, znacznie różniącym się od aktualnej wersji Perla[6]. Najbardziej zaawansowaną implementacją tego nowego języka jest Rakudo[7], który działa używając maszyny wirtualnej Parrot. Informacje o planowanych zmianach między wersją 5 i 6 są publikowane na stronie perl.com – głównie przez Larry’ego Walla (cykl artykułów „Apocalypse”[8]) i Damiana Conwaya (cykl „Exegesis”).
+
+Rozwój Perla 5
+Rozwój aktualnej wersji języka, czyli Perl 5, jest wciąż kontynuowany. Nowe wersje testowe pojawiają się w miesięcznych odstępach, a większe zmiany są publikowane około raz na rok.
+
+CPAN
+ Osobny artykuł: CPAN.
+Dostępna jest olbrzymia kolekcja modułów perlowych. Można je pobrać z archiwów CPAN (np. www.cpan.org). Można znaleźć moduły między innymi do zaawansowanych obliczeń matematycznych, dostępu do baz danych czy zagadnień sieciowych. Większość, jeśli nie wszystkie, modułów udostępnianych przez CPAN jest dostępna na zasadach Licencji Artystycznej, GPL lub obydwu.
+
+Interpreter

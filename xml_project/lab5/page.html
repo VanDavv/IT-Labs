@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab5</title>
+</head>
+<body>
+<h1>Lista osób</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Pesel</th>
+        <th>Data urodzenia</th>
+        <th>Płeć</th>
+        <th>Numer telefonu</th>
+        <th>Ulica</th>
+        <th>Nr domu</th>
+        <th>Nr mieszkania</th>
+        <th>Kod pocztowy</th>
+        <th>Miejscowość</th>
+        <th>Wzrost</th>
+        <th>Kolor oczu</th>
+        <th>Zawód</th>
+    </tr>
+    </thead>
+    <tbody id="tableBody">
+
+    </tbody>
+</table>
+
+<script type="text/javascript">
+  function addData() {
+    const tBody = document.getElementById('tableBody');
+    const req = new XMLHttpRequest();
+    req.open("GET", "XML_41B_40016_lab5_Pilatowski.xml", false);
+    req.send();
+    const doc = req.responseXML;
+    doc.getElementsByTagName('lista_osob')[0].childNodes.forEach(node => {
+      if (node.nodeType === 3) {
+        return
+      }
+      const row = document.createElement('tr');
+      node.childNodes.forEach(entity => {
+        if (entity.nodeType === 3) {
+          return
+        }
+        if (entity.tagName === 'adres') {
+          entity.childNodes.forEach(child => {
+            if (child.nodeType === 3) {
+              return;
+            }
+            const dataCell = document.createElement('td');
+            dataCell.innerHTML = child.textContent;
+            row.appendChild(dataCell);
+          })
+        } else {
+          const dataCell = document.createElement('td');
+          dataCell.innerHTML = entity.textContent;
+          row.appendChild(dataCell);
+        }
+      });
+      tBody.appendChild(row);
+    })
+  }
+
+  window.onload = addData;
+</script>
+</body>
+</html>
