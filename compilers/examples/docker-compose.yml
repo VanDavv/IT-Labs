@@ -1,0 +1,11 @@
+# before running, make `sudo xhost +` to allow connections to unix socket
+
+version: "3.7"
+services:
+  mars:
+    build: .
+    command: java -jar Mars4_5.jar
+    environment:
+      - DISPLAY=:0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix

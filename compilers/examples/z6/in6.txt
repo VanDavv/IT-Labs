@@ -1,0 +1,3 @@
+int i
+c=a+b
+d=v+f

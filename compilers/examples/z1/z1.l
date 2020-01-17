@@ -1,0 +1,4 @@
+%%
+tak			;
+niem			;
+nie			;

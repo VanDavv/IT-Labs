@@ -1,0 +1,12 @@
+1::nazwa
+1::nazwa
+2::nazwa
+2::=
+2::nazwa
+2::+
+2::nazwa
+3::nazwa
+3::=
+3::nazwa
+3::+
+3::nazwa

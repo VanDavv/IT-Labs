@@ -1,0 +1,5 @@
+startbeginend
+start
+999
+99.99
+1something
