@@ -1,27 +1,33 @@
 %{
-
-#include <stdio.h>
-#include <string.h>
-#include "test.tab.h"
-void showError();
+ #include "test.tab.h"
+ #include <stdlib.h>
+ void yyerror(char *);
 %}
-
-
-numbers     ([0-9])+
-alpha       ([a-zA-Z])+
-mixed       ([a-zA-Z0-9])+
-
 %%
 
-{alpha}			   {sscanf(yytext, "%s", yylval.name); return (STRING);}
-{numbers}      {yylval.number = atoi(yytext); return (NUM);}
-";"      		   {return (SEMICOLON);}
-{mixed}			   {sscanf(yytext, "%s", yylval.name); return (MIXED);}
-.      		     {showError(); return(OTHER);}
-
+[!] {
+ return T_INT;
+}
+[?] {
+ return T_DOUBLE;
+}
+[0-9]+\.[0-9]+ {
+ yylval = strtod(yytext, NULL);
+ return DOUBLE;
+}
+[a-z] {
+ yylval = *yytext - 'a';
+ return VARIABLE;
+ }
+[0-9]+ {
+ yylval = atoi(yytext);
+ return INTEGER;
+ }
+[-+()/=*\n] { return *yytext; }
+[ \t] ;
+. yyerror("Unknown character");
 %%
 
-
-void showError(){
-    printf("Other input");
+int yywrap(void) {
+  return 1;
 }

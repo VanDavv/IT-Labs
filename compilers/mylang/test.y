@@ -1,55 +1,40 @@
-
 %{
-#include <stdio.h>
-
-int yylex();
-int yyerror(char *s);
-
+ #include <stdio.h>
+ void yyerror(char *);
+ int yylex(void);
+ int symInt[26];
+ double symDouble[26];
 %}
-
-%token STRING NUM OTHER MIXED SEMICOLON
-
-%type <name> STRING
-%type <name> MIXED
-%type <number> NUM
-
-%union{
-	  char name[20];
-    int number;
-}
-
+%token INTEGER VARIABLE T_INT T_DOUBLE DOUBLE
+%left '+' '-' '*'
 %%
-
-prog:
-  stmts
-;
-
-stmts:
-		| stmt SEMICOLON stmts
-
-stmt:
-		STRING {
-				printf("Your entered a string - %s", $1);
-		}
-		| NUM {
-				printf("The number you entered is - %d", $1);
-		}
-		| MIXED {
-				printf("The mixed you entered is - %s", $1);
-		}
-		| OTHER
-;
-
+program:
+ program statement '\n'
+ | /* NULL */
+ ;
+statement:
+ expression {
+   printf("%d\n", $1);
+ }
+ | T_INT VARIABLE '=' expression { symInt[$2] = $4; }
+ | T_DOUBLE VARIABLE '=' expression { symDouble[$2] = $4; }
+ ;
+expression:
+ INTEGER
+ | DOUBLE
+ | T_INT VARIABLE { $$ = symInt[$2]; }
+ | T_DOUBLE VARIABLE { $$ = symDouble[$2]; }
+ | '-' expression { $$ = -$2; }
+ | expression '+' expression { $$ = $1 + $3; }
+ | expression '-' expression { $$ = $1 - $3; }
+ | expression '*' expression { $$ = $1 * $3; }
+ | expression '/' expression { $$ = $1 / $3; }
+ | '(' expression ')' { $$ = $2; }
+ ;
 %%
-
-int yyerror(char *s)
-{
-	printf("Syntax Error on line %s\n", s);
-	return 0;
+void yyerror(char *s) {
+ fprintf(stderr, "%s\n", s);
 }
-
-int main()
-{
-    yyparse();
-    return 0;
+int main(void) {
+ yyparse();
 }
