@@ -8,8 +8,17 @@
 [!] {
  return T_INT;
 }
-[?] {
+[@] {
  return T_DOUBLE;
+}
+[?] {
+ return MARK_IF;
+}
+[i] {
+ return PRINT_INT;
+}
+[d] {
+ return PRINT_DOUBLE;
 }
 [0-9]+\.[0-9]+ {
  yylval = strtod(yytext, NULL);
