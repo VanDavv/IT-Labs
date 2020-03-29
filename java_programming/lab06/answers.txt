@@ -1,0 +1,96 @@
+#1
+public class Example {
+    private static final instance = Example();
+    private Example() {
+    }
+    public static Example getInstance() {
+        return instance;
+    }
+    public void cutMaterial() {
+        System.out.println("Cut Material");
+    }
+}
+#2 A D
+#3 A
+#4 A
+#5 E
+#6 B
+public class OverTest {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public static long add2(long a, long b) {
+        return a + b;
+    }
+}
+
+public class OverTest2 extends OverTest {
+    @Override
+    public int add(int a, int b) {
+        return a - b;
+    }
+
+    public static long add2(long a, long b) {
+        return a - b;
+    }
+}
+#7 C
+#8 D
+#9 A
+#10 A
+#11 B
+#12 B
+#13
+import java.util.Random;
+
+interface Figura {
+    public void rysuj();
+}
+
+class Wielokat implements Figura {
+    public void rysuj() {
+        System.out.print("Wielokat.rysuj() -");
+    }
+}
+
+class Elipsa implements Figura {
+    public void rysuj() {
+        System.out.print("Elipsa.rysuj() -");
+    }
+}
+
+public class PolymorphismExample {
+    public static void main(String[] args) {
+        Random random = new Random();
+        Figura[] figura = new Figura[9];
+        for (int i = 0; i < figura.length; i++) {
+            figura[i] = (random.nextInt(2) == 0) ? new Wielokat() : new Elipsa();
+        }
+        for (Figura f : figura) {
+            if(f instanceof  Elipsa) {
+                System.out.println("Mamy Elipse!");
+            }
+            if(f instanceof  Wielokat) {
+                System.out.println("Mamy Wielokąt!");
+            }
+        }
+    }
+}
+#14
+public abstract class Example {
+    public abstract void transform();
+}
+
+class ExampleChildOne extends Example {
+    public void transform() {
+        System.out.println("Transform in ExampleChildOne");
+    }
+}
+
+class ExampleChildTwo extends Example {
+    public void transform() {
+        System.out.println("Transform in ExampleChildTwo");
+    }
+}
+#15 D

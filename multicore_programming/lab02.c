@@ -56,7 +56,7 @@ int main()
   int id;
   system("cat /proc/cpuinfo | grep processor | wc -l");
   printf(" - liczba rdzeni w kompie.\n");
-  for (int i = 1; i <= CORES; i = i * 2)
+  for (int i = 8; i <= CORES; i = i * 2)
   {
     double startTime = omp_get_wtime();
     #pragma omp parallel private(iX, iY, Iteration, Zx, Zy, Cx, Cy, Zx2, Zy2, id) num_threads(i)

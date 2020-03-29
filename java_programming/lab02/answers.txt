@@ -1,0 +1,43 @@
+#1 A B C D
+#2 C (nie dla wszystkich jest 0) D
+#3 B C
+#4 A D
+#5
+/**
+ * Downloads the image from specified URL and saves it under a specific name
+ *
+ * @param url
+ *            a valid URL object containing the image location
+ * @param name
+ *            a String containing the name under which the image will be saved
+ * @return an Image object containing the downloaded image or null if the URL was invalid (MalformedURLException thrown)
+ */
+public Image getImage(URL url, String name) throws IOException {
+    try {
+        // Something to do
+        return getImage(new URL(url, name));
+    } catch (MalformedURLException e) {
+        return null;
+    }
+}
+
+#6 Wykonania - żaden, ponieważ kod się nie skompiluje. Powód - odwołanie się metody niestatycznej w kontekście metody
+statycznej.
+Metody statyczne mogą być wykonywane z definicji Klasy, natomiast niestatyczne wymagają konretnego utworzonego obiektu
+tej klasy, aby można było je wykonać
+
+#7
+/**
+* ... other stuff
+*
+* @author Łukasz Piłatowski
+*/
+
+#8 C
+#9 A D E
+#10 D
+#11 new Example(i); albo new Example(i * 2);
+#12 zamienić miejscami linijkę 7 i 8 - odwołania do 'this' (czyli innych konstruktorów) musza być pierwszą instrukcją w konstruktorze
+#13 tylko raz - zmienna statyczna jest inicjowana jeden raz dla wszystkich obiektów danej klasy.
+#14 System.out.println(e1.getClass());
+#15 C E

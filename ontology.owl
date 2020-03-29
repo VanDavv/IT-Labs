@@ -1376,6 +1376,88 @@
     
 
 
+    <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Clynelish_2008_LMDW -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Clynelish_2008_LMDW">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Produkty"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#CLYNELISH"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Clynelish"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Highlands"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Single_Malt"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Szkocja"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Szkocka"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#10-14_YO"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#50-60_vol"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Dymny/Torfowy"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#CLYNELISH"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Clynelish"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Highlands"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Single_Malt"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Szkocja"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Szkocka"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#10-14_YO"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#50-60_vol"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Dymny/Torfowy"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Clynelish_Brora -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Clynelish_Brora">
@@ -1996,6 +2078,74 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Francja">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kraj"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Fraoch_Mointeach_2007_TMD -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Fraoch_Mointeach_2007_TMD">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Produkty"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Anglia"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Other"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Single_Malt"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Szkocka"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#10-14_YO"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#50-60_vol"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Dymny/Torfowy"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Anglia"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Other"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Single_Malt"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Szkocka"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#10-14_YO"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#50-60_vol"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Dymny/Torfowy"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3225,10 +3375,361 @@
     
 
 
+    <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Produkty"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Ameryka"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Bourbon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#JIM_BEAM"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Distillery"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kentucky"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kukurydza"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Nieznana"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Powietrzna"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Pszenica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Składniki"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Żyto"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#25-50_zł"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#40_vol"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Delikatny/Ładogny"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Ameryka"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Bourbon"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#JIM_BEAM"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Distillery"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kentucky"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kukurydza"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Nieznana"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Powietrzna"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Pszenica"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Składniki"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Żyto"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#25-50_zł"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#40_vol"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Delikatny/Ładogny"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Distillery -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Distillery">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Destylarnia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Honey -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Honey">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Produkty"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Ameryka"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Bourbon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#JIM_BEAM"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Distillery"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kentucky"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kukurydza"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Nieznana"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Powietrzna"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Pszenica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Składniki"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Żyto"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#25-50_zł"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#35-39_vol"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Delikatny/Ładogny"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Ameryka"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Bourbon"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#JIM_BEAM"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Distillery"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kentucky"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kukurydza"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Nieznana"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Powietrzna"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Pszenica"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Składniki"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Żyto"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#25-50_zł"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#35-39_vol"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Delikatny/Ładogny"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Red_Stag -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Red_Stag">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Produkty"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Ameryka"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Bourbon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#JIM_BEAM"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Distillery"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kentucky"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kukurydza"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Nieznana"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Powietrzna"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Pszenica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Składniki"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Żyto"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#25-50_zł"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#40_vol"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Owocowy/Korzenny"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Ameryka"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Bourbon"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#JIM_BEAM"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Jim_Beam_Distillery"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kentucky"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Kukurydza"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Nieznana"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Powietrzna"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Pszenica"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Składniki"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Żyto"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#25-50_zł"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#40_vol"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Owocowy/Korzenny"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -4107,14 +4608,6 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Mannochmore">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Destylarnia"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Masterson_10YO -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Masterson_10YO">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Produkty"/>
     </owl:Class>
     
 
@@ -6147,6 +6640,65 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ZUIDAM_MILLSTONE">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Producent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Zapytanie1 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Zapytanie1">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Obiekty"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Bourbon"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Zapytanie2 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Zapytanie2">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Obiekty"/>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Ameryka"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Owocowy/Korzenny"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Zapytanie3 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Zapytanie3">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#Obiekty"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#ma_kryterium"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/vandavv/ontologies/2019/10/untitled-ontology-3#50-60_vol"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
     </owl:Class>
     
 

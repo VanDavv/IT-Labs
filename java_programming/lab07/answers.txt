@@ -1,0 +1,115 @@
+#1 A
+#2 E
+#3 A
+#4 C
+#5 B
+#6 F
+#7 C
+#8 C
+#9 A D
+#10 EnumSet
+#11
+import java.util.*;
+
+public class Test {
+    public static void main(String[] args) {
+        Comparator myComparator = new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                int length = Math.min(o1.length(), o2.length());
+                for (int i = length - 1; i >= 0; i--) {
+                    if(o1.charAt(i) < o2.charAt(i)) {
+                        return -1;
+                    } else if (o1.charAt(i) > o2.charAt(i)) {
+                        return 1;
+                    }
+                }
+                return o1.compareTo(o2);
+            }
+        };
+        SortedMap<String, String> myMap = new TreeMap<String, String>(myComparator);
+        myMap.put("abc", "one");
+        myMap.put("aac", "two");
+        myMap.put("aaa", "three");
+        for (Map.Entry<String, String> entry : myMap.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ". Value: " + entry.getValue());
+        }
+    }
+}
+#12
+import java.util.*;
+
+interface IMinMax< T extends Number > {
+    T min(T[] tab); //min. wartość w tablicy
+    T max(T[] tab); //max. wartość w tablicy
+}
+
+class ImplClass implements IMinMax<Integer> {
+    @Override
+    public Integer min(Integer[] tab) {
+        Integer min = Integer.MAX_VALUE;
+        for(Integer elem : tab) {
+            if(elem < min) {
+                min = elem;
+            }
+        }
+        return min;
+    }
+    @Override
+    public Integer max(Integer[] tab) {
+        Integer max = Integer.MIN_VALUE;
+        for(Integer elem : tab) {
+            if(elem > max) {
+                max = elem;
+            }
+        }
+        return max;
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Integer[] a = {1, 2, 3, 5, 6, 2, 31, 1, 2, -1};
+        ImplClass o = new ImplClass();
+        System.out.println(o.max(a));
+        System.out.println(o.min(a));
+    }
+}
+
+#13
+public class Gen<T> {
+    T object;
+
+    Gen(T o) {
+        object = o;
+    }
+
+    T getObject() {
+        return object;
+    }
+
+    void showType() {
+        System.out.println(object.getClass().getName());
+    }
+}
+
+#14
+public class Example {
+    public <T extends Number> Example(T obj) {
+        System.out.println(obj.getClass().getName());
+    }
+
+    public <K extends Comparable, R extends Comparable> Example(K a, R b) {
+        if(a.compareTo(b) == 1) {
+            System.out.println("większe");
+        } else {
+            System.out.println("nie-większe");
+        }
+    }
+}
+
+#15 B
+#16 C
+#17 B
+#18
+StringBuilder nie jest synchronizowany, StringBuffer jest. Dzięki czemu, StringBuilder może wykonywać te same
+operacje szybciej, gdyż nie martwi sie byciem threadsafe
