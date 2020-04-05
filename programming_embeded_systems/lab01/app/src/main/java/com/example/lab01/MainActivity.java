@@ -3,13 +3,19 @@ package com.example.lab01;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int BMI_ACTIVITY_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,5 +35,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         content.setMovementMethod(new ScrollingMovementMethod());
+    }
+
+    /** Called when the user taps the Send button */
+    public void clickImage(View view) {
+        startActivityForResult(new Intent(this, Main3Activity.class), BMI_ACTIVITY_CODE);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == BMI_ACTIVITY_CODE) {
+            if(resultCode == Activity.RESULT_OK){
+                Toast.makeText(
+                    getApplicationContext(),
+                    "BMI: " + data.getStringExtra("result"),
+                    Toast.LENGTH_LONG
+                ).show();
+            }
+        }
     }
 }
