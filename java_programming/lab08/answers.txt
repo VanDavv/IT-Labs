@@ -1,0 +1,28 @@
+#1 A D
+#2 C D
+#3 C
+#4 B E
+#5 A C D
+#6 C F
+#7 C E G
+#8 B C
+#9 A C E
+#10 E
+#11 A
+#12 B D E
+#13 A C D E F
+#14 A B C
+#15 E
+#16 E
+#17 A
+#18 F
+#19 A
+#20 B
+#21 A B D
+#22 E
+#23 C
+#24
+public static void setStdOut2File(String filename ) {
+    System.setOut(new PrintStream(filename + ".log"));
+    System.setErr(new PrintStream(filename + ".log"));
+}
