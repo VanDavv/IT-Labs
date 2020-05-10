@@ -1,0 +1,20 @@
+#1 d
+#2 f
+#3 e
+#4 a b
+#5 a b
+#6 a
+#7 f
+#8 d e
+#9 b d
+#10 n m
+#11 b c e
+#12 żadna; klasy z odpowiedzi c i d nie istnieją - sprawdzono na OpenJDK Runtime Environment (build 1.8.0_242-b08)
+#13 f
+#14 d
+#15 d
+#16 c
+#17 d
+#18 d
+#19 a b c d e
+#20 b
