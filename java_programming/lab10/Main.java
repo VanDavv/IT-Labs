@@ -1,6 +1,4 @@
-package lab10;
-
-import lab10.controllers.PracownikController;
+import controllers.PracownikController;
 
 import java.util.Scanner;
 

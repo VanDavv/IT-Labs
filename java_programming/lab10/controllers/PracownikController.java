@@ -1,8 +1,8 @@
-package lab10.controllers;
+package controllers;
 
-import lab10.models.Dyrektor;
-import lab10.models.Handlowiec;
-import lab10.models.Pracownik;
+import models.Dyrektor;
+import models.Handlowiec;
+import models.Pracownik;
 
 import java.io.*;
 import java.util.*;

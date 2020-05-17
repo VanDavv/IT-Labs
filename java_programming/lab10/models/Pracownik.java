@@ -1,4 +1,4 @@
-package lab10.models;
+package models;
 
 import java.io.Serializable;
 

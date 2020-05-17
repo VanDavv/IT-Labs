@@ -1,4 +1,4 @@
-package lab10.models;
+package models;
 
 public class Dyrektor extends Pracownik {
     private String karta;

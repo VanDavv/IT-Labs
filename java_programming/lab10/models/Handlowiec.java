@@ -1,4 +1,4 @@
-package lab10.models;
+package models;
 
 public class Handlowiec extends Pracownik {
     private float prowizja, limitprowizji;
