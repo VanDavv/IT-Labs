@@ -84,6 +84,78 @@ class Matrix {
     }
 }
 
+class Controller {
+    private static int[][] A = null, B = null, C = null;
+    public static void getMatrices() {
+        System.out.println("[Matrix A]");
+        A = Matrix.getMatrix();
+        System.out.println("[Matrix B]");
+        B = Matrix.getMatrix();
+    }
+
+    public static void transposeInput() {
+        System.out.println("[Matrix A]");
+        if (A == null) {
+            System.err.println("Matrix A was not initialized!");
+            return;
+        }
+        A = Matrix.transposeMatrix(A);
+        System.out.println("[Matrix B]");
+        if (B == null) {
+            System.err.println("Matrix B was not initialized!");
+            return;
+        }
+        B = Matrix.transposeMatrix(B);
+    }
+
+    public static void multiply() {
+        System.out.println("[Matrix A]");
+        if (A == null) {
+            System.err.println("Matrix A was not initialized!");
+            return;
+        }
+        System.out.println("[Matrix B]");
+        if (B == null) {
+            System.err.println("Matrix B was not initialized!");
+            return;
+        }
+        C = Matrix.multiplyMatrices(A, B);
+    }
+
+    public static void transposeOutput() {
+        System.out.println("[Matrix C]");
+        if (C == null) {
+            System.err.println("Matrix C was not initialized!");
+            return;
+        }
+        C = Matrix.transposeMatrix(C);
+    }
+
+    public static void printInput() {
+        System.out.println("[Matrix A]");
+        if (A == null) {
+            System.err.println("Matrix A was not initialized!");
+            return;
+        }
+        Matrix.printMatrix(A);
+        System.out.println("[Matrix B]");
+        if (B == null) {
+            System.err.println("Matrix B was not initialized!");
+            return;
+        }
+        Matrix.printMatrix(B);
+    }
+
+    public static void printOutput() {
+        System.out.println("[Matrix C]");
+        if (C == null) {
+            System.err.println("Matrix C was not initialized!");
+            return;
+        }
+        Matrix.printMatrix(C);
+    }
+}
+
 public class Main {
     public static void main(String... args) {
         String text = "Choose operation:\n" +
@@ -98,74 +170,30 @@ public class Main {
                 "4. Quit";
         Scanner scan = new Scanner(System.in);
         String op;
-        int[][] A = null, B = null, C = null;
         do {
             System.out.println(text);
             op = scan.nextLine();
             switch (op) {
                 case "1":
-                    System.out.println("[Matrix A]");
-                    A = Matrix.getMatrix();
-                    System.out.println("[Matrix B]");
-                    B = Matrix.getMatrix();
+                    Controller.getMatrices();
                     break;
                 case "2.1":
-                    System.out.println("[Matrix A]");
-                    if (A == null) {
-                        System.err.println("Matrix A was not initialized!");
-                        break;
-                    }
-                    A = Matrix.transposeMatrix(A);
-                    System.out.println("[Matrix B]");
-                    if (B == null) {
-                        System.err.println("Matrix B was not initialized!");
-                        break;
-                    }
-                    B = Matrix.transposeMatrix(B);
+                    Controller.transposeInput();
                     break;
                 case "2.2": {
-                    System.out.println("[Matrix A]");
-                    if (A == null) {
-                        System.err.println("Matrix A was not initialized!");
-                        break;
-                    }
-                    System.out.println("[Matrix B]");
-                    if (B == null) {
-                        System.err.println("Matrix B was not initialized!");
-                        break;
-                    }
-                    C = Matrix.multiplyMatrices(A, B);
+                    Controller.multiply();
                     break;
                 }
                 case "2.3":
-                    System.out.println("[Matrix C]");
-                    if (C == null) {
-                        System.err.println("Matrix C was not initialized!");
-                        break;
-                    }
-                    C = Matrix.transposeMatrix(C);
+                    Controller.transposeOutput();
                     break;
                 case "3.1":
-                    System.out.println("[Matrix A]");
-                    if (A == null) {
-                        System.err.println("Matrix A was not initialized!");
-                        break;
-                    }
-                    Matrix.printMatrix(A);
-                    System.out.println("[Matrix B]");
-                    if (B == null) {
-                        System.err.println("Matrix B was not initialized!");
-                        break;
-                    }
-                    Matrix.printMatrix(B);
+                    Controller.printInput();
                     break;
                 case "3.2":
-                    System.out.println("[Matrix C]");
-                    if (C == null) {
-                        System.err.println("Matrix C was not initialized!");
-                        break;
-                    }
-                    Matrix.printMatrix(C);
+                    Controller.printOutput();
+                    break;
+                case "4":
                     break;
                 default:
                     System.err.println("Your choice is invalid, please try again");
